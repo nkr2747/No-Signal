@@ -3,7 +3,7 @@ import React from 'react'
 export default function SideBar() {
   return (
     <div
-            className="col-3 bg-primary-subtle"
+            className="col-3 d-none d-lg-block bg-primary-subtle"
             style={{
               height: "100vh",
             }}
