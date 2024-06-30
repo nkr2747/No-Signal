@@ -19,7 +19,7 @@ export default function NewArrivals() {
                   }}
                 >
                   {[...Array(5)].map((_, index) => (
-                    <div className="d-inline-block mx-4" key={index}>
+                    <div className="d-inline-block mx-4 " key={index}>
                       <div
                         className="card"
                         style={{
@@ -31,7 +31,7 @@ export default function NewArrivals() {
                           className="card-img-top"
                           alt="..."
                         />
-                        <div className="card-body">
+                        <div className="card-body" >
                           <h5 className="card-title">Title</h5>
                           <p className="card-text">Some quick example</p>
                           <a href="/" className="btn btn-primary">

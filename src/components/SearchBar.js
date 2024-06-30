@@ -19,12 +19,12 @@ export default function SearchBar() {
                     Search
                   </button>
                   <div class="btn-group px-4 dropdown-center">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn  shadow btn-primary">
                       Department
                     </button>
                     <button
                       type="button"
-                      class="btn btn-primary dropdown-center dropdown-toggle dropdown-toggle-split"
+                      class="btn btn-primary shadow dropdown-center dropdown-toggle dropdown-toggle-split"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
@@ -53,13 +53,13 @@ export default function SearchBar() {
                       </li>
                     </ul>
                   </div>
-                  <div class="btn-group px-4 dropdown-center">
-                    <button type="button" class="btn btn-primary">
+                  <div class="btn-group  px-4 dropdown-center">
+                    <button type="button" class="btn shadow btn-primary">
                       Author
                     </button>
                     <button
                       type="button"
-                      class="btn btn-primary dropdown-center dropdown-toggle dropdown-toggle-split"
+                      class="btn shadow btn-primary dropdown-center dropdown-toggle dropdown-toggle-split"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
@@ -89,12 +89,12 @@ export default function SearchBar() {
                     </ul>
                   </div>
                   <div class="btn-group px-4 dropdown-center">
-                    <button type="button" class="btn btn-primary">
+                    <button type="button" class="btn shadow btn-primary">
                       Genre
                     </button>
                     <button
                       type="button"
-                      class="btn btn-primary dropdown-center dropdown-toggle dropdown-toggle-split"
+                      class="btn btn-primary shadow dropdown-center dropdown-toggle dropdown-toggle-split"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
                     >
