@@ -5,7 +5,7 @@ import SearchBar from "./components/SearchBar";
 import Quotes from "./components/Quotes";
 import NewArrivals from "./components/NewArrivals";
 import Recommended from "./components/Recommended";
-
+import about from "./components/about";
 function App() {
   
   return (
@@ -69,7 +69,9 @@ function App() {
             style={{
               height: "30vh",
             }}
-          ></div>
+          >
+            <about/>
+          </div>
           <div
             className="row  my-5 border"
             style={{
