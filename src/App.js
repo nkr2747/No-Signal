@@ -2,8 +2,10 @@ import bg from "./images/bg.png";
 import "./App.css";
 import SideBar from "./components/SideBar";
 import SearchBar from "./components/SearchBar";
-import Home from "./components/Home";
-import SearchPanel from "./components/SearchPanel";
+import MyShelf from "./components/MyShelf";
+// import ContibutePanel from "./components/ContibutePanel";
+// import Home from "./components/Home";
+// import SearchPanel from "./components/SearchPanel";
 
 
 function App() {
@@ -30,7 +32,9 @@ function App() {
         >
           <SearchBar />
           {/* <Home/> */}
-          <SearchPanel/>
+          {/* <SearchPanel/> */}
+          {/* <ContibutePanel/> */}
+          <MyShelf/>
         </div>
       </div>
     </div>

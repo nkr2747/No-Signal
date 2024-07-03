@@ -57,7 +57,7 @@ export default function SearchBar() {
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                   style={{
-                    backgroundColor:"#F3F3F7"
+                    backgroundColor:"white"
                   }}
                 >
                   <img
