@@ -1,48 +1,44 @@
 import React from 'react'
 
 export default function NewArrivals() {
+    const arr = [1, 2, 3, 4, 5, 6];
+  function myf(x) {
+    return (
+      <div
+        className="d-inline-block justify mx-1  h-100"
+        style={{
+          width: "6rem",
+        }}
+      >
+        <div
+          class="card"
+          style={{
+            width: "6rem",
+          }}
+        >
+          <img
+            src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
+            class="card-img-top"
+            alt="..."
+          />
+        </div>
+      </div>
+    );
+  }
   return (
-    <div className="container my-4">
-              <h4>New Arrivals</h4>
-              <div
-                className="overflow-x-auto my-2"
-                style={{
-                  overflowX: "scroll",
-                  overflowY: "hidden", 
-                }}
-              >
+    <div className="col-12 col-lg-7 bg-light px-0">
+              <div class="overflow-x-auto  h-100 w-100 bg-light  scrollable-container" >
                 <div
+                  className="align-items-center text-center"
                   style={{
-                    height: "25rem",
-                    display: "inline-flex", 
-                    alignItems: "center", 
+                    display: "inline-flex",
+                    backgroundColor:'white'
                   }}
                 >
-                  {[...Array(5)].map((_, index) => (
-                    <div className="d-inline-block mx-4 " key={index}>
-                      <div
-                        className="card"
-                        style={{
-                          width: "10rem",
-                        }}
-                      >
-                        <img
-                          src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
-                          className="card-img-top"
-                          alt="..."
-                        />
-                        <div className="card-body" >
-                          <h5 className="card-title">Title</h5>
-                          <p className="card-text">Some quick example</p>
-                          <a href="/" className="btn btn-primary">
-                            Issue
-                          </a>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
+                  {arr.map(myf)}
                 </div>
               </div>
             </div>
+          
   )
 }
