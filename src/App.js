@@ -2,12 +2,11 @@ import bg from "./images/bg.png";
 import "./App.css";
 import SideBar from "./components/SideBar";
 import SearchBar from "./components/SearchBar";
-import Quotes from "./components/Quotes";
-import NewArrivals from "./components/NewArrivals";
-import Recommended from "./components/Recommended";
+import Home from "./components/Home";
+import SearchPanel from "./components/SearchPanel";
+
 
 function App() {
-  
   return (
     <div
       className="container-fluid p-4"
@@ -30,52 +29,8 @@ function App() {
           }}
         >
           <SearchBar />
-          <div
-            className="row  my-5 "
-            style={{
-              height: "20vh",
-            }}
-          >
-            <Quotes/>
-            <NewArrivals/>
-          </div>
-          <div
-            className="row p-1  my-5 border"
-            style={{
-              height: "35vh",
-            }}
-          >
-            <div className="container">
-              <h3>Good Morning</h3>
-              <div class="d-flex justify-content-between">
-                <div>
-                  <p>Reccomended for You</p>
-                </div>
-                <div className="fs-6 small">
-                <p><a class="link-secondary link-underline small link-underline-opacity-0 link-opacity-100-hover" href="/">Show all</a></p>
-                </div>
-              </div>
-              <Recommended/>
-            </div>
-          </div>
-          <div
-            className="row  my-5 border"
-            style={{
-              height: "30vh",
-            }}
-          ></div>
-          <div
-            className="row  my-5 border"
-            style={{
-              height: "30vh",
-            }}
-          ></div>
-          <div
-            className="row  my-5 border"
-            style={{
-              height: "30vh",
-            }}
-          ></div>
+          {/* <Home/> */}
+          <SearchPanel/>
         </div>
       </div>
     </div>

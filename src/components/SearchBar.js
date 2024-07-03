@@ -3,9 +3,11 @@ import logo from "../images/logo.svg";
 import DateTimeDisplay from "../components/DateTimeDisplay";
 export default function SearchBar() {
   return (
-    <div className="row mx-1  ">
-            <div className="col-7 col-lg-5 position-relative ">
-              <div class="input-group mb-3 position-absolute top-50 start-50 translate-middle">
+    <div className="row mx-1 sticky-top " style={{
+      backgroundColor:'#F3F3F7'
+    }}>
+            <div className="col-7 col-lg-5  position-relative ">
+              <div class="input-group mb-3  position-absolute top-50 start-50 translate-middle">
                 <button
                   class="btn  btn-secondary text-dark dropdown-toggle"
                   type="button"
@@ -66,7 +68,7 @@ export default function SearchBar() {
                   />
                   User
                 </button>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu position-relative z-index-2">
                   <li>
                     <a class="dropdown-item" href="/">
                       Action

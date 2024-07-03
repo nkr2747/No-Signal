@@ -49,7 +49,7 @@ export default function SideBar() {
           
           <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li class="nav-item small">
-                      <a class="nav-link " href="/">
+                      <a class="nav-link " href="./about.html">
                         <div className="small">
                           About
                         </div>
