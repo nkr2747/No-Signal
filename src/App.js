@@ -32,8 +32,9 @@ function App() {
             backgroundColor: "#F3F3F7",
           }}
         >
-          <SearchBar />
-          <Routes>
+          
+        <SearchBar /> 
+        <Routes> 
         <Route path="/" element={<Home />} />
         <Route path="searchpanel" element={<SearchPanel/>} />
         <Route path="contributepanel" element={<ContibutePanel/>} />
