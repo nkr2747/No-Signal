@@ -1,7 +1,7 @@
 import React from 'react';
 import './Support.css';
 
-export default function About(props) {
+export default function Termsconditions(props) {
     let myStyle = {
         color: props.mode === 'dark' ? 'white' : '#042743',
         backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white',

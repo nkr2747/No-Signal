@@ -64,11 +64,11 @@ export default function SideBar() {
                       </Link>
                     </li>
                     <li class="nav-item small">
-                      <a class="nav-link" href="/">
+                      <Link class="nav-link" to="termsconditions">
                         <div className="small">
                         Terms & Conditions
                         </div>
-                      </a>
+                      </Link>
                     </li>
                   </ul>
 
