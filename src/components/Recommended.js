@@ -11,7 +11,7 @@ export default function Recommended() {
           }}
         >
           <div
-            class="card"
+            class="card border border-0"
             style={{
               width: "6rem",
             }}
