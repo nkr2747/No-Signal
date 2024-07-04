@@ -3,13 +3,15 @@ import "./App.css";
 import SideBar from "./components/SideBar";
 import SearchBar from "./components/SearchBar";
 import MyShelf from "./components/MyShelf";
-// import ContibutePanel from "./components/ContibutePanel";
-// import Home from "./components/Home";
-// import SearchPanel from "./components/SearchPanel";
+import ContibutePanel from "./components/ContibutePanel";
+import Home from "./components/Home";
+import SearchPanel from "./components/SearchPanel";
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
 function App() {
   return (
+    <Router>
     <div
       className="container-fluid p-4"
       style={{
@@ -31,13 +33,20 @@ function App() {
           }}
         >
           <SearchBar />
+          <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="searchpanel" element={<SearchPanel/>} />
+        <Route path="contributepanel" element={<ContibutePanel/>} />
+        <Route path="myshelf" element={<MyShelf />} />
+        </Routes>
           {/* <Home/> */}
           {/* <SearchPanel/> */}
           {/* <ContibutePanel/> */}
-          <MyShelf/>
+          {/* <MyShelf/> */}
         </div>
       </div>
     </div>
+    </Router>
   );
 }
 

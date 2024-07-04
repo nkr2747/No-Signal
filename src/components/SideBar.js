@@ -4,6 +4,7 @@ import home from "../images/home.svg"
 import search from "../images/search-icon.svg"
 import bookshelf from "../images/Bookshelf.svg"
 import contri from "../images/Give Gift.svg"
+import { Link } from 'react-router-dom'
 export default function SideBar() {
   return (
     <div
@@ -28,22 +29,22 @@ export default function SideBar() {
                       </a>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/">
+                      <Link class="nav-link" to="searchpanel">
                       <img src={search} className='px-1' height="15" alt="" />
                        Search
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/">
+                      <Link class="nav-link" to="myshelf">
                       <img src={bookshelf} className='px-1' alt="" />
                        My Shelf
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item">
-                      <a class="nav-link" href="/">
+                      <Link class="nav-link" to="contributepanel">
                       <img src={contri} className='px-1' alt="" />
                        Contribute
-                      </a>
+                      </Link>
                     </li>
                   </ul>
           
