@@ -6,6 +6,7 @@ import MyShelf from "./components/MyShelf";
 import ContibutePanel from "./components/ContibutePanel";
 import Home from "./components/Home";
 import SearchPanel from "./components/SearchPanel";
+import Support from "./components/Support";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 
@@ -39,6 +40,7 @@ function App() {
         <Route path="searchpanel" element={<SearchPanel/>} />
         <Route path="contributepanel" element={<ContibutePanel/>} />
         <Route path="myshelf" element={<MyShelf />} />
+        <Route path="support" element={<Support mode='dark'/>} />
         </Routes>
           {/* <Home/> */}
           {/* <SearchPanel/> */}

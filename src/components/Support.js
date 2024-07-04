@@ -1,14 +1,14 @@
 import React from 'react';
 import './Support.css';
 
-export default function About(props) {
+export default function Support(props) {
     let myStyle = {
         color: props.mode === 'dark' ? 'white' : '#042743',
         backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white',
     };
 
     return (
-        <div style={myStyle}>
+        <div className='container' style={myStyle}>
             <h1>Support</h1>
             <br/>
             <br/>
@@ -17,11 +17,11 @@ export default function About(props) {
             <div className="accordion" id="accordionExample">
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
                             Q: What is the last Date of submission after the date of issue of the book ???
                         </button>
                     </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
+                    <div id="collapseOne" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                             <strong>After 24 days from the date of issue.</strong>Late fees are $0.25 per day for books, $1.00 per day for DVDs, and $0.10 per day for magazines. We encourage timely returns to avoid fines and ensure availability for other patrons.
                         </div>
@@ -33,7 +33,7 @@ export default function About(props) {
                             Q: How can I reserve a book?
                         </button>
                     </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseTwo" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         You can reserve a book online through our catalog, over the phone, or by visiting the library. We will notify you when the book is available for pickup.    
                         </div>
@@ -53,11 +53,11 @@ export default function About(props) {
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
                             Q: Are there computers and Wi-Fi available?
                         </button>
                     </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         Yes, we provide public computers with internet access and free Wi-Fi throughout the library. You can use your library card to log in to the computers.
                         </div>
@@ -65,11 +65,11 @@ export default function About(props) {
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
                         Q: Can I print, copy, or scan documents at the library?
                         </button>
                     </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseFive" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         Yes, we have printing, copying, and scanning services available. Printing and copying cost $0.10 per page for black and white and $0.50 per page for color.
                         </div>
@@ -77,11 +77,11 @@ export default function About(props) {
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
                          Q: How can I volunteer at the library?
                         </button>
                     </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseSix" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         We welcome volunteers! Please visit our volunteer page on the website or speak to a staff member for more information on how to get involved.
                         </div>
@@ -89,11 +89,11 @@ export default function About(props) {
                 </div>
                 <div className="accordion-item">
                     <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
                          Q: Who do I contact for additional questions or support?
                         </button>
                     </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                    <div id="collapseSeven" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
                         <div className="accordion-body">
                         For any further inquiries, you can contact us via phone at [Library Phone Number], email at [Library Email Address], or visit the library in person.
                         </div>

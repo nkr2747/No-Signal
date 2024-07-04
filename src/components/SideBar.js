@@ -57,11 +57,11 @@ export default function SideBar() {
                       </a>
                     </li>
                     <li class="nav-item  small">
-                      <a class="nav-link" href="/">
+                      <Link class="nav-link" to="support">
                       <div className="small">
                           Support
                         </div>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item small">
                       <a class="nav-link" href="/">
