@@ -1,0 +1,23 @@
+hr {
+    border: none;
+    height: 2px;
+    background-color: #000;
+    width: 50%;
+    margin: 20px auto;
+}
+#hh {
+    font-weight: 100;
+}
+#foot {
+    background-color: black;
+    color: white;
+    text-align: center;
+    padding: 20px;
+}
+#foot table {
+    margin: 0 auto;
+    color: white; 
+}
+#foot th, #foot td {
+    padding: 10px;
+}
