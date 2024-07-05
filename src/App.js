@@ -1,7 +1,7 @@
 import bg from "./images/bg.png";
 import "./App.css";
 import SideBar from "./components/SideBar";
-import SearchBar from "./components/SearchBar";
+//import SearchBar from "./components/SearchBar";
 import MyShelf from "./components/MyShelf";
 import ContibutePanel from "./components/ContibutePanel";
 import Home from "./components/Home";
@@ -33,7 +33,6 @@ function App() {
               backgroundColor: "#F3F3F7",
             }}
           >
-            <SearchBar />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="searchpanel" element={<SearchPanel />} />

@@ -1,4 +1,5 @@
 import React from 'react'
+import SearchBar from './SearchBar'
 
 export default function SearchPanel() {
     const arr=[1,2,3,4,5,6,7]
@@ -15,11 +16,14 @@ export default function SearchPanel() {
         )
     }
   return (
+    <>
+    <SearchBar/>
     <div className="list-group">
       {
         arr.map(func)
       }
       
     </div>
+    </>
   )
 }

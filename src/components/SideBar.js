@@ -7,6 +7,8 @@ import contri from "../images/Give Gift.svg"
 import { Link } from 'react-router-dom'
 export default function SideBar() {
   return (
+    <>
+    
     <div
           className="col-3 rounded-start d-none flex-column d-flex h-100 align-items-center text-center d-lg-block"
           style={{
@@ -73,5 +75,6 @@ export default function SideBar() {
                   </ul>
 
         </div>
+        </>
   )
 }

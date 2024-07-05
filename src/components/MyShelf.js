@@ -1,4 +1,5 @@
 import React from "react";
+import SearchBar from "./SearchBar";
 
 export default function MyShelf() {
   const arr = [1, 2, 3,4];
@@ -63,6 +64,8 @@ export default function MyShelf() {
     );
   }
   return (
+    <>
+    <SearchBar/>
     <div className="container border py-3">
       <div className="container align-items-start border my-2">
         <h5>
@@ -156,5 +159,6 @@ export default function MyShelf() {
         </div>
       </div>
     </div>
+    </>
   );
 }
