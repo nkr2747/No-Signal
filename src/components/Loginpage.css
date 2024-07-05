@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: flex-start;
     height: 100vh;
-    padding-top: 20px; /* Adjust padding as needed */
+    padding-top: 20px; 
     background-image: url('bg.png');
     background-size: cover;
     background-position: center;
@@ -14,19 +14,19 @@
   #header {
     text-align: center;
     font-size: 2em;
-    margin-bottom: 20px; /* Adjust margin as needed */
-    color: rgb(14, 4, 4); /* Adjust text color for better visibility */
+    margin-bottom: 20px;
+    color: rgb(14, 4, 4); 
   }
   
   .login-form {
     width: 100%;
     max-width: 350px;
     padding: 15px;
-    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background */
+    background-color: rgba(255, 255, 255, 0.8); 
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 
   #header .book {
-    color: red; /* Specific color for the word "Book" */
+    color: red; 
   }
