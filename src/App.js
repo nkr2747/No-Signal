@@ -28,7 +28,7 @@ function App() {
           <Route path="newarrivals" element={<Expand category='New Arrivals'/> } />
           <Route path="termsconditions" element={<TermsConditions />} />
         </Route>
-        <Route path="/loginpage" element={<Loginpage/> }>
+        <Route path="loginpage" element={<Loginpage/> }>
           
         </Route>
       </Routes>

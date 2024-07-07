@@ -75,11 +75,11 @@ export default function SearchBar() {
           
           <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex my-4 ">
                     <li class="nav-item small">
-                      <a class="nav-link " href="./about.html">
+                      <Link class="nav-link " to="about">
                         <div className="small">
                           About
                         </div>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item  small">
                       <Link class="nav-link" to="support">
@@ -169,9 +169,9 @@ export default function SearchBar() {
               </a>
             </li> */}
             <li>
-              <Link class="dropdown-item" to="loginpage">
+              <a class="dropdown-item" href="loginpage">
                 Login
-              </Link>
+              </a>
             </li>
           </ul>
         </div>
