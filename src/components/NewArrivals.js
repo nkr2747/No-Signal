@@ -33,7 +33,7 @@ export default function NewArrivals() {
       }}>
         <div className="row d-flex">
           
-          <div className="col-1 d-flex px-3 align-items-center justify-content-start">
+          <div className="col-1 d-flex align-items-center justify-content-start">
             <Link className='link-underline link-underline-opacity-0' to="newarrivals">
             <img src={na} height='130' alt="" />
             </Link>
