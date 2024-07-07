@@ -1,8 +1,9 @@
 import React from 'react';
 import './BorrowPage.css';
 
-export default function About(props) {
+export default function BorrowPage(props) {
   return (
+    <div className="container">
     <div className="body-layout">
       <div className="card-container">
         <div className="card" style={{ width: '18rem' }}>
@@ -58,6 +59,7 @@ export default function About(props) {
           <h6>Book1</h6>
           <h6>Book2</h6>
         </div>
+      </div>
       </div>
       </div>
   );

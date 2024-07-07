@@ -1,6 +1,6 @@
 import React from "react";
 
-export default function ContibutePanel() {
+export default function ContributePanel() {
   return (
     <div
       className="container border px-4"

@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
 export default function SearchBar() {
   return (
     <div
-      className="row mx-1 sticky-top "
+      className="row mx-1  "
       style={{
         backgroundColor: "#F3F3F7",
       }}
@@ -73,7 +73,7 @@ export default function SearchBar() {
                     </li>
                   </ul>
           
-          <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
+          <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex my-4 ">
                     <li class="nav-item small">
                       <a class="nav-link " href="./about.html">
                         <div className="small">
@@ -100,7 +100,7 @@ export default function SearchBar() {
         </div>
         </div>
       </div>
-      <div className="col-7 col-lg-5 border position-relative ">
+      <div className="col-7 col-lg-5   ">
         <div class="input-group mb-3  position-absolute top-50 start-50 translate-middle">
           <button
             class="btn  btn-secondary text-dark dropdown-toggle"
@@ -143,8 +143,8 @@ export default function SearchBar() {
       <div className="col-4 d-none d-lg-block  align-items-end ">
         <DateTimeDisplay />
       </div>
-      <div className="col-3 col-lg-3 position-relative">
-        <div class="dropdown-center position-absolute top-50 start-50 translate-middle">
+      <div className="col-3 col-lg-3 ">
+        <div class="dropdown-center ">
           <button
             class="btn btn-secondary text-dark rounded-pill dropdown-toggle "
             type="button"
@@ -157,21 +157,21 @@ export default function SearchBar() {
             <img src={logo} class="rounded-circle" alt="..." height="25" />
             User
           </button>
-          <ul class="dropdown-menu position-relative z-index-2">
-            <li>
+          <ul class="dropdown-menu ">
+            {/* <li>
               <a class="dropdown-item" href="/">
-                Action
+                Profile
               </a>
-            </li>
-            <li>
+            </li> */}
+            {/* <li>
               <a class="dropdown-item" href="/">
-                Action two
+                Favourite
               </a>
-            </li>
+            </li> */}
             <li>
-              <a class="dropdown-item" href="/">
-                Action three
-              </a>
+              <Link class="dropdown-item" to="loginpage">
+                Login
+              </Link>
             </li>
           </ul>
         </div>

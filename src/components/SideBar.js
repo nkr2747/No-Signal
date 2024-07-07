@@ -25,10 +25,10 @@ export default function SideBar() {
           </a>
           <ul class="navbar-nav m-1 align-items-start px-5 flex-column ">
                     <li class="nav-item">
-                      <a class="nav-link active" aria-current="page" href="/">
+                      <Link class="nav-link active" aria-current="page" to="/">
                       <img src={home} class="px-1 d-inline-block align-text-top" alt=".." height="15" />
                         Home
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item">
                       <Link class="nav-link" to="searchpanel">
@@ -52,11 +52,11 @@ export default function SideBar() {
           
           <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li class="nav-item small">
-                      <a class="nav-link " href="./about.html">
+                      <Link class="nav-link " to="about">
                         <div className="small">
                           About
                         </div>
-                      </a>
+                      </Link>
                     </li>
                     <li class="nav-item  small">
                       <Link class="nav-link" to="support">

@@ -1,5 +1,5 @@
 import React from 'react'
-
+import { Link } from 'react-router-dom';
 export default function Recommended() {
     const arr = [1, 2, 3, 4, 5, 6,9,8,];
     function myf(x) {
@@ -15,12 +15,13 @@ export default function Recommended() {
             style={{
               width: "6rem",
             }}
-          >
+          > <Link to="/issuebook">
             <img
               src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
               class="card-img-top"
               alt="..."
             />
+            </Link>
           </div>
         </div>
       );

@@ -1,7 +1,8 @@
-import React from 'react'
-
+import React from "react";
+import na from "../images/na.png"
+import { Link } from "react-router-dom";
 export default function NewArrivals() {
-    const arr = [1, 2, 3, 4, 5, 6];
+  const arr = [1, 2, 3, 4, 5, 6];
   function myf(x) {
     return (
       <div
@@ -26,19 +27,31 @@ export default function NewArrivals() {
     );
   }
   return (
-    <div className="col-12 col-lg-7 bg-light px-0">
-              <div class="overflow-x-auto  h-100 w-100 bg-light  scrollable-container" >
-                <div
-                  className="align-items-center text-center"
-                  style={{
-                    display: "inline-flex",
-                    backgroundColor:'white'
-                  }}
-                >
-                  {arr.map(myf)}
-                </div>
-              </div>
-            </div>
+
+      <div className="col-12 col-lg-7 bg-light p-1 rounded" style={{
+        background: "linear-gradient(to top, #792A8E, #BB4248)",
+      }}>
+        <div className="row d-flex">
           
-  )
+          <div className="col-1 d-flex px-3 align-items-center justify-content-start">
+            <Link className='link-underline link-underline-opacity-0' to="newarrivals">
+            <img src={na} height='130' alt="" />
+            </Link>
+          </div>
+          <div className="col-11">
+        <div class="overflow-x-auto  h-100 w-100 bg-light  scrollable-container">
+          <div
+            className="align-items-center text-center"
+            style={{
+              display: "inline-flex",
+              backgroundColor: "white",
+            }}
+          >
+            {arr.map(myf)}
+          </div>
+        </div>
+        </div>
+        </div>
+      </div>
+  );
 }

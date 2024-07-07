@@ -1,53 +1,37 @@
-import bg from "./images/bg.png";
 import "./App.css";
-import SideBar from "./components/SideBar";
-//import SearchBar from "./components/SearchBar";
+
 import MyShelf from "./components/MyShelf";
-import ContibutePanel from "./components/ContibutePanel";
+import ContributePanel from "./components/ContributePanel";
 import Home from "./components/Home";
 import SearchPanel from "./components/SearchPanel";
 import Support from "./components/Support";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Termsconditions from "./components/Termsconditions";
-
+import TermsConditions from "./components/TermsConditions";
+import IssueBook from "./components/IssueBook";
+import Layout from "./components/Layout";
+import Loginpage from "./components/Loginpage";
+import About from "./components/About"
+import Expand from "./components/Expand";
 function App() {
   return (
     <Router>
-      <div
-        className="container-fluid p-4"
-        style={{
-          backgroundImage: `url(${bg})`,
-          height: "100vh",
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          overflow: "hidden",
-        }}
-      >
-        <div className="row h-100">
-          <SideBar />
-          <div
-            className="col-12 text-centre rounded-end h-100 col-lg-9 py-4 scrollable-container" //note : iss line ka mtlb hai ki col-12 rhe jb size chota rhe (kyuki iss time sidebar gayab ho jaega aur aur jb wapas aa jayega lg breakpoint ke bad tb col-9 ho jaye)
-            style={{
-              height: "100vh",
-              overflowY: "scroll",
-              backgroundColor: "#F3F3F7",
-            }}
-          >
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="searchpanel" element={<SearchPanel />} />
-              <Route path="contributepanel" element={<ContibutePanel />} />
-              <Route path="myshelf" element={<MyShelf />} />
-              <Route path="support" element={<Support />} />
-              <Route path="termsconditions" element={<Termsconditions/>} />
-            </Routes>
-            {/* <Home/> */}
-            {/* <SearchPanel/> */}
-            {/* <ContibutePanel/> */}
-            {/* <MyShelf/> */}
-          </div>
-        </div>
-      </div>
+      <Routes>
+        <Route path="/" element={<Layout/> }>
+        <Route index element={<Home />} />
+          <Route path="searchpanel" element={<SearchPanel />} />
+          <Route path="issuebook" element={<IssueBook />} />
+          <Route path="contributepanel" element={<ContributePanel />} />
+          <Route path="myshelf" element={<MyShelf />} />
+          <Route path="support" element={<Support />} />
+          <Route path="about" element={<About />} />
+          <Route path="recommended" element={<Expand category='Recommended for You'/> } />
+          <Route path="newarrivals" element={<Expand category='New Arrivals'/> } />
+          <Route path="termsconditions" element={<TermsConditions />} />
+        </Route>
+        <Route path="/loginpage" element={<Loginpage/> }>
+          
+        </Route>
+      </Routes>
     </Router>
   );
 }
