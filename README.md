@@ -4,9 +4,17 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Available Scripts
 
-In the project directory, you can run:
+First clone this repository in your local directory using the command:
+### `git clone https://github.com/nkr2747/No-Signal.git`
 
+
+Then install the required packages by using the command:
+### `npm install`
+
+
+Now, you are ready to launch the website by the command:
 ### `npm start`
+
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.

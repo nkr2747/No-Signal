@@ -1,13 +1,23 @@
-import React from "react";
+import React ,{useEffect,useState} from "react";
 import Quotes from "./Quotes";
 import NewArrivals from "./NewArrivals";
-
-import Recommended from "./Recommended";
+import axios from "axios";
 
 import SearchBar from "./SearchBar";
-import { Link } from "react-router-dom";
+import BookScroller from "./BookScroller"
 
 export default function Home() {
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:3000/books')
+      .then(response => {
+        setBooks(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the books!', error);
+      });
+  }, []);
+
   return (
     <>
             <SearchBar />
@@ -15,9 +25,7 @@ export default function Home() {
             <div className="container-fluid">
               <div
                 className="row my-5 position-relative "
-                style={{
-                  height: "20vh",
-                }}
+             
               >
                 <Quotes />
 
@@ -26,40 +34,20 @@ export default function Home() {
 
               <div
                 className="row p-1 my-5 border"
-                style={{
-                  height: "35vh",
-                }}
               >
                 <div className="container">
                   <h3>Good Morning</h3>
-
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <p>Reccomended for You</p>
-                    </div>
-
-                    <div className="fs-6 small">
-                      <p>
-                        <Link
-                          class="link-secondary link-underline small link-underline-opacity-0 link-opacity-100-hover"
-                          to="recommended"
-                        >
-                          Show all
-                        </Link>
-                      </p>
-                    </div>
-                  </div>
-
-                  <Recommended />
+                  <BookScroller title="Reccomended for You" book={books}/>
                 </div>
               </div>
 
               <div
                 className="row my-5 border"
-                style={{
-                  height: "30vh",
-                }}
-              ></div>
+              >
+                  <div className="container">
+                  <BookScroller title='Computer Science' book={books}/>
+                </div>
+              </div>
               <div
                 className="row my-5 border"
                 style={{

@@ -1,5 +1,4 @@
 import "./App.css";
-
 import MyShelf from "./components/MyShelf";
 import ContributePanel from "./components/ContributePanel";
 import Home from "./components/Home";
@@ -12,6 +11,8 @@ import Layout from "./components/Layout";
 import Loginpage from "./components/Loginpage";
 import About from "./components/About"
 import Expand from "./components/Expand";
+import Alayout from "./admin/Alayout";
+import AaddNewStudent from "./admin/AaddNewStudent";
 function App() {
   return (
     <Router>
@@ -19,7 +20,7 @@ function App() {
         <Route path="/" element={<Layout/> }>
         <Route index element={<Home />} />
           <Route path="searchpanel" element={<SearchPanel />} />
-          <Route path="issuebook" element={<IssueBook />} />
+          <Route path="issuebook/:id" element={<IssueBook />} />
           <Route path="contributepanel" element={<ContributePanel />} />
           <Route path="myshelf" element={<MyShelf />} />
           <Route path="support" element={<Support />} />
@@ -28,9 +29,11 @@ function App() {
           <Route path="newarrivals" element={<Expand category='New Arrivals'/> } />
           <Route path="termsconditions" element={<TermsConditions />} />
         </Route>
-        <Route path="/loginpage" element={<Loginpage/> }>
+        <Route path="loginpage" element={<Loginpage/> }/>        
+        <Route path="/admin" element={<Alayout/> }>
+        <Route index element={<AaddNewStudent />} />
+        </Route>        
           
-        </Route>
       </Routes>
     </Router>
   );

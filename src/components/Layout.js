@@ -1,9 +1,9 @@
 import React from "react";
 import bg from "../images/bg.png";
 import SideBar from "../components/SideBar";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
-export default function Home() {
+export default function Layout() {
   return (
     <>
       <div
@@ -26,6 +26,11 @@ export default function Home() {
               backgroundColor: "#F3F3F7",
             }}
           >
+            <div className="container d-lg-none text-center">
+              <Link to="/" className="link-underline link-underline-opacity-0">
+              <h1 style={{color:'black'}}>IIT<span style={{color:'red'}}>D</span>h <span style={{color:'red'}}>Book</span> Shelf</h1>
+              </Link>
+            </div>
             <Outlet/>
           </div>
         </div>

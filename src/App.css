@@ -47,3 +47,13 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+
+image-container img {
+  display: block; /* Ensures the image behaves like a block element */
+  transition: transform 0.3s ease; /* Smooth transition effect on transform */
+}
+
+.image-container:hover img {
+  transform: scale(1.2); /* Scales the image to 120% of its original size on hover */
+}

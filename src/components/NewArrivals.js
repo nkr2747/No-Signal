@@ -1,9 +1,21 @@
-import React from "react";
+import React,{useState,useEffect} from "react";
 import na from "../images/na.png"
 import { Link } from "react-router-dom";
+import axios from "axios";
+
+
 export default function NewArrivals() {
-  const arr = [1, 2, 3, 4, 5, 6];
-  function myf(x) {
+  const [books, setBooks] = useState([]);
+  useEffect(() => {
+    axios.get('http://localhost:3000/books')
+      .then(response => {
+        setBooks(response.data);
+      })
+      .catch(error => {
+        console.error('There was an error fetching the books!', error);
+      });
+  }, []);
+  function myf(book) {
     return (
       <div
         className="d-inline-block justify mx-1  h-100"
@@ -16,12 +28,13 @@ export default function NewArrivals() {
           style={{
             width: "6rem",
           }}
-        >
+        ><a href={`issuebook/${book._id}`}>
           <img
-            src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
+            src={book.image_url}
             class="card-img-top"
             alt="..."
           />
+          </a>
         </div>
       </div>
     );
@@ -33,9 +46,9 @@ export default function NewArrivals() {
       }}>
         <div className="row d-flex">
           
-          <div className="col-1 d-flex px-3 align-items-center justify-content-start">
+          <div className="col-1 d-flex  align-items-center ">
             <Link className='link-underline link-underline-opacity-0' to="newarrivals">
-            <img src={na} height='130' alt="" />
+            <img src={na} className="" height='130' alt="" />
             </Link>
           </div>
           <div className="col-11">
@@ -47,7 +60,7 @@ export default function NewArrivals() {
               backgroundColor: "white",
             }}
           >
-            {arr.map(myf)}
+            {books.map(myf)}
           </div>
         </div>
         </div>
