@@ -15,7 +15,7 @@ export default function Expand(props) {
               style={{
                 width: "12rem",
               }}
-            ><a href="">
+            ><a href="/">
               <img
                 src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
                 class="card-img-top"

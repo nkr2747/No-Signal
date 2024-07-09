@@ -57,3 +57,7 @@ image-container img {
 .image-container:hover img {
   transform: scale(1.2); /* Scales the image to 120% of its original size on hover */
 }
+.highlight {
+  font-weight: bold;
+  color: #000; /* Darker color for matched text */
+}

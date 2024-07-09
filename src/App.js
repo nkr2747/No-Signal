@@ -13,7 +13,9 @@ import About from "./components/About"
 import Expand from "./components/Expand";
 import Alayout from "./admin/Alayout";
 import AaddNewStudent from "./admin/AaddNewStudent";
+
 function App() {
+
   return (
     <Router>
       <Routes>

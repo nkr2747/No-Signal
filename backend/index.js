@@ -1,11 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const cors = require('cors')
+const bodyParser = require('body-parser');
+
+const User = require('./models/users');
+const Book = require('./models/Book');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-app.use(express.json());
+app.use(bodyParser.json());
 app.use(cors());
 
 async function main() {
@@ -20,21 +24,6 @@ async function main() {
   }
 }
 main().catch(err => console.log(err));
-
-const bookSchema = new mongoose.Schema({
-  title: String,
-  description: String,
-  author: String,
-  genre: String,
-  department: String,
-  count: Number,
-  vendor: String,
-  vendor_id: Number,
-  publisher: String,
-  publisher_id: String,
-});
-
-const Book = mongoose.model('Book', bookSchema);
 
 app.get('/books', async (req, res) => {
   try {
@@ -66,6 +55,34 @@ app.post('/books', async (req, res) => {
     res.status(400).send(err);
   }
 });
+// app.post('/users', async (req, res) => {
+//   try {
+//     const newUser = new User(req.body);
+//     await newUser.save();
+//     res.status(201).json(newUser);
+//   } catch (err) {
+//     res.status(400).send(err);
+//   }
+// });
+
+app.post('/users', async (req, res) => {
+  const { name, password,email, } = req.body;
+
+  try {
+    const user = new User({ name, email, password });
+    await user.save();
+    res.status(201).json({ message: 'User registered successfully' });
+  } catch (err) {
+    if (err.code === 11000) { // Duplicate key error
+      res.status(400).json({ error: 'Email already exists' });
+    } else {
+      res.status(500).json({ error: 'An error occurred while registering the user' });
+    }
+  }
+});
+
+// Start the server
+
 
 app.put('/books/:id', async (req, res) => {
   try {
@@ -90,7 +107,16 @@ app.delete('/books/:id', async (req, res) => {
     res.status(500).send(err);
   }
 });
+// const fuzzySearchUsers = require('./fuzzysearch');
+// async function fn() {
+//   const searchTerm = 'data'; // Example search term
+//   const results = await fuzzySearchUsers(searchTerm);
+//   console.log('hi');
+//   console.log(results); // Array of matching user documents
+// };
+
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
+

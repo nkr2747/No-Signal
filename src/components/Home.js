@@ -22,7 +22,7 @@ export default function Home() {
     <>
             <SearchBar />
 
-            <div className="container-fluid">
+            <div className="container-fluid border" >
               <div
                 className="row my-5 position-relative "
              
@@ -35,7 +35,7 @@ export default function Home() {
               <div
                 className="row p-1 my-5 border"
               >
-                <div className="container">
+                <div className="container" >
                   <h3>Good Morning</h3>
                   <BookScroller title="Reccomended for You" book={books}/>
                 </div>
