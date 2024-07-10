@@ -55,6 +55,10 @@ export default function AddBook() {
               <label htmlFor="validationDefault09" className="form-label">Publisher ID</label>
               <input type="text" className="form-control" id="validationDefault09" required />
             </div>
+            <div className="col-md-6">
+              <label htmlFor="validationDefault10" className="form-label">Book Cover</label>
+              <input type="text" className="form-control" id="validationDefault10" required />
+            </div>
             <div className="col-12">
               <button className="btn btn-success" type="submit">+ADD</button>
             </div>
