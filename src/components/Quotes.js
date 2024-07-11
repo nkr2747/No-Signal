@@ -11,25 +11,25 @@ export default function Quotes() {
               >
                 <div
                   id="carouselExampleAutoplaying"
-                  class="carousel slide"
+                  className="carousel slide"
                   data-bs-ride="carousel"
                 >
-                  <div class="carousel-inner text-light">
-                    <div class="carousel-item h-100 active align-items-start justify-content-start">
+                  <div className="carousel-inner text-light">
+                    <div className="carousel-item h-100 active align-items-start justify-content-start">
                       <h3>Todays Quote1</h3>
                       <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing
                         elit. Cumque dignissimos dolor voluptates .
                       </p>
                     </div>
-                    <div class="carousel-item">
+                    <div className="carousel-item">
                       <h3>Todays Quote2</h3>
                       <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing
                         elit. Cumque dignissimos dolor voluptates .
                       </p>
                     </div>
-                    <div class="carousel-item">
+                    <div className="carousel-item">
                       <h3>Todays Quote3</h3>
                       <p>
                         Lorem ipsum, dolor sit amet consectetur adipisicing
@@ -38,28 +38,28 @@ export default function Quotes() {
                     </div>
                   </div>
                   <button
-                    class="carousel-control-prev"
+                    className="carousel-control-prev"
                     type="button"
                     data-bs-target="#carouselExampleAutoplaying"
                     data-bs-slide="prev"
                   >
                     <span
-                      class="carousel-control-prev-icon"
+                      className="carousel-control-prev-icon"
                       aria-hidden="true"
                     ></span>
-                    <span class="visually-hidden">Previous</span>
+                    <span className="visually-hidden">Previous</span>
                   </button>
                   <button
-                    class="carousel-control-next"
+                    className="carousel-control-next"
                     type="button"
                     data-bs-target="#carouselExampleAutoplaying"
                     data-bs-slide="next"
                   >
                     <span
-                      class="carousel-control-next-icon"
+                      className="carousel-control-next-icon"
                       aria-hidden="true"
                     ></span>
-                    <span class="visually-hidden">Next</span>
+                    <span className="visually-hidden">Next</span>
                   </button>
                 </div>
               </div>

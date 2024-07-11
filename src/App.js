@@ -15,8 +15,10 @@ import Alayout from "./admin/Alayout";
 // import AaddNewStudent from "./admin/AaddNewStudent";
 import AddBook from './admin/AddBook'
 import DashBoard from "./admin/DashBoard";
-//import AaddNewStudent from "./admin/AaddNewStudent";
-import Register from "./admin/Register"
+import AaddNewStudent from "./admin/AaddNewStudent";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Logout from "./components/Logout";
+
 
 
 function App() {
@@ -29,9 +31,17 @@ function App() {
           <Route path="searchpanel" element={<SearchPanel />} />
           <Route path="issuebook/:id" element={<IssueBook />} />
           <Route path="contributepanel" element={<ContributePanel />} />
-          <Route path="myshelf" element={<MyShelf />} />
+          <Route
+          path="/myshelf"
+          element={
+            // <ProtectedRoute>
+              <MyShelf />
+            // </ProtectedRoute>
+          }
+        />
           <Route path="support" element={<Support />} />
           <Route path="about" element={<About />} />
+          <Route path="logout" element={<Logout />} />
           <Route path="recommended" element={<Expand category='Recommended for You'/> } />
           <Route path="newarrivals" element={<Expand category='New Arrivals'/> } />
           <Route path="termsconditions" element={<TermsConditions />} />
@@ -39,7 +49,7 @@ function App() {
         <Route path="loginpage" element={<Loginpage/> }/>        
         <Route path="/admin" element={<Alayout/> }>
         <Route index element={<DashBoard />} />
-        <Route path="addnewstudent" element={<Register/>} />
+        <Route path="addnewstudent" element={<AaddNewStudent/>} />
         <Route path="addnewbook" element={<AddBook />} />
         </Route>        
           

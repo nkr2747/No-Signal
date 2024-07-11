@@ -16,57 +16,57 @@ export default function SideBar() {
             backgroundColor: "white",
           }}
         >
-          <a class="navbar-brand " href="/">
+          <a className="navbar-brand " href="/">
             <img
               src={logo}
               alt="Bootstrap"
               width="260"
             />
           </a>
-          <ul class="navbar-nav m-1 align-items-start px-5 flex-column ">
-                    <li class="nav-item">
-                      <Link class="nav-link active" aria-current="page" to="/">
-                      <img src={home} class="px-1 d-inline-block align-text-top" alt=".." height="15" />
+          <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
+                    <li className="nav-item">
+                      <Link className="nav-link active" aria-current="page" to="/">
+                      <img src={home} className="px-1 d-inline-block align-text-top" alt=".." height="15" />
                         Home
                       </Link>
                     </li>
-                    <li class="nav-item">
-                      <Link class="nav-link" to="searchpanel">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="searchpanel">
                       <img src={search} className='px-1' height="15" alt="" />
                        Search
                       </Link>
                     </li>
-                    <li class="nav-item">
-                      <Link class="nav-link" to="myshelf">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="myshelf">
                       <img src={bookshelf} className='px-1' alt="" />
                        My Shelf
                       </Link>
                     </li>
-                    <li class="nav-item">
-                      <Link class="nav-link" to="contributepanel">
+                    <li className="nav-item">
+                      <Link className="nav-link" to="contributepanel">
                       <img src={contri} className='px-1' alt="" />
                        Contribute
                       </Link>
                     </li>
                   </ul>
           
-          <ul class="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
-                    <li class="nav-item small">
-                      <Link class="nav-link " to="about">
+          <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
+                    <li className="nav-item small">
+                      <Link className="nav-link " to="about">
                         <div className="small">
                           About
                         </div>
                       </Link>
                     </li>
-                    <li class="nav-item  small">
-                      <Link class="nav-link" to="support">
+                    <li className="nav-item  small">
+                      <Link className="nav-link" to="support">
                       <div className="small">
                           Support
                         </div>
                       </Link>
                     </li>
-                    <li class="nav-item small">
-                      <Link class="nav-link" to="termsconditions">
+                    <li className="nav-item small">
+                      <Link className="nav-link" to="termsconditions">
                         <div className="small">
                         Terms & Conditions
                         </div>

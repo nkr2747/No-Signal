@@ -24,14 +24,14 @@ export default function NewArrivals() {
         }}
       >
         <div
-          class="card"
+          className="card"
           style={{
             width: "6rem",
           }}
         ><a href={`issuebook/${book._id}`}>
           <img
             src={book.image_url}
-            class="card-img-top"
+            className="card-img-top"
             alt="..."
           />
           </a>
@@ -52,7 +52,7 @@ export default function NewArrivals() {
             </Link>
           </div>
           <div className="col-11">
-        <div class="overflow-x-auto  h-100 w-100 bg-light  scrollable-container">
+        <div className="overflow-x-auto  h-100 w-100 bg-light  scrollable-container">
           <div
             className="align-items-center text-center"
             style={{

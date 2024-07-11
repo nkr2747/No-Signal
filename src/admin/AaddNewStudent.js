@@ -200,42 +200,42 @@ export default function AaddNewStudent() {
 //   return (
 //     <div className="contanier px-5 py-4 ">
 //        <h4 className=" my-3">Student Registration</h4>
-//     <form class="row g-3">
-//       <div class="col-md-6">
-//         <label for="inputEmail4" class="form-label">
+//     <form className="row g-3">
+//       <div className="col-md-6">
+//         <label for="inputEmail4" className="form-label">
 //           Name
 //         </label>
-//         <input type="name" value={name} onChange={(e) => setname(e.target.value)} placeholder="Name" class="form-control" id="inputEmail4" />
+//         <input type="name" value={name} onChange={(e) => setname(e.target.value)} placeholder="Name" className="form-control" id="inputEmail4" />
 //       </div>
-//       <div class="col-md-6">
-//         <label for="inputEmail4" class="form-label">
+//       <div className="col-md-6">
+//         <label for="inputEmail4" className="form-label">
 //           Email
 //         </label>
-//         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="College Email ID"  class="form-control" id="inputEmail4" />
+//         <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="College Email ID"  className="form-control" id="inputEmail4" />
 //       </div>
-//       <div class="col-md-6">
-//         <label for="inputPassword4" class="form-label">
+//       <div className="col-md-6">
+//         <label for="inputPassword4" className="form-label">
 //           Password
 //         </label>
-//         <input type="password" value={password}  onChange={(e) => setPassword(e.target.value)} placeholder="Password"  class="form-control" id="inputPassword4" />
+//         <input type="password" value={password}  onChange={(e) => setPassword(e.target.value)} placeholder="Password"  className="form-control" id="inputPassword4" />
 //       </div>
-//       <div class="col-md-6">
-//         <label for="inputPassword4" class="form-label">
+//       <div className="col-md-6">
+//         <label for="inputPassword4" className="form-label">
 //           Confirm Password
 //         </label>
-//         <input type="password" placeholder="Confirm Password"  class="form-control" id="inputPassword4" />
+//         <input type="password" placeholder="Confirm Password"  className="form-control" id="inputPassword4" />
 //       </div>
-//       <div class="col-md-6">
-//     <label for="inputprogram" class="form-label">Program</label>
-//     <select id="inputprogram" value={program} onChange={(e) => setProgram(e.target.value)} class="form-select">
+//       <div className="col-md-6">
+//     <label for="inputprogram" className="form-label">Program</label>
+//     <select id="inputprogram" value={program} onChange={(e) => setProgram(e.target.value)} className="form-select">
 //       <option>B.Tech</option>
 //       <option>M.Tech</option>
 //       <option>PhD</option>
 //     </select>
 //   </div>
-//       <div class="col-md-6">
-//     <label for="inputbranch" class="form-label">Branch</label>
-//     <select id="inputbranch" value={branch} onChange={(e) => setBranch(e.target.value)} class="form-select">
+//       <div className="col-md-6">
+//     <label for="inputbranch" className="form-label">Branch</label>
+//     <select id="inputbranch" value={branch} onChange={(e) => setBranch(e.target.value)} className="form-select">
 //       <option value="CSE">CSE</option>
 //       <option value="Electrical">Electrical</option>
 //       <option value="Mechanical">Mechanical</option>
@@ -246,8 +246,8 @@ export default function AaddNewStudent() {
 //     </select>
 //   </div>
       
-//       <div class="col-12">
-//         <button type="submit" onClick={handleSubmit} class="btn btn-outline-danger">
+//       <div className="col-12">
+//         <button type="submit" onClick={handleSubmit} className="btn btn-outline-danger">
 //          Submit
 //         </button>
 //       </div>

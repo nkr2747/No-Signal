@@ -11,14 +11,14 @@ export default function BookScroller(props) {
           }}
         >
           <div
-            class="card border border-0"
+            className="card border border-0"
             style={{
               width: "6rem",
             }}
           > <a href={`issuebook/${book._id}`}>
             <img
               src={book.image_url}
-              class="card-img-top"
+              className="card-img-top"
               alt="..."
             />
             </a>
@@ -28,7 +28,7 @@ export default function BookScroller(props) {
     }
     return (
         <>
-        <div class="d-flex justify-content-between">
+        <div className="d-flex justify-content-between">
                     <div>
                     <p className='fs-5'>{props.title}</p>
                     </div>
@@ -36,7 +36,7 @@ export default function BookScroller(props) {
                     <div className="fs-6 small">
                       <p>
                         <Link
-                          class="link-secondary link-underline link-underline-opacity-0 small link-opacity-100-hover"
+                          className="link-secondary link-underline link-underline-opacity-0 small link-opacity-100-hover"
                           to="recommended"
                         >
                           Show all
@@ -45,7 +45,7 @@ export default function BookScroller(props) {
                     </div>
                   </div>
       <div className="col-12  px-0">
-                <div class="overflow-x-auto  h-100 w-100  scrollable-container" >
+                <div className="overflow-x-auto  h-100 w-100  scrollable-container" >
                   <div
                     className=" text-center"
                     style={{

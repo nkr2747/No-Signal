@@ -72,16 +72,16 @@ export default function SearchPanel(props) {
   }, []);
     function func(book){
         return (
-            <a href={`issuebook/${book._id}`} class="list-group-item my-2 rounded list-group-item-action" >
-    <div class="d-flex w-100 justify-content-between">
+            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
+    <div className="d-flex w-100 justify-content-between">
       <div className="row small gx-2 w-100">
       <div className='col-3' style={{ height:'60px', }}>
   <img className='object-fit-cover' src={book.image_url} style={{ height:'60px' }} alt="book" />
 </div>
 
         <div className="col-6">
-        <h6 class="mb-1">{book.title}</h6>
-        <small class="text-body-secondary">{book.author}</small>
+        <h6 className="mb-1">{book.title}</h6>
+        <small className="text-body-secondary">{book.author}</small>
         </div>
         <div className="col-2 small ">{book.genre}</div>
         <div className="col-1 small">{book.count===0?"Unavailable":"Available"}</div>
@@ -107,9 +107,9 @@ export default function SearchPanel(props) {
         position: 'relative',
         zIndex: 2 /* Ensures this container is on top */
       }}>
-    <div class="input-group">
+    <div className="input-group">
         <button
-            class="btn  btn-secondary text-dark dropdown-toggle"
+            className="btn  btn-secondary text-dark dropdown-toggle"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -119,19 +119,19 @@ export default function SearchPanel(props) {
           >
             All
           </button>
-          <ul class="dropdown-menu">
+          <ul className="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Action
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Another action
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Something else here
               </a>
             </li>
@@ -139,14 +139,14 @@ export default function SearchPanel(props) {
 
       <input
             type="text"
-            class="form-control me-2"
+            className="form-control me-2"
             value={inputValue}
             onChange={handleChange}
             placeholder="Search"
             aria-label="Example text with button addon"
             aria-describedby="button-addon1"
           />
-          <button class="btn btn-outline-danger rounded" onClick={handleSearch} type="submit">Search</button>
+          <button className="btn btn-outline-danger rounded" onClick={handleSearch} type="submit">Search</button>
           {inputValue.trim() !== '' && (
             <div className="container overflow-y-auto list-group scrollable-container " style={{maxHeight:'40vh'}}>
         <ul className='' style={{
@@ -154,7 +154,7 @@ export default function SearchPanel(props) {
             zIndex:2
         }} >
           {filteredSuggestions.map((suggestion, index) => (
-            <li class="list-group-item list-group-item-action" key={index} onClick={() => handleSelect(suggestion)}>
+            <li className="list-group-item list-group-item-action" key={index} onClick={() => handleSelect(suggestion)}>
               {getHighlightedText(suggestion, inputValue)}
             </li>
           ))}

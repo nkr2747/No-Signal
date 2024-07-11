@@ -12,7 +12,7 @@ export default function Loginpage(props) {
   {
       e.preventDefault();
 
-      const res = await fetch('/users', {
+      const res = await fetch('/loginpage', {
         method : "POST",
         headers : {
           "Content-Type": "application/json"
@@ -31,7 +31,7 @@ export default function Loginpage(props) {
       else
       {
         window.alert("Login Successfully");
-        navigate('/');
+        navigate('/myshelf');
       }
   }
   return (

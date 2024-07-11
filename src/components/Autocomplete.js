@@ -58,9 +58,9 @@ const Autocomplete = ({ suggestions }) => {
         position: 'relative',
         zIndex: 2 /* Ensures this container is on top */
       }}>
-    <div class="input-group">
+    <div className="input-group">
         <button
-            class="btn  btn-secondary text-dark dropdown-toggle"
+            className="btn  btn-secondary text-dark dropdown-toggle"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -70,19 +70,19 @@ const Autocomplete = ({ suggestions }) => {
           >
             All
           </button>
-          <ul class="dropdown-menu">
+          <ul className="dropdown-menu">
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Action
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Another action
               </a>
             </li>
             <li>
-              <a class="dropdown-item" href="/">
+              <a className="dropdown-item" href="/">
                 Something else here
               </a>
             </li>
@@ -90,7 +90,7 @@ const Autocomplete = ({ suggestions }) => {
 
       <input
             type="text"
-            class="form-control me-2"
+            className="form-control me-2"
             value={inputValue}
             onChange={handleChange}
             onKeyPress={handleKeyPress}
@@ -98,7 +98,7 @@ const Autocomplete = ({ suggestions }) => {
             aria-label="Example text with button addon"
             aria-describedby="button-addon1"
           />
-          {/* <button class="btn btn-outline-danger rounded" type="submit">Search</button> */}
+          {/* <button className="btn btn-outline-danger rounded" type="submit">Search</button> */}
           {inputValue.trim() !== '' && (
             <div className="container overflow-y-auto list-group scrollable-container " style={{maxHeight:'40vh'}}>
         <ul className='' style={{
@@ -106,7 +106,7 @@ const Autocomplete = ({ suggestions }) => {
             zIndex:2
         }} >
           {filteredSuggestions.map((suggestion, index) => (
-            <li class="list-group-item list-group-item-action" key={index} onClick={() => handleSelect(suggestion)}>
+            <li className="list-group-item list-group-item-action" key={index} onClick={() => handleSelect(suggestion)}>
               {getHighlightedText(suggestion, inputValue)}
             </li>
           ))}

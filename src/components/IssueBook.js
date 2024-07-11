@@ -39,7 +39,7 @@ export default function IssueBook() {
               }}
             >
               <div
-                class="card border border-0"
+                className="card border border-0"
                 style={{
                   width: "8rem",
                 }}
@@ -48,7 +48,7 @@ export default function IssueBook() {
                 <Link to="issuebook">
                   <img
                     src={book.image_url}
-                    class="card-img-top"
+                    className="card-img-top"
                     alt="..."
                   />
                 </Link>

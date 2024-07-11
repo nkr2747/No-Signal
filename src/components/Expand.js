@@ -11,14 +11,14 @@ export default function Expand(props) {
             }}
           >
             <div
-              class="card"
+              className="card"
               style={{
                 width: "12rem",
               }}
             ><a href="/">
               <img
                 src="https://minalsampat.com/wp-content/uploads/2019/12/book-placeholder-370x538.jpg"
-                class="card-img-top"
+                className="card-img-top"
                 alt="..."
               />
               </a>

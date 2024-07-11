@@ -16,47 +16,47 @@ export default function ContributePanel() {
           }}
         >
           <p className="my-4">Fill up Book Details</p>
-          <div class="row">
-            <div class="col">
+          <div className="row">
+            <div className="col">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Book name"
                 aria-label="Book name"
               />
             </div>
-            <select class="col form-select" aria-label="Default select example">
+            <select className="col form-select" aria-label="Default select example">
               <option selected>Category</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
           </div>
-          <div class="row my-3">
-            <div class="col">
+          <div className="row my-3">
+            <div className="col">
               <input
                 type="text"
-                class="form-control"
+                className="form-control"
                 placeholder="Author name"
                 aria-label="Author name"
               />
             </div>
-            <select class="col form-select" aria-label="Default select example">
+            <select className="col form-select" aria-label="Default select example">
               <option selected>Language</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
           </div>
-          <div class="mb-3">
+          <div className="mb-3">
             <textarea
-              class="form-control"
+              className="form-control"
               id="exampleFormControlTextarea1"
               rows="3"
               placeholder="Reason For Your Contribution"
             ></textarea>
           </div>
-          <button type="button" class="btn btn-outline-danger btn-lg my-4">Submit</button>
+          <button type="button" className="btn btn-outline-danger btn-lg my-4">Submit</button>
         </div>
         <div
           className="col d-none h-100 py-5 align-items-start align-item-top d-lg-block mx-1 "

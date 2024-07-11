@@ -149,11 +149,11 @@ inside the 24X7 Reading Hall.</h5></li>
             </ul>
 
            <h3>Support staff emails</h3>
-           <ul class="list-group">
-    <li class="list-group-item">Mohit<br/><a href="mailto:me23bt022@iitdh.ac.in">me23bt022@iitdh.ac.in</a></li>
-    <li class="list-group-item">Saurabh<br/><a href="mailto:ch23bt001@iitdh.ac.in">ch23bt001@iitdh.ac.in</a></li>
-    <li class="list-group-item">Nilesh<br/><a href="mailto:cs23bt006@iitdh.ac.in">cs23bt006@iitdh.ac.in</a></li>
-    <li class="list-group-item">Siddharth<br/><a href="mailto:ce23bt007@iitdh.ac.in">ce23bt007@iitdh.ac.in</a></li>
+           <ul className="list-group">
+    <li className="list-group-item">Mohit<br/><a href="mailto:me23bt022@iitdh.ac.in">me23bt022@iitdh.ac.in</a></li>
+    <li className="list-group-item">Saurabh<br/><a href="mailto:ch23bt001@iitdh.ac.in">ch23bt001@iitdh.ac.in</a></li>
+    <li className="list-group-item">Nilesh<br/><a href="mailto:cs23bt006@iitdh.ac.in">cs23bt006@iitdh.ac.in</a></li>
+    <li className="list-group-item">Siddharth<br/><a href="mailto:ce23bt007@iitdh.ac.in">ce23bt007@iitdh.ac.in</a></li>
 </ul>
 
 
