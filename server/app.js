@@ -16,40 +16,26 @@ app.use(express.json());
 app.use(require('./router/auth'));
 const PORT = process.env.PORT;
 
-
-app.get('/', (req, res) =>
-{
-    res.send(`Hello world from the server`);
-});
-
-app.get('/contact', (req, res) =>
-{
-    res.send(`Hello contact world from the server`);
-});
-
 app.listen(PORT, () =>{
     console.log(`Server is runing at port no ${PORT}`);
 })
 
 
 
+// app.get('/', (req, res) =>
+// {
+//     res.send(`Hello world from the server`);
+// });
+// app.get('/admin', (req, res) =>
+// {
+//     res.send(`Hello world from the server`);
+// });
+// app.get('/loginpage', (req, res) =>
+// {
+//     res.send(`Hello world from the server`);
+// });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-// , {
-//     useNewUrlParser: true,
-//     useCreateIndex: true,
-//     useUnifiedTopology: true,
-//     useFindAndModify: false
-// }
+// app.get('/contact', (req, res) =>
+// {
+//     res.send(`Hello contact world from the server`);
+// });

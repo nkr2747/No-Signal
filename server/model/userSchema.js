@@ -38,7 +38,6 @@ const userSchema = new mongoose.Schema({
     ]
 })
 
-// we are hashing the password
 
 userSchema.pre('save', async function(next)
 {
@@ -50,7 +49,7 @@ userSchema.pre('save', async function(next)
     next();
 })
 
-// we are generating token
+
 userSchema.methods.generateAuthToken = async function()
 {
     try
@@ -66,6 +65,5 @@ userSchema.methods.generateAuthToken = async function()
     }
 }
 
-// collection creation
 const User = mongoose.model("USER", userSchema);
 module.exports = User;
