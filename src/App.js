@@ -12,7 +12,12 @@ import Loginpage from "./components/Loginpage";
 import About from "./components/About"
 import Expand from "./components/Expand";
 import Alayout from "./admin/Alayout";
-import AaddNewStudent from "./admin/AaddNewStudent";
+// import AaddNewStudent from "./admin/AaddNewStudent";
+import AddBook from './admin/AddBook'
+import DashBoard from "./admin/DashBoard";
+//import AaddNewStudent from "./admin/AaddNewStudent";
+import Register from "./admin/Register"
+
 
 function App() {
 
@@ -33,7 +38,9 @@ function App() {
         </Route>
         <Route path="loginpage" element={<Loginpage/> }/>        
         <Route path="/admin" element={<Alayout/> }>
-        <Route index element={<AaddNewStudent />} />
+        <Route index element={<DashBoard />} />
+        <Route path="addnewstudent" element={<Register/>} />
+        <Route path="addnewbook" element={<AddBook />} />
         </Route>        
           
       </Routes>

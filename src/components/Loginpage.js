@@ -12,7 +12,7 @@ export default function Loginpage(props) {
   {
       e.preventDefault();
 
-      const res = await fetch('/loginpage', {
+      const res = await fetch('/users', {
         method : "POST",
         headers : {
           "Content-Type": "application/json"

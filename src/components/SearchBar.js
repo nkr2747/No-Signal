@@ -9,8 +9,10 @@ import React, { useEffect, useState } from "react";
 // import { Link } from "react-router-dom";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
+
 export default function SearchBar() {
   const [books, setBooks] = useState([]);
+
   useEffect(() => {
     axios
       .get("http://localhost:3000/books")
@@ -121,7 +123,7 @@ export default function SearchBar() {
         </div>
       </div> */}
 
-      <div className="   ">
+      
         {/* <div class="input-group mb-3  position-absolute top-50 start-50 translate-middle">
        
           <button
@@ -161,8 +163,7 @@ export default function SearchBar() {
             aria-describedby="button-addon1"
           />
         </div> */}
-      </div>
-      <div className="col-12 col-lg-9  border align-items-end ">
+      <div className="col-12 mx-auto col-lg-10 border align-items-end ">
         {/* <DateTimeDisplay /> */}
         <Autocomplete suggestions={bkttles} />
       </div>

@@ -1,10 +1,10 @@
-const express = require('express')
-const mongoose = require('mongoose')
-const cors = require('cors')
-const bodyParser = require('body-parser');
+const express = require("express");
+const mongoose = require("mongoose");
+const cors = require("cors");
+const bodyParser = require("body-parser");
 
-const User = require('./models/users');
-const Book = require('./models/Book');
+const User = require("./models/users");
+const Book = require("./models/Book");
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -15,17 +15,17 @@ app.use(cors());
 async function main() {
   try {
     await mongoose.connect(
-      'mongodb+srv://nileshkumar2747:thalaforareason7@books.5yyh6kt.mongodb.net/lms',
+      "mongodb+srv://nileshkumar2747:thalaforareason7@books.5yyh6kt.mongodb.net/lms",
       { useNewUrlParser: true, useUnifiedTopology: true }
     );
-    console.log('Connected to MongoDB');
+    console.log("Connected to MongoDB");
   } catch (err) {
-    console.error('Error connecting to MongoDB', err);
+    console.error("Error connecting to MongoDB", err);
   }
 }
-main().catch(err => console.log(err));
+main().catch((err) => console.log(err));
 
-app.get('/books', async (req, res) => {
+app.get("/books", async (req, res) => {
   try {
     const books = await Book.find({});
     res.json(books);
@@ -34,11 +34,11 @@ app.get('/books', async (req, res) => {
   }
 });
 
-app.get('/books/:id', async (req, res) => {
+app.get("/books/:id", async (req, res) => {
   try {
     const book = await Book.findById(req.params.id);
     if (!book) {
-      return res.status(404).send('Book not found');
+      return res.status(404).send("Book not found");
     }
     res.json(book);
   } catch (err) {
@@ -46,15 +46,15 @@ app.get('/books/:id', async (req, res) => {
   }
 });
 
-app.post('/books', async (req, res) => {
-  try {
-    const newBook = new Book(req.body);
-    await newBook.save();
-    res.status(201).json(newBook);
-  } catch (err) {
-    res.status(400).send(err);
-  }
-});
+// app.post("/books", async (req, res) => {
+//   try {
+//     const newBook = new Book(req.body);
+//     await newBook.save();
+//     res.status(201).json(newBook);
+//   } catch (err) {
+//     res.status(400).send(err);
+//   }
+// });
 // app.post('/users', async (req, res) => {
 //   try {
 //     const newUser = new User(req.body);
@@ -65,30 +65,81 @@ app.post('/books', async (req, res) => {
 //   }
 // });
 
-app.post('/users', async (req, res) => {
-  const { name, password,email, } = req.body;
+app.post('/check-email', async (req, res) => {
+  const { email } = req.body;
+  const user = await User.findOne({ email });
+  if (user) {
+    return res.json({ exists: true });
+  } else {
+    return res.json({ exists: false });
+  }
+});
+
+app.post("/users", async (req, res) => {
+  const { name, email, password, program, branch } = req.body;
 
   try {
-    const user = new User({ name, email, password });
+    const user = new User({ name, email, password, program, branch });
     await user.save();
-    res.status(201).json({ message: 'User registered successfully' });
+    res.status(201).json({ message: "User registered successfully" });
   } catch (err) {
-    if (err.code === 11000) { // Duplicate key error
-      res.status(400).json({ error: 'Email already exists' });
+    if (err.code === 11000) {
+      // Duplicate key error
+      res.status(400).json({ error: "Email already exists" });
     } else {
-      res.status(500).json({ error: 'An error occurred while registering the user' });
+      res
+        .status(500)
+        .json({ error: "An error occurred while registering the user" });
+    }
+  }
+});
+app.post("/books", async (req, res) => {
+  const { title,
+    description,
+    author,
+    genre,
+    department,
+    count,
+    vendor,
+    vendor_id,
+    publisher,
+    publisher_id, } = req.body;
+
+  try {
+    const book = new Book({ title,
+        description,
+        author,
+        genre,
+        department,
+        count,
+        vendor,
+        vendor_id,
+        publisher,
+        publisher_id, });
+    await book.save();
+    res.status(201).json({ message: "User registered successfully" });
+  } catch (err) {
+    if (err.code === 11000) {
+      // Duplicate key error
+      res.status(400).json({ error: "Email already exists" });
+    } else {
+      res
+        .status(500)
+        .json({ error: "An error occurred while registering the user" });
     }
   }
 });
 
 // Start the server
 
-
-app.put('/books/:id', async (req, res) => {
+app.put("/books/:id", async (req, res) => {
   try {
-    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+    const updatedBook = await Book.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true,
+    });
     if (!updatedBook) {
-      return res.status(404).send('Book not found');
+      return res.status(404).send("Book not found");
     }
     res.json(updatedBook);
   } catch (err) {
@@ -96,13 +147,13 @@ app.put('/books/:id', async (req, res) => {
   }
 });
 
-app.delete('/books/:id', async (req, res) => {
+app.delete("/books/:id", async (req, res) => {
   try {
     const deletedBook = await Book.findByIdAndDelete(req.params.id);
     if (!deletedBook) {
-      return res.status(404).send('Book not found');
+      return res.status(404).send("Book not found");
     }
-    res.send('Book deleted');
+    res.send("Book deleted");
   } catch (err) {
     res.status(500).send(err);
   }
@@ -115,8 +166,6 @@ app.delete('/books/:id', async (req, res) => {
 //   console.log(results); // Array of matching user documents
 // };
 
-
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
-
