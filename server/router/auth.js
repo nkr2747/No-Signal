@@ -1,13 +1,18 @@
 const jwt = require('jsonwebtoken');
 const express = require('express');
 const bcrypt = require('bcryptjs');
-// const Authenticate = require('../middleware/authenticate');
+const Authenticate = require('../middleware/authenticate');
 
 const router = express.Router();
 
 require('../db/conn');
 
 const User = require('../model/userSchema');
+
+////
+
+////
+
 
 // Async - Await
 router.post('/admin', async (req, res) => {
@@ -100,11 +105,19 @@ module.exports = router;
 
 // About us
 
-// router.get('/about',  Authenticate , (req, res) =>
-// {
-//     console.log("Hello My About");
-//     res.send("Hello about world from the server");
-// });
+router.get('/about',  Authenticate , (req, res) =>
+{
+    console.log("Hello My About");
+    res.send(req.rootUser);
+});
+// logout ka code
+
+router.get('/logout', (req, res) =>
+{
+    res.clearCookie('jwtoken',{path:'/'})
+    console.log("Hello My About");
+    res.status(200).send("User Logout");
+});
 
 
 
