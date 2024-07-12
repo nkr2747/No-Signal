@@ -3,7 +3,7 @@ import { useEffect,useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 // import SearchBar from './SearchBar'
 import axios from 'axios'
-import Fuse from "fuse.js"
+// import Fuse from "fuse.js"
 export default function SearchPanel(props) {
   function bkttle(x) {
     return x.title;

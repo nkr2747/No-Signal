@@ -33,6 +33,10 @@ export default function NewArrivals() {
             src={book.image_url}
             className="card-img-top"
             alt="..."
+            style={{
+              height: "150px",
+              objectFit: "cover",
+            }}
           />
           </a>
         </div>
