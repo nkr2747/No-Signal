@@ -21,6 +21,7 @@ import Logout from "./components/Logout";
 import React, { createContext, useReducer } from "react";
 import { initialState, reducer } from "./reducer/UseReducer";
 import Favourites from "./components/Favourites";
+import PresentStatus from "./components/PresentStatus";
 
 export const UserContext = createContext();
 
@@ -36,10 +37,7 @@ function App() {
             <Route path="searchpanel" element={<SearchPanel />} />
             <Route path="issuebook/:id" element={<IssueBook />} />
             <Route path="contributepanel" element={<ContributePanel />} />
-            <Route path="/myshelf" element={<MyShelf />}>
-            <Route index element={<Favourites />} />
-            
-            </Route>
+            <Route path="/myshelf" element={<MyShelf />}/>
             <Route path="support" element={<Support />} />
             <Route path="about" element={<About />} />
             <Route path="logout" element={<Logout />} />
@@ -58,6 +56,7 @@ function App() {
             <Route index element={<DashBoard />} />
             <Route path="addnewstudent" element={<AaddNewStudent />} />
             <Route path="addnewbook" element={<AddBook />} />
+            <Route path="presentstatus" element={<PresentStatus />} />
           </Route>
         </Routes>
       </Router>
