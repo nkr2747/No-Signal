@@ -23,6 +23,7 @@ import { initialState, reducer } from "./reducer/UseReducer";
 import Favourites from "./components/Favourites";
 import PresentStatus from "./components/PresentStatus";
 import PresentStatusPage from "./components/PresentStatusPage";
+import AdminReturnRequests from "./admin/ReturnReq";
 
 export const UserContext = createContext();
 
@@ -58,6 +59,7 @@ function App() {
             <Route path="addnewstudent" element={<AaddNewStudent />} />
             <Route path="addnewbook" element={<AddBook />} />
             <Route path="presentstatuspage" element={<PresentStatusPage />} />
+            <Route path="returnrequest" element={<AdminReturnRequests />} />
           </Route>
         </Routes>
       </Router>

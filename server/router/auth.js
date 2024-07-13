@@ -181,6 +181,7 @@ router.post('/addtofavourite', Authenticate, async (req, res) => {
         }
 
         const user = req.rootUser;
+        
         user.favourites.push(book._id);
         await user.save();
 
@@ -226,7 +227,7 @@ router.post('/approvebook', async (req, res) => {
         }
 
         user.requested_books.splice(requestIndex, 1);
-        user.issued_books.push(book._id); // Add to issued books
+        user.borrowed_books.push(book._id); // Add to issued books
         book.count--;
         await user.save();
         await book.save();
@@ -269,10 +270,11 @@ router.post('/approvebook', async (req, res) => {
 
 router.get('/admin/bookrequests', async (req, res) => {
     try {
-        const users = await User.find({ 'requested_books.0': { $exists: true } })
+        
+        const users = await User.find({ 'requested_books.book': { $exists: true } })
             .select('requested_books name')
             .populate('requested_books.book', 'title');
-
+        console.log("HI")
         const requests = users.flatMap(user =>
             user.requested_books.map(request => ({
                 userId: user._id,
@@ -290,7 +292,96 @@ router.get('/admin/bookrequests', async (req, res) => {
     }
 });
 
+//returning book request to admin
+router.post('/returnbook', Authenticate, async (req, res) => {
+    const { bookId } = req.body;
+    
+    try {
+      const user = req.rootUser;
+      
+      const borrowedBookIndex = user.borrowed_books.findIndex(b => b.toString() === bookId);
+        console.log(borrowedBookIndex)
+      if (borrowedBookIndex === -1) {
+        return res.status(404).json({ message: 'Book not found in borrowed books' });
+      }
+  
+      const returnRequest = {
+        book: bookId,
+        returnedAt: new Date()
+      };
+  
+      user.return_requests.push(returnRequest);
+      await user.save();
+  
+      res.status(200).json({ message: 'Return request submitted successfully', user });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
 
+//to show the list of return requests to admin
+router.get('/admin/returnrequests', async (req, res) => {
+    try {
+        
+        const users = await User.find({ 'return_requests.book': { $exists: true } })
+            .select('return_requests name')
+            .populate('return_requests.book', 'title');
+        console.log("HI")
+        const requests = users.flatMap(user =>
+            user.return_requests.map(request => ({
+                userId: user._id,
+                userName: user.name,
+                bookId: request.book._id,
+                bookTitle: request.book.title,
+                requestedAt: request.requestedAt
+            }))
+        );
+
+        res.status(200).json({ requests });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+//admin,response for returning
+router.post('/admin/approvereturn', async (req, res) => {
+    const { userId, bookId } = req.body;
+    
+    try {
+      const user = await User.findById(userId);
+      const book = await Book.findById(bookId);
+      
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+      
+      const returnRequestIndex = user.return_requests.findIndex(r => r.book.toString() === bookId);
+      console.log(returnRequestIndex)
+      if (returnRequestIndex === -1) {
+        return res.status(404).json({ message: 'Return request not found' });
+      }
+  
+      const returnedBook = user.return_requests[returnRequestIndex];
+      user.previously_borrowed_books.push(returnedBook);
+      user.return_requests.splice(returnRequestIndex, 1);
+  
+      const borrowedBookIndex = user.borrowed_books.findIndex(b => b.toString() === bookId);
+      if (borrowedBookIndex !== -1) {
+        user.borrowed_books.splice(borrowedBookIndex, 1);
+      }
+    //   const book=Book.findById(user.borrowed_books)
+      book.count++
+      await user.save();
+      await book.save();
+      res.status(200).json({ message: 'Return request approved', user });
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ message: 'Internal server error' });
+    }
+  });
 
 
 /////

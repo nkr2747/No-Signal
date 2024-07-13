@@ -1,8 +1,5 @@
-import React,{useEffect,useState} from 'react'
-import axios from 'axios'
-
-
-
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export default function DashBoard() {
   const [bookRequests, setBookRequests] = useState([]);
@@ -12,6 +9,7 @@ export default function DashBoard() {
   useEffect(() => {
     fetchBookRequests();
   }, []);
+
   const fetchBookRequests = async () => {
     try {
       const response = await axios.get('/admin/bookrequests', {
@@ -47,30 +45,21 @@ export default function DashBoard() {
   if (loading) return <div>Loading...</div>;
   if (error) return <div>{error}</div>;
 
-
-  function notification(x){
-    return(
-      <div className="list-group-item">
-
-      </div>
-    )
-  }
-
   return (
     <div className="list-group m-2">
-      
-         {bookRequests.map(request => (
-          <div className="list-group-item m-2" key={`${request.userId}-${request.bookId}`}>
-              <strong>Student Name:</strong> {request.userName}
-              <br />
-              <strong>Book Name:</strong> {request.bookTitle}
-             <br />
-                <button onClick={() => approveBookRequest(request.userId, request.bookId)} className="btn btn-primary">
-                  Approve
-                </button>
-          
-            </div>
-          ))}
+      {bookRequests.map(request => (
+        <div className="list-group-item m-2" key={`${request.userId}-${request.bookId}`}>
+          <strong>Student Name:</strong> {request.userName}
+          <br />
+          <strong>Book Name:</strong> {request.bookTitle}
+          <br />
+          <strong>Requested At:</strong> {new Date(request.requestedAt).toLocaleString()}
+          <br />
+          <button onClick={() => approveBookRequest(request.userId, request.bookId)} className="btn btn-primary">
+            Approve
+          </button>
+        </div>
+      ))}
     </div>
-  )
+  );
 }

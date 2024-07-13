@@ -90,6 +90,35 @@ export default function MyShelf() {
     );
   }
 
+  const handleReturnBook = async (bookId) => {
+    try {
+      await axios.post('/returnbook', { bookId }, { withCredentials: true });
+      setBorrowedBooks(borrowedBooks.filter(book => book._id !== bookId));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  function fnBorrowedBooks(book, index) {
+    return (
+      <div
+        className="col-4 rounded mx-2 d-inline p-2"
+        key={index}
+        style={{ backgroundColor: "white" }}
+      >
+        <div className=" d-flex">
+          <div className="d-inline">
+            <img src={book.image_url} alt="" style={{ height: "120px" }} />
+          </div>
+          <div className="d-inline px-1">
+            {book.title}
+            <small>{book.author}</small>
+          </div>
+          <button onClick={() => handleReturnBook(book._id)}>Return</button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <>
       <SearchBar />
@@ -150,7 +179,7 @@ export default function MyShelf() {
           </div>
           <h4 id="scrollspyHeading2">Borrowed Books</h4>
           <div className="row py-2 g-5 my-2 justify-content-around">
-            {borrowedBooks.map(shelfBooks)}
+            {borrowedBooks.map(fnBorrowedBooks)}
           </div>
           <h4 id="scrollspyHeading3">Requested Books</h4>
           <div className="row py-2 g-5 my-2 justify-content-around">

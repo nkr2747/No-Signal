@@ -42,7 +42,7 @@ app.get("/books", async (req, res) => {
   });
 //issue
 
-//delete after 24 hours
+//delete issue request after 24 hours
 const cron = require('node-cron');
  // Adjust the path to your User model
 
@@ -97,7 +97,22 @@ app.get('/search', async (req, res) => {
 
 //
 
+//delete return request after 24hr
+cron.schedule('0 0 * * *', async () => { // Runs every day at midnight
+  const users = await User.find({ 'return_requests.returnedAt': { $lt: new Date(Date.now() - 24 * 60 * 60 * 1000) } });
+  
+  users.forEach(async (user) => {
+    const unapprovedRequests = user.return_requests.filter(r => r.returnedAt < new Date(Date.now() - 24 * 60 * 60 * 1000));
+    
+    unapprovedRequests.forEach(request => {
+      user.borrowed_books.push({ book: request.book });
+    });
 
+    user.return_requests = user.return_requests.filter(r => r.returnedAt >= new Date(Date.now() - 24 * 60 * 60 * 1000));
+
+    await user.save();
+  });
+});
   
 //add book
 app.post("/books", async (req, res) => {

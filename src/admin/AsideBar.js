@@ -32,13 +32,19 @@ export default function AsideBar() {
                     <li className="nav-item">
                       <Link className="nav-link" to="/admin">
                       <img src={search} className='px-1' height="15" alt="" />
-                       Dashboard
+                      Issue Requests
                       </Link>
                     </li>
                     <li className="nav-item">
                       <Link className="nav-link" to="addnewbook">
                       <img src={bookshelf} className='px-1' alt="" />
                        Add New Book
+                      </Link>
+                    </li>
+                    <li className="nav-item">
+                      <Link className="nav-link" to="returnrequest">
+                      <img src={bookshelf} className='px-1' alt="" />
+                       Return Requests
                       </Link>
                     </li>
                     <li className="nav-item">
