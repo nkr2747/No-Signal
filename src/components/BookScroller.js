@@ -20,6 +20,10 @@ export default function BookScroller(props) {
               src={book.image_url}
               className="card-img-top"
               alt="..."
+              style={{
+                height: "150px",
+                objectFit: "cover",
+              }}
             />
             </Link>
           </div>
