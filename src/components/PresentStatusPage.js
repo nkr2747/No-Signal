@@ -1,5 +1,5 @@
 import React from 'react';
-import './support.css';
+import './Support.css';
 
 const userData = {
   name: 'John Doe',
@@ -13,7 +13,7 @@ const statusStyle = {
 
 export default function PresentStatusPage() {
   return (
-    <div className="background" style={{ backgroundColor: "#F0F7F7" }}>
+    <div className="container" style={{ backgroundColor: "#F0F7F7" }}>
       <h1>Present <span style={statusStyle}>Status</span></h1>
       <div
         className="container rounded my-2 p-3 d-flex justify-content-between align-items-center"

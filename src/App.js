@@ -22,6 +22,7 @@ import React, { createContext, useReducer } from "react";
 import { initialState, reducer } from "./reducer/UseReducer";
 import Favourites from "./components/Favourites";
 import PresentStatus from "./components/PresentStatus";
+import PresentStatusPage from "./components/PresentStatusPage";
 
 export const UserContext = createContext();
 
@@ -56,7 +57,7 @@ function App() {
             <Route index element={<DashBoard />} />
             <Route path="addnewstudent" element={<AaddNewStudent />} />
             <Route path="addnewbook" element={<AddBook />} />
-            <Route path="presentstatus" element={<PresentStatus />} />
+            <Route path="presentstatuspage" element={<PresentStatusPage />} />
           </Route>
         </Routes>
       </Router>
