@@ -1,8 +1,10 @@
-import React,{useEffect} from 'react'
+import React,{useEffect,useContext} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
 
 export default function Logout() {
+  const {state,dispatch}=useContext(UserContext)
     const navigate = useNavigate();
 
     const handleLogout = async () => {
@@ -13,6 +15,7 @@ export default function Logout() {
     
           //localStorage.removeItem('token');
           console.log("hi")
+          dispatch({type:"USER",payload:false})
           navigate('/loginpage');
         } catch (error) {
           console.error('Error logging out:', error);

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 // import logo from "../images/logo.svg";
 // import logoiitdh from "../images/logo.png";
 // import DateTimeDisplay from "../components/DateTimeDisplay";
@@ -9,8 +9,12 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Autocomplete from "./Autocomplete";
 import axios from "axios";
+import { UserContext } from "../App";
+import Search from "./search";
+
 
 export default function SearchBar() {
+  const {state,dispatch} = useContext(UserContext)
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -27,6 +31,32 @@ export default function SearchBar() {
     return x.title;
   }
   const bkttles = books.map(bkttle);
+
+
+  const RenderMenu=()=>{
+    if(state){
+      return(
+        <>
+          <div className="col-2">
+            <Link to="/logout">
+                logout
+            </Link>
+          </div>
+        </>
+      )
+    }
+    else{
+      return(
+        <>
+          <div className="col-2">
+            <Link to="/loginpage">
+                login
+            </Link>
+          </div>
+        </>
+      )
+    }
+  }
   return (
     <div
       className="row mx-1  "
@@ -165,19 +195,11 @@ export default function SearchBar() {
         </div> */}
       <div className="col-10 mx-auto col-lg-10 border align-items-end ">
         {/* <DateTimeDisplay /> */}
-        <Autocomplete suggestions={bkttles} />
+        <Search/>
       </div>
 
-          <div className="col-2">
-            <Link to="/loginpage">
-                login
-            </Link>
-          </div>
-          <div className="col-2">
-            <Link to="/logout">
-                logout
-            </Link>
-          </div>
+          
+          <RenderMenu/>
           <div className="col-2">
             <Link to="/admin">
                 admin

@@ -1,6 +1,6 @@
 import React from 'react'
 import { useEffect,useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 // import SearchBar from './SearchBar'
 import axios from 'axios'
 import Fuse from "fuse.js"
@@ -72,7 +72,7 @@ export default function SearchPanel(props) {
   }, []);
     function func(book){
         return (
-            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
+            <Link to={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
     <div className="d-flex w-100 justify-content-between">
       <div className="row small gx-2 w-100">
       <div className='col-3' style={{ height:'60px', }}>
@@ -88,7 +88,7 @@ export default function SearchPanel(props) {
       </div>
       
     </div>
-  </a>
+  </Link>
         )
     }
   return (

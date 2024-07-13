@@ -1,4 +1,5 @@
 import React from "react";
+import Search from "./search";
 
 export default function ContributePanel() {
   return (
@@ -8,6 +9,7 @@ export default function ContributePanel() {
         height: "75vh",
       }}
     >
+      {/* <Search/> */}
       <div className="row align-items-center g-3 h-100 ">
         <div
           className="col-12 col-lg mx-2 px-5 rounded py-2"

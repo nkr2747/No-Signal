@@ -40,6 +40,65 @@ app.get("/books", async (req, res) => {
       res.status(500).send(err);
     }
   });
+//issue
+
+//delete after 24 hours
+const cron = require('node-cron');
+ // Adjust the path to your User model
+
+cron.schedule('0 * * * *', async () => { // Runs every hour at minute 0
+    const oneDayAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
+
+    try {
+        const users = await User.find({ 'requested_books.requestedAt': { $lt: oneDayAgo } });
+        for (const user of users) {
+            user.requested_books = user.requested_books.filter(request => request.requestedAt >= oneDayAgo);
+            await user.save();
+        }
+        console.log('Cleanup job completed successfully');
+    } catch (err) {
+        console.error('Error in cleanup job:', err);
+    }
+});
+
+//autocomplete search
+app.get('/search', async (req, res) => {
+  const query = req.query.q;
+  try {
+    const books = await Book.aggregate([
+      {
+        $search: {
+          index: 'default',
+          autocomplete: {
+            query: query,
+            path: 'title',
+            fuzzy: {
+              maxEdits: 2,
+            },
+          },
+        },
+      },
+      {
+        $limit: 7,
+      },
+      {
+        $project: {
+          title: 1,
+          author: 1,
+        },
+      },
+    ]);
+    res.json(books);
+  } catch (error) {
+    console.error('Error performing search:', error);
+    res.status(500).send('Internal server error');
+  }
+});
+
+//
+
+
+  
 //add book
 app.post("/books", async (req, res) => {
     const { title,

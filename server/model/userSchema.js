@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const Book =require('./bookSchema')
+
 
 const userSchema = new mongoose.Schema({
     name : {
@@ -34,6 +36,30 @@ const userSchema = new mongoose.Schema({
                 type : String,
                 required : true
             }
+        }
+    ],
+    favourites:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Book'
+        }
+    ],
+    borrowed_books:[
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Book'
+        }
+    ],
+    // requested_books:[
+    //     {
+    //         type: mongoose.Schema.Types.ObjectId,
+    //         ref: 'Book'
+    //     }
+    // ]
+    requested_books: [
+        {
+            book: { type: mongoose.Schema.Types.ObjectId, ref: 'Book' },
+            requestedAt: { type: Date, default: Date.now }
         }
     ]
 })

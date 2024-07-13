@@ -1,11 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState,useContext } from "react";
 import "../App.css"
 import SearchBar from "./SearchBar";
 import authorlogo from "../images/authorlogo.svg";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import arrow from "../images/arrow.svg"
+import { UserContext } from "../App";
+
+
+
 export default function IssueBook() {
+  const navigate= useNavigate()
+  const {state,dispatch} = useContext(UserContext)
   const { id } = useParams();
   const [book, setBook] = useState([]);
 
@@ -19,7 +25,57 @@ export default function IssueBook() {
         console.error("There was an error fetching the books!", error);
       });
   }, [id]);
+
+  const handleIssue=async (e)=>{
+    e.preventDefault();
+    console.log(state)
+    console.log(id)
+    if (state===false) {
+      navigate('/loginpage')
+      return;
+    }
+    try {
+      const response = await axios.post('/issuebook', { id },{
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+      );
+      
+
+      console.log('Book issued successfully:', response.data);
+    } catch (error) {
+      console.error('Error issuing book:', error);
+    }
+      
+  }
+  const handleAddToFav=async (e)=>{
+    e.preventDefault();
+    console.log(state)
+    console.log(id)
+    if (state===false) {
+      navigate('/loginpage')
+      return;
+    }
+    try {
+      const response = await axios.post('/addtofavourite', { id },{
+        headers: {
+          "Content-Type": "application/json",
+        }
+      }
+      );
+      
+
+      console.log('Book added to favourite successfully:', response.data);
+    } catch (error) {
+      console.error('Error issuing book:', error);
+    }
+      
+  }
+
+
   return (
+
     <>
       <SearchBar />
       <div className=" d-flex align-items-center opacity-50" style={{ height: "10vh" }}>
@@ -68,8 +124,13 @@ export default function IssueBook() {
               <p className="fs-6">Description</p>
               <p className="small">{book.description}</p>
             </div>
-            <div className="container  my-5">
-              <button className="btn btn-outline-danger">Borrow</button>
+            <div className="container d-flex  my-5">
+              <div className="d-inline mx-3">
+              <button className="btn btn-outline-danger" onClick={handleIssue}>Issue{state}</button>
+              </div>
+              <div className="d-inline mx-3">
+              <button className="btn btn-outline-secondary" onClick={handleAddToFav} >Add to Favourite</button>
+              </div>
             </div>
           </div>
           <div className="col-4 d-none d-lg-block">

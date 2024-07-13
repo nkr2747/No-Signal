@@ -15,13 +15,13 @@ export default function BookScroller(props) {
             style={{
               width: "6rem",
             }}
-          > <a href={`issuebook/${book._id}`}>
+          > <Link to={`issuebook/${book._id}`}>
             <img
               src={book.image_url}
               className="card-img-top"
               alt="..."
             />
-            </a>
+            </Link>
           </div>
         </div>
       );

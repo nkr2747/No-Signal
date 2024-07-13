@@ -1,9 +1,14 @@
-import React, {useState} from 'react';
+import React, {useState,useContext} from 'react';
 import './Loginpage.css';
 import { Link, useNavigate } from 'react-router-dom';
+import { UserContext } from '../App';
+
+
 
 export default function Loginpage(props) {
 
+
+  const {state,dispatch}=useContext(UserContext);
   const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -30,6 +35,7 @@ export default function Loginpage(props) {
       }
       else
       {
+        dispatch({type:"USER",payload:true})
         window.alert("Login Successfully");
         navigate('/myshelf');
       }

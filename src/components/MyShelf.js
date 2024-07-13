@@ -1,134 +1,107 @@
 import React, { useEffect, useState } from "react";
 import SearchBar from "./SearchBar";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 export default function MyShelf() {
-  const navigate=useNavigate()
-  const [userData, setUserData] = useState();
+  const navigate = useNavigate();
+  const [userData, setUserData] = useState(null);
+  const [reqBooks, setReqBooks] = useState([]);
+  const [favBooks, setFavBooks] = useState([]);
+  const [borrowedBooks, setBorrowedBooks] = useState([]);
 
   const callAboutPage = async () => {
     try {
       const res = await fetch("/about", {
         method: "GET",
         headers: {
-          Accept: "appllication/json",
+          Accept: "application/json",
           "Content-Type": "application/json",
         },
         credentials: "include",
       });
       const data = await res.json();
-      // console.log(data);
-      setUserData(data)
-      if (!res.status === 200) {
+      setUserData(data);
+      if (res.status !== 200) {
         const error = new Error(res.error);
-        
         throw error;
-
       }
     } catch (err) {
       console.log(err);
-      console.log("hi")
-    
-      navigate('/loginpage')
-    
+      navigate("/loginpage");
     }
   };
+
+  const fetchBooks = async () => {
+    try {
+      if (userData) {
+        const favBookRequests = userData.favourites.map((bookId) =>
+          axios.get(`/books/${bookId}`).then((response) => response.data)
+        );
+        const reqBookRequests = userData.requested_books.map((bookId) =>
+          axios.get(`/books/${bookId.book}`).then((response) => response.data)
+        );
+        const borrowedBookRequests = userData.borrowed_books.map((bookId) =>
+          axios.get(`/books/${bookId}`).then((response) => response.data)
+        );
+
+        const favBooks = await Promise.all(favBookRequests);
+        const reqBooks = await Promise.all(reqBookRequests);
+        const borrowedBooks = await Promise.all(borrowedBookRequests);
+
+        setFavBooks(favBooks);
+        setReqBooks(reqBooks);
+        setBorrowedBooks(borrowedBooks);
+      }
+    } catch (error) {
+      console.error("There was an error fetching the books!", error);
+    }
+  };
+
   useEffect(() => {
     callAboutPage();
-  },[]);
+  }, []);
 
-  const arr = [1, 2, 3, 4];
-  const requestedbk = [1, 2];
-  const pendingbk = [1, 2, 5];
-  const lup = [1, 2, 3];
-  function LatestUpdates(x) {
-    return (
-      <div className="container">
-        <p>Maintenance break till submission</p>
-        <hr />
-      </div>
-    );
+  useEffect(() => {
+    fetchBooks();
+  }, [userData]);
+
+  if (!userData) {
+    return <div>Loading...</div>;
   }
-  function funrequestedbk(x) {
-    return (
-      <div className="container ">
-        <div className="row">
-          <div className="col-4 mx-2">
-            <img src="" alt="" />
-          </div>
-          <div className="col-7">
-            Title of book
-            <p className="small my-2">Author</p>
-            <button type="button" className="btn btn-outline-secondary btn-sm my-4">
-              Unavailable
-            </button>
-          </div>
-          <hr />
-        </div>
-      </div>
-    );
-  }
-  function funpendingbk(x) {
-    return (
-      <div className="container ">
-        <div className="row">
-          <div className="col-4 mx-2">
-            <img src="" alt="" />
-          </div>
-          <div className="col-7">
-            Title of book
-            <p className="small my-2">Author</p>
-            <button type="button" className="btn btn-outline-danger btn-sm my-4">
-              Return
-            </button>
-          </div>
-          <hr />
-        </div>
-      </div>
-    );
-  }
-  function shelfBooks(x) {
+
+  function shelfBooks(book, index) {
     return (
       <div
-        className="card rounded  -0 mx-3 "
-        style={{
-          width: "15rem",
-          height: "15rem",
-        }}
+        className="col-4 rounded mx-2 d-inline p-2"
+        key={index}
+        style={{ backgroundColor: "white" }}
       >
-        <div className="card-body">This is some text within a card body.</div>
+        <div className=" d-flex">
+          <div className="d-inline">
+            <img src={book.image_url} alt="" style={{ height: "120px" }} />
+          </div>
+          <div className="d-inline px-1">
+            {book.title}
+            <small>{book.author}</small>
+          </div>
+        </div>
       </div>
     );
   }
-  if(!userData)
-  {
-    
-    return (
-      <div className="">Loading</div>
-    )
-  }
+
   return (
     <>
       <SearchBar />
-      <div className="container  py-3">
-        <div className="container align-items-start  my-2">
+      <div className="container py-3">
+        <div className="container align-items-start my-2">
           <h5>
-            My{" "}
-            <span
-              style={{
-                color: "red",
-              }}
-            >
-              Shelf
-            </span>
+            My <span style={{ color: "red" }}>Shelf</span>
           </h5>
         </div>
         <div
-          className="container  rounded my-2 p-3 d-flex justify-content-between align-items-center"
-          style={{ 
-             backgroundColor: "white" 
-            }}
+          className="container rounded my-2 p-3 d-flex justify-content-between align-items-center"
+          style={{ backgroundColor: "white" }}
         >
           <p className="mb-0">
             <strong>Name:</strong> {userData.name}
@@ -140,82 +113,53 @@ export default function MyShelf() {
             <strong>Department:</strong> {userData.program}
           </p>
         </div>
-        <div className="container  my-2">
-          <ul className="nav justify-content-between">
-            <li className="nav-item">
-              <a
-                className="nav-link link-secondary active"
-                aria-current="page"
-                href="/"
-              >
-                Favourite
+        {/* // */}
+        <nav
+          id="navbar-example2"
+          class="navbar bg-body-tertiary px-3 mb-3" 
+        >
+          <ul class="nav justify-content-between text-center w-100" >
+            <li class="nav-item ">
+              <a class="nav-link link-secondary" href="#scrollspyHeading1">
+                Favourites
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link link-secondary" href="/">
-                Borrowed Books
+            <li class="nav-item ">
+              <a class="nav-link link-secondary" href="#scrollspyHeading2">
+                Borrowed
               </a>
             </li>
-            <li className="nav-item">
-              <a className="nav-link link-secondary" href="/">
-                E-Books
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link link-secondary" href="/">
-                Audio Books
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link link-secondary" href="/">
-                Articles & Journals
+            <li class="nav-item ">
+              <a class="nav-link link-secondary" href="#scrollspyHeading3">
+                Requested
               </a>
             </li>
           </ul>
-        </div>
-        <div className="row py-2 g-5 my-2 justify-content-center  ">
-          {arr.map(shelfBooks)}
-        </div>
-        <div className="container ">
-          <h4 className="my-4">Reminders</h4>
-          <div className="row gx-3">
-            <div
-              className="col  p-3 rounded mx-2 align-items-stretch"
-              style={{
-                backgroundColor: "white",
-              }}
-            >
-              <div className="container">
-                <h6>Latest Updates</h6>
-              </div>
-              <div className="vstack gap-3">{lup.map(LatestUpdates)}</div>
-            </div>
-            <div
-              className="col  p-3  rounded mx-2 align-items-stretch"
-              style={{
-                backgroundColor: "white",
-              }}
-            >
-              <div className="container my-2 ">
-                <h6>Pending Books</h6>
-              </div>
-              <div className="vstack gap-3">{pendingbk.map(funpendingbk)}</div>
-            </div>
-            <div
-              className="col p-3 rounded mx-2 align-items-stretch"
-              style={{
-                backgroundColor: "white",
-              }}
-            >
-              <div className="container my-2">
-                <h6>Requested Books</h6>
-              </div>
-              <div className="vstack gap-3">
-                {requestedbk.map(funrequestedbk)}
-              </div>
-            </div>
+        </nav>
+        <div
+          data-bs-spy="scroll"
+          data-bs-target="#navbar-example2"
+          data-bs-root-margin="0px 0px -40%"
+          data-bs-smooth-scroll="true"
+          class="scrollspy-example bg-body-tertiary p-3 rounded-2"
+          tabindex="0"
+        >
+          <h4 id="scrollspyHeading1">Favourite Books</h4>
+          <div className="row py-2 g-5 my-2 justify-content-around">
+            {favBooks.map(shelfBooks)}
+          </div>
+          <h4 id="scrollspyHeading2">Borrowed Books</h4>
+          <div className="row py-2 g-5 my-2 justify-content-around">
+            {borrowedBooks.map(shelfBooks)}
+          </div>
+          <h4 id="scrollspyHeading3">Requested Books</h4>
+          <div className="row py-2 g-5 my-2 justify-content-around">
+            {reqBooks.map(shelfBooks)}
           </div>
         </div>
+
+        {/* /// */}
+        
       </div>
     </>
   );
