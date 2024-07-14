@@ -17,83 +17,71 @@ const User = require('../model/userSchema');
 // Async - Await
 router.post('/admin', async (req, res) => {
 
-    const { name, email, password, cpassword, program, branch} = req.body;
+    const { name, email, password, cpassword, program, branch } = req.body;
 
-    if (!name || !email || !password || !cpassword || !program || !branch)
-    {
+    if (!name || !email || !password || !cpassword || !program || !branch) {
         // window.alert("Please filled properly");
         return res.status(422).json({ error: "Please filled properly" });
     }
 
-    try{
+    try {
         const userExist = await User.findOne({ email: email });
 
-        if (userExist) 
-        {
+        if (userExist) {
             // window.alert("Email already Exist");
             return res.status(422).json({ error: "Email already Exist" });
         }
-        else if(password != cpassword)
-        {
+        else if (password != cpassword) {
             // window.alert("password is not matching");
             return res.status(422).json({ error: "password is not matching" });
         }
-        else
-        {
-            const user = new User({ name, email, password, cpassword, program, branch});
+        else {
+            const user = new User({ name, email, password, cpassword, program, branch });
             await user.save();
             res.status(201).json({ massage: "user registered successfully" });
         }
 
-    } catch(err){
+    } catch (err) {
         console.log(err);
     }
-    
+
 })
 
 // login route
-  
-router.post('/loginpage', async (req, res) =>
-{
-    try
-    {
-        const {email, password} = req.body;
-        if(!email || !password)
-        {
+
+router.post('/loginpage', async (req, res) => {
+    try {
+        const { email, password } = req.body;
+        if (!email || !password) {
             // window.alert("Please fill the data");
-            return res.status(400).json({error : "Please fill the data"});
+            return res.status(400).json({ error: "Please fill the data" });
         }
 
-        const userLogin = await User.findOne({email : email});
+        const userLogin = await User.findOne({ email: email });
 
-        if(userLogin)
-        {
+        if (userLogin) {
             const isMatch = await bcrypt.compare(password, userLogin.password);
 
             const token = await userLogin.generateAuthToken();
 
             res.cookie("jwtoken", token, {
-                expires : new Date(Date.now() + 25892000000),
-                httpOnly : true
+                expires: new Date(Date.now() + 25892000000),
+                httpOnly: true
             })
 
-            if(!isMatch)
-            {
+            if (!isMatch) {
                 // window.alert("User Does not exist");
-                res.status(400).json({error: "User Does not exist"});
+                res.status(400).json({ error: "User Does not exist" });
             }
-            else
-            {
-                res.json({massage: "User login successfully"});
+            else {
+                res.json({ massage: "User login successfully" });
             }
         }
-        else
-        {
-            res.status(400).json({error: "User Does not exist"});
+        else {
+            res.status(400).json({ error: "User Does not exist" });
         }
 
-    } catch(err)
-    {
+    } catch (err) {
         console.log(err);
     }
 })
@@ -133,23 +121,28 @@ router.post('/loginpage', async (req, res) =>
 
 // About us
 
-router.get('/about',  Authenticate , (req, res) =>
-    {
-        console.log("Hello My About");
-        res.send(req.rootUser);
-    });
-    // logout ka code
-    
-    router.get('/logout', (req, res) =>
-        {
-            res.clearCookie('jwtoken',{path:'/'})
-            console.log("Hello My About");
-            res.status(200).send("User Logout");
-        });
-        
-        
+router.get('/about', Authenticate, (req, res) => {
+    console.log("Hello My About");
+    res.send(req.rootUser);
+});
+
+// presentstatuspage
+
+router.get('/presentstatuspage', Authenticate, (req, res) => {
+    console.log("Hello My Presentstatuspage");
+    res.send(req.rootUser);
+});
+// logout ka code
+
+router.get('/logout', (req, res) => {
+    res.clearCookie('jwtoken', { path: '/' })
+    console.log("Hello My About");
+    res.status(200).send("User Logout");
+});
+
+
 module.exports = router;
-        
+
 // using promises
 // router.post('/admin', (req, res) => {
 
