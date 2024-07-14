@@ -21,8 +21,8 @@ import Logout from "./components/Logout";
 import React, { createContext, useReducer } from "react";
 import { initialState, reducer } from "./reducer/UseReducer";
 import Favourites from "./components/Favourites";
-import PresentStatus from "./components/PresentStatus";
-import PresentStatusPage from "./components/PresentStatusPage";
+import PresentStatus from "./admin/PresentStatus";
+import PresentStatusPage from "./admin/PresentStatusPage";
 import AdminReturnRequests from "./admin/ReturnReq";
 
 export const UserContext = createContext();
