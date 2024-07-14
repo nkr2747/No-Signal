@@ -40,6 +40,20 @@ app.get("/books", async (req, res) => {
       res.status(500).send(err);
     }
   });
+  //get User
+  app.get("/users/:id", async (req, res) => {
+    try {
+      console.log("hi")
+      const user = await User.findOne({email : req.params.id});
+
+      if (!user) {
+        return res.status(404).send("Book not found");
+      }
+      res.json(user);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
 //issue
 
 //delete issue request after 24 hours

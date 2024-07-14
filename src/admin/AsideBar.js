@@ -42,6 +42,12 @@ export default function AsideBar() {
                       </Link>
                     </li>
                     <li className="nav-item">
+                      <Link className="nav-link" to="presentstatus">
+                      <img src={bookshelf} className='px-1' alt="" />
+                       Search Student
+                      </Link>
+                    </li>
+                    <li className="nav-item">
                       <Link className="nav-link" to="returnrequest">
                       <img src={bookshelf} className='px-1' alt="" />
                        Return Requests

@@ -101,33 +101,33 @@ router.post('/loginpage', async (req, res) =>
 
 // Present-Status
 
-router.post('/presentstatus', async (req, res) =>
-{
-    try
-    {
-        const {email} = req.body;
-        if(!email)
-        {
-            return res.status(400).json({error : "Please fill the data"});
-        }
+// router.post('/presentstatus', async (req, res) =>
+// {
+//     try
+//     {
+//         const {email} = req.body;
+//         if(!email)
+//         {
+//             return res.status(400).json({error : "Please fill the data"});
+//         }
 
-        const userLogin = await User.findOne({email : email});
+//         const userLogin = await User.findOne({email : email});
 
-        if(userLogin)
-        {
-            res.json({massage: "User Found"});
-        }
-        else
-        {
-            res.status(400).json({error: "User Does not exist"});
-        }
+//         if(userLogin)
+//         {
+//             res.json({massage: "User Found"});
+//         }
+//         else
+//         {
+//             res.status(400).json({error: "User Does not exist"});
+//         }
 
-    } 
-    catch(err)
-    {
-        console.log(err);
-    }
-})
+//     } 
+//     catch(err)
+//     {
+//         console.log(err);
+//     }
+// })
 
 
 
