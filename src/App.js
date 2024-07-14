@@ -58,6 +58,7 @@ function App() {
             <Route index element={<DashBoard />} />
             <Route path="addnewstudent" element={<AaddNewStudent />} />
             <Route path="addnewbook" element={<AddBook />} />
+            <Route path="presentstatus" element={<PresentStatus />} />
             <Route path="presentstatuspage" element={<PresentStatusPage />} />
             <Route path="returnrequest" element={<AdminReturnRequests />} />
           </Route>
