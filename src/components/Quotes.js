@@ -12,7 +12,7 @@ export default function About() {
   return (
     <div className="col-5 d-none d-lg-block px-4 text-center py-1">
       <div
-        className="container rounded h-100 text-center"
+        className="container rounded h-100 text-center d-flex justify-content-center"
         style={{
           background: "linear-gradient(to top, #792A8E, #BB4248)",
         }}
@@ -30,13 +30,13 @@ export default function About() {
               </p>
             </div>
             <div className="carousel-item">
-              <h3>Quote Three</h3>
+              <h3>Quote Two</h3>
               <p id="quote">
                 {getRandomQuote()}
               </p>
             </div>
             <div className="carousel-item">
-              <h3>Quote Two</h3>
+              <h3>Quote Three</h3>
               <p id="quote">
                 {getRandomQuote()}
               </p>
