@@ -52,6 +52,16 @@ export default function SideBar() {
           
           <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li className="nav-item small">
+                      <Link className="nav-link " to="admin">
+                        <div className="small">
+                          Admin
+                        </div>
+                      </Link>
+                      <hr style={{
+                        width:"100%"
+                      }} />
+                    </li>
+                    <li className="nav-item small">
                       <Link className="nav-link " to="about">
                         <div className="small">
                           About

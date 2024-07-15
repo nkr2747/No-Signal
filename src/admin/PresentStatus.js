@@ -93,7 +93,7 @@ export default function PresentStatus() {
 
   return (
     <>
-      <div className="container ">
+      <div className="container  ">
         <div className="d-flex align-items-center  justify-content-center x-auto mb-3">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ export default function PresentStatus() {
           </h1>
         </div>
 
-        <div className="card" style={{ width: "100%" }}>
+        <div className="card " style={{ width: "100%" }}>
           <div className="card-body">
             <div className="mb-3 row">
               <div className="col-md-9">
@@ -126,13 +126,13 @@ export default function PresentStatus() {
                   id="exampleFormControlInput1"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  placeholder="RollNo@iiitdh.ac.in"
+                  placeholder="RollNo@iitdh.ac.in"
                 />
               </div>
               <div className="col-md-3 d-flex align-items-end">
                 <button
                   type="search"
-                  className="btn btn-primary"
+                  className="btn btn-danger"
                   value="search"
                   onClick={presentStatus}
                 >
@@ -142,9 +142,7 @@ export default function PresentStatus() {
             </div>
           </div>
         </div>
-        <h1>
-          Present <span style={statusStyle}>Status</span>of Student
-        </h1>
+       
         <div
           className="container rounded my-2 p-3 d-flex justify-content-between align-items-center"
           style={{ backgroundColor: "white" }}

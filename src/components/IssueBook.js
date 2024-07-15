@@ -44,8 +44,10 @@ export default function IssueBook() {
       
 
       console.log('Book issued successfully:', response.data);
+      window.alert('Book issued successfully');
     } catch (error) {
       console.error('Error issuing book:', error);
+      window.alert('Error issuing book');
     }
       
   }
@@ -67,8 +69,10 @@ export default function IssueBook() {
       
 
       console.log('Book added to favourite successfully:', response.data);
+      window.alert('Book added to favourite successfully');
     } catch (error) {
       console.error('Error issuing book:', error);
+      window.alert('Error ');
     }
       
   }
@@ -85,7 +89,7 @@ export default function IssueBook() {
         </Link>
         </div>
       </div>
-      <div className="container border">
+      <div className="container ">
         <div className="row  " style={{ height: "40vh" }}>
           <div className="col-5 col-lg-3  d-flex ">
             <div
@@ -111,7 +115,7 @@ export default function IssueBook() {
               </div>
             </div>
           </div>
-          <div className="col-7 col-lg-5 border ">
+          <div className="col-7 col-lg-5  ">
             <div className="container my-3">
               <p className="fs-4">{book.title}</p>
               <p
@@ -135,7 +139,7 @@ export default function IssueBook() {
           </div>
           <div className="col-4 d-none d-lg-block">
             <div
-              className="container h-100 rounded"
+              className="container  rounded"
               style={{ backgroundColor: "white" }}
             >
               <div className="row">
@@ -151,17 +155,17 @@ export default function IssueBook() {
                 <div className="col-6">
                   <img src={authorlogo} alt="" />
                 </div>
-                <div className="small">
+                {/* <div className="small">
                   <p className="small">
                     Lorem ipsum dolor sit, amet consectetur adipisicing elit.
                     Corporis dolor consectetur consequuntur maxime fugit neque
                     nisi, sequi quidem hic officia.
                   </p>
-                </div>
+                </div> */}
                 <div className="container small">
-                  <p className="small">
+                  {/* <p className="small">
                     <strong>Other Books</strong>
-                  </p>
+                  </p> */}
                 </div>
               </div>
             </div>

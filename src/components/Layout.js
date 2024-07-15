@@ -26,7 +26,7 @@ export default function Layout() {
         <div className="row h-100">
           <SideBar />
           <div
-            className="col-12 text-centre rounded-end h-100 col-lg-9 py-4 scrollable-container" //note : iss line ka mtlb hai ki col-12 rhe jb size chota rhe (kyuki iss time sidebar gayab ho jaega aur aur jb wapas aa jayega lg breakpoint ke bad tb col-9 ho jaye)
+            className="col-12 rounded-end h-100 col-lg-9 py-4 scrollable-container" //note : iss line ka mtlb hai ki col-12 rhe jb size chota rhe (kyuki iss time sidebar gayab ho jaega aur aur jb wapas aa jayega lg breakpoint ke bad tb col-9 ho jaye)
             style={{
               height: "100vh",
               overflowY: "scroll",
@@ -35,7 +35,7 @@ export default function Layout() {
           >
             <div className="row my-3 d-lg-none ">
               {/* <div className="col-2 d-flex justify-content-start border "> */}
-              <div className="col-2 border d-lg-none d-flex justify-content-start ">
+              <div className="col-2 d-lg-none d-flex justify-content-start ">
                 <button
                   className="btn btn-outline-danger"
                   type="button"
@@ -68,12 +68,12 @@ export default function Layout() {
                       backgroundColor: "white",
                     }}
                   >
-                    <a className="navbar-brand " href="/">
+                    <Link className="navbar-brand " to="/">
                       <img src={logoiitdh} alt="Bootstrap" width="260" />
-                    </a>
+                    </Link>
                     <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
                       <li className="nav-item">
-                        <a className="nav-link active" aria-current="page" href="/">
+                        <Link className="nav-link active" aria-current="page" to="/">
                           <img
                             src={home}
                             className="px-1 d-inline-block align-text-top"
@@ -81,7 +81,7 @@ export default function Layout() {
                             height="15"
                           />
                           Home
-                        </a>
+                        </Link>
                       </li>
                       <li className="nav-item">
                         <Link className="nav-link" to="searchpanel">
@@ -110,6 +110,14 @@ export default function Layout() {
 
                     <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex my-4 ">
                       <li className="nav-item small">
+                        <Link className="nav-link " to="/admin">
+                          <div className="small">Admin</div>
+                        </Link>
+                      </li>
+                      <hr style={{
+                        width:"100%"
+                      }} />
+                      <li className="nav-item small">
                         <Link className="nav-link " to="about">
                           <div className="small">About</div>
                         </Link>
@@ -129,7 +137,7 @@ export default function Layout() {
                 </div>
               </div>
               {/* </div> */}
-              <div className="col border text-center">
+              <div className="col  text-center">
                 <Link
                   to="/"
                   className="link-underline link-underline-opacity-0"

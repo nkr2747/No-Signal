@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from 'react-router-dom';
 
-export default function AaddNewStudent() {
+export default function AaddNewAdmin() {
 
   const navigate = useNavigate();
   const [user, setUser] = useState({
@@ -142,11 +142,11 @@ export default function AaddNewStudent() {
             onChange={handleInputs}
           >
             <option value="">Select Branch</option>
-            <option>Computer Science and Engineering</option>
-            <option>Electrical</option>
-            <option>Mechanical</option>
-            <option>Civil</option>
-            <option>Chemical</option>
+            <option>Computer Science</option>
+            <option>Electrical Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Chemical Engineering</option>
             <option>Engineering Physics</option>
             <option>BS-MS</option>
           </select>

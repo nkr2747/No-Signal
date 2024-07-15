@@ -22,6 +22,7 @@ export default function MyShelf() {
       });
       const data = await res.json();
       setUserData(data);
+      
       if (res.status !== 200) {
         const error = new Error(res.error);
         throw error;
@@ -34,6 +35,7 @@ export default function MyShelf() {
 
   const fetchBooks = async () => {
     try {
+      
       if (userData) {
         const favBookRequests = userData.favourites.map((bookId) =>
           axios.get(`/books/${bookId}`).then((response) => response.data)
@@ -113,15 +115,17 @@ export default function MyShelf() {
             {book.title}
             <small>{book.author}</small>
           </div>
-          <button onClick={() => handleReturnBook(book._id)}>Return</button>
+          
         </div>
+        <button type="button" onClick={() => handleReturnBook(book._id)} className="btn btn-danger my-2 align-self-end">Return</button>
+        
       </div>
     );
   }
 
   return (
     <>
-      <SearchBar />
+      <SearchBar state={true} />
       <div className="container py-3">
         <div className="container align-items-start my-2">
           <h5>

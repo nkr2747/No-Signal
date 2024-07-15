@@ -24,6 +24,9 @@ import Favourites from "./components/Favourites";
 import PresentStatus from "./admin/PresentStatus";
 import PresentStatusPage from "./admin/PresentStatusPage";
 import AdminReturnRequests from "./admin/ReturnReq";
+import Loginpageadmin from "./admin/AdminLogin";
+import AaddNewAdmin from "./admin/AddNewAdmin";
+import Logoutadmin from "./admin/Logoutadmin";
 
 export const UserContext = createContext();
 
@@ -54,13 +57,18 @@ function App() {
             <Route path="termsconditions" element={<TermsConditions />} />
           </Route>
           <Route path="loginpage" element={<Loginpage />} />
+          <Route path="loginpageadmin" element={<Loginpageadmin />} />
+          <Route path="registeradmin" element={<AaddNewAdmin />} />
           <Route path="/admin" element={<Alayout />}>
             <Route index element={<DashBoard />} />
             <Route path="addnewstudent" element={<AaddNewStudent />} />
             <Route path="addnewbook" element={<AddBook />} />
+            
             <Route path="presentstatus" element={<PresentStatus />} />
+            
             <Route path="presentstatuspage" element={<PresentStatusPage />} />
             <Route path="returnrequest" element={<AdminReturnRequests />} />
+            <Route path="logoutadmin" element={<Logoutadmin />} />
           </Route>
         </Routes>
       </Router>

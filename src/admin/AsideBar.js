@@ -63,23 +63,9 @@ export default function AsideBar() {
           
           <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li className="nav-item small">
-                      <Link className="nav-link " to="about">
+                      <Link className="nav-link " to="logoutadmin">
                         <div className="small">
-                          About
-                        </div>
-                      </Link>
-                    </li>
-                    <li className="nav-item  small">
-                      <Link className="nav-link" to="support">
-                      <div className="small">
-                          Support
-                        </div>
-                      </Link>
-                    </li>
-                    <li className="nav-item small">
-                      <Link className="nav-link" to="termsconditions">
-                        <div className="small">
-                        Terms & Conditions
+                          Logout
                         </div>
                       </Link>
                     </li>

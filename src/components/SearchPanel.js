@@ -1,9 +1,9 @@
 import React from 'react'
 import { useEffect,useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 // import SearchBar from './SearchBar'
 import axios from 'axios'
-// import Fuse from "fuse.js"
+import Fuse from "fuse.js"
 export default function SearchPanel(props) {
   function bkttle(x) {
     return x.title;
@@ -13,7 +13,28 @@ export default function SearchPanel(props) {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [inputValue, setInputValue] = useState('');
   const [searchResults, setSearchResults] = useState([]);
+  const [branch, setBranch] = useState([]);
+  const [booksDep, setBooksDep] = useState([]);
   
+  const handleInput = (event) => {
+    const inputValue = event.target.value;
+    setBranch(inputValue);
+  }
+  
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:3000/booksdep/${branch}`)
+      .then((response) => {
+        setBooksDep(response.data);
+      })
+      .catch((error) => {
+        console.error("There was an error fetching the books!", error);
+      });
+  }, [branch]);
+
+
+
   const handleChange = (event) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
@@ -29,7 +50,32 @@ export default function SearchPanel(props) {
     }
   };
 
-
+const DisplayBooks=()=>{
+  if(searchResults.length === 0 && booksDep.length ===0)
+    {
+      return(
+        <>
+        {books.map(func)}
+        </>
+      )
+    }
+    else if( booksDep.length>0 && searchResults.length === 0)
+    {
+      return(
+        <>
+        {booksDep.map(func)}
+        </>
+      )
+    }
+    else
+    {
+      return(
+        <>
+        {searchResults.map(func)}
+        </>
+      )
+    }
+}
 
   const handleSelect = (value) => {
     setInputValue(value);
@@ -51,7 +97,6 @@ export default function SearchPanel(props) {
 
     const results = fuse.search(inputValue);
     setSearchResults(results.map(result => result.item));
-    goToAbout()
   };
 
   const getHighlightedText = (text, highlight) => {
@@ -72,23 +117,29 @@ export default function SearchPanel(props) {
   }, []);
     function func(book){
         return (
-            <Link to={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
-    <div className="d-flex w-100 justify-content-between">
+            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
+    <div className="d-flex w-100 ">
       <div className="row small gx-2 w-100">
-      <div className='col-3' style={{ height:'60px', }}>
-  <img className='object-fit-cover' src={book.image_url} style={{ height:'60px' }} alt="book" />
+      <div className='col-2' style={{ height:'60px', }}>
+  <img className='object-fit-scale' src={book.image_url} style={{ height:'60px' }} alt="book" />
 </div>
 
-        <div className="col-6">
+        <div className="col-6 ">
         <h6 className="mb-1">{book.title}</h6>
         <small className="text-body-secondary">{book.author}</small>
         </div>
-        <div className="col-2 small ">{book.genre}</div>
-        <div className="col-1 small">{book.count===0?"Unavailable":"Available"}</div>
+        <div className="col-2 small text-truncate ">{book.genre}</div>
+        
+        <div className="col-2 small text-end">
+          <small  className='text-end'>
+          {book.count===0?"Unavailable":"Available"}
+          </small>
+          </div>
+       
       </div>
       
     </div>
-  </Link>
+  </a>
         )
     }
   return (
@@ -100,7 +151,7 @@ export default function SearchPanel(props) {
         backgroundColor: "#F3F3F7",
       }}
     >
-      <div className="col-12 col-lg-9  border align-items-end ">
+      <div className="col-12 col-lg-9   align-items-end ">
         {/* <DateTimeDisplay /> */}
         {/* <Autocomplete suggestions={bkttles} /> */}
             <div className="container px-0" style={ {
@@ -108,34 +159,7 @@ export default function SearchPanel(props) {
         zIndex: 2 /* Ensures this container is on top */
       }}>
     <div className="input-group">
-        <button
-            className="btn  btn-secondary text-dark dropdown-toggle"
-            type="button"
-            data-bs-toggle="dropdown"
-            aria-expanded="false"
-            style={{
-              backgroundColor: "#F3F3F7",
-            }}
-          >
-            All
-          </button>
-          <ul className="dropdown-menu">
-            <li>
-              <a className="dropdown-item" href="/">
-                Action
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="/">
-                Another action
-              </a>
-            </li>
-            <li>
-              <a className="dropdown-item" href="/">
-                Something else here
-              </a>
-            </li>
-          </ul>
+    
 
       <input
             type="text"
@@ -147,7 +171,29 @@ export default function SearchPanel(props) {
             aria-describedby="button-addon1"
           />
           <button className="btn btn-outline-danger rounded" onClick={handleSearch} type="submit">Search</button>
-          {inputValue.trim() !== '' && (
+          
+          
+          
+    </div>
+    <div className='my-2'>
+    <select
+            id="inputBranch"
+            name="branch"
+            className="form-select"
+            value={branch}
+            onChange={handleInput}
+          >
+            <option value="">Select Branch</option>
+            <option>Computer Science</option>
+            <option>Electrical Engineering</option>
+            <option>Mechanical Engineering</option>
+            <option>Civil Engineering</option>
+            <option>Chemical Engineering</option>
+            <option>Engineering Physics</option>
+            <option>BS-MS</option>
+          </select>
+    </div>
+    {inputValue.trim() !== '' && (
             <div className="container overflow-y-auto list-group scrollable-container " style={{maxHeight:'40vh'}}>
         <ul className='' style={{
             position: 'absolute',
@@ -162,22 +208,22 @@ export default function SearchPanel(props) {
         </div>
       )}
     </div>
-    </div>
       </div>
     </div>
     <div className="contaiiner px-4">
-    <div className="row pt-5  mt-4">
-      <div className="col-6 "><h6>Title</h6></div>
-      <div className="col-4 px-0"><h6>Category</h6></div>
-      <div className="col-2 px-0"><h6>Status</h6></div>
+    <div className="row pt-3  mt-4">
+      <div className="col-7 text-center "><h6>Title</h6></div>
+      <div className="col-3  text-center px-0"><h6>Category</h6></div>
+      <div className="col-2  text-end px-1"><h6>Status</h6></div>
     </div>
     </div>
     <div className="list-group ">
       
        
-        
-        {(searchResults.length > 0 ? searchResults : books).map(func)}
-        
+        <DisplayBooks/>
+        {/* {(searchResults.length > 0 ? searchResults : books).map(func)} */}
+        {/* {booksDep.map(func)} */}
+
       
       
     </div>

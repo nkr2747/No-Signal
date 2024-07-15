@@ -13,7 +13,7 @@ import { UserContext } from "../App";
 import Search from "./search";
 
 
-export default function SearchBar() {
+export default function SearchBar(props) {
   const {state,dispatch} = useContext(UserContext)
   const [books, setBooks] = useState([]);
 
@@ -34,12 +34,12 @@ export default function SearchBar() {
 
 
   const RenderMenu=()=>{
-    if(state){
+    if(props.state){
       return(
         <>
           <div className="col-2">
             <Link to="/logout">
-                logout
+            <button type="button" class="btn btn-outline-danger">Logout</button>
             </Link>
           </div>
         </>
@@ -50,7 +50,7 @@ export default function SearchBar() {
         <>
           <div className="col-2">
             <Link to="/loginpage">
-                login
+            <button type="button" class="btn btn-outline-primary">Login</button>
             </Link>
           </div>
         </>
@@ -193,18 +193,13 @@ export default function SearchBar() {
             aria-describedby="button-addon1"
           />
         </div> */}
-      <div className="col-10 mx-auto col-lg-10 border align-items-end ">
+      <div className="col-10 mx-auto col-lg-10 align-items-end ">
         {/* <DateTimeDisplay /> */}
         <Search/>
       </div>
 
           
           <RenderMenu/>
-          <div className="col-2">
-            <Link to="/admin">
-                admin
-            </Link>
-          </div>
 
       {/* <div className="col-3 col-lg-3 ">
         <div className="dropdown-center ">

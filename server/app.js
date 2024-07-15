@@ -40,6 +40,18 @@ app.get("/books", async (req, res) => {
       res.status(500).send(err);
     }
   });
+  //get books by department
+  app.get("/booksdep/:department", async (req, res) => {
+    try {
+      const books = await Book.find({department:req.params.department});
+      if (!books) {
+        return res.status(404).send("Book not found");
+      }
+      res.json(books);
+    } catch (err) {
+      res.status(500).send(err);
+    }
+  });
   //get User
   app.get("/users/:id", async (req, res) => {
     try {
@@ -74,7 +86,37 @@ cron.schedule('0 * * * *', async () => { // Runs every hour at minute 0
         console.error('Error in cleanup job:', err);
     }
 });
+//reminer after 30 days
+// Run every day at midnight
+// cron.schedule('0 0 * * *', async () => {
+//   try {
+//     const today = new Date();
+//     const thirtyDaysAgo = new Date(today.setDate(today.getDate() - 30));
 
+//     const users = await User.find({
+//       'borrowed_books.borrowedAt': { $lte: thirtyDaysAgo }
+//     }).populate('borrowed_books.book', 'title');
+
+//     users.forEach(user => {
+//       user.borrowed_books.forEach(book => {
+//         if (book.borrowedAt <= thirtyDaysAgo) {
+//           // Add your notification logic here, e.g., add a reminder to the user document
+//           user.reminders.push({
+//             message: `Please return the book "${book.book.title}"`,
+//             createdAt: new Date()
+//           });
+//         }
+//       });
+//       user.save();
+//     });
+
+//     console.log('Reminders sent');
+//   } catch (error) {
+//     console.error('Error sending reminders:', error);
+//   }
+// });
+
+ 
 //autocomplete search
 app.get('/search', async (req, res) => {
   const query = req.query.q;
