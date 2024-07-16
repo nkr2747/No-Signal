@@ -21,7 +21,9 @@ app.use(bodyParser.json());
 const allowedOrigins = ['https://no-signal-frontend.vercel.app'];
 const corsOptions = {
   origin: allowedOrigins,
-  credentials: true // Allow cookies
+  credentials: true ,// Allow cookies
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
 };
 app.use(cors(corsOptions));
 app.options('*', cors(corsOptions));
