@@ -17,7 +17,7 @@ export default function Loginpageadmin(props) {
   {
       e.preventDefault();
 
-      const res = await fetch('/loginpageadmin', {
+      const res = await fetch('https://no-signal.onrender.com/loginpageadmin', {
         method : "POST",
         headers : {
           "Content-Type": "application/json"

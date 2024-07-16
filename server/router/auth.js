@@ -11,7 +11,7 @@ require('../db/conn');
 const User = require('../model/userSchema');
 const Book = require('../model/bookSchema');
 const Admin = require('../model/adminSchema');
-const AuthenticateAdmin = require('../middleware/authenticateAdmin');
+const AuthenticateAdmin = require('../middleware/authenticateAdmin.js');
 
 ////create new admin
 router.post('/adminregister', async (req, res) => {

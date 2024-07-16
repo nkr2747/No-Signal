@@ -11,7 +11,7 @@ export default function Alayout() {
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch("/aboutadmin", {
+      const res = await fetch("https://no-signal.onrender.com/aboutadmin", {
         method: "GET",
         headers: {
           Accept: "application/json",

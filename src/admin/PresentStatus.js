@@ -38,17 +38,17 @@ export default function PresentStatus() {
       if (data) {
         console.log(data);
         const favBookRequests = data.favourites.map((bookId) =>
-          axios.get(`/books/${bookId}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
         );
         const reqBookRequests = data.requested_books.map((bookId) =>
-          axios.get(`/books/${bookId.book}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId.book}`).then((response) => response.data)
         );
         console.log(data.previously_borrowed_books[0].book)
         const prevBorrowedBookRequests = data.previously_borrowed_books.map((bookId) =>
-          axios.get(`/books/${bookId.book}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId.book}`).then((response) => response.data)
         );
         const borrowedBookRequests = data.borrowed_books.map((bookId) =>
-          axios.get(`/books/${bookId}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
         );
 
         const favBooks = await Promise.all(favBookRequests);
@@ -75,7 +75,7 @@ export default function PresentStatus() {
     e.preventDefault();
 
     axios
-      .get(`http://localhost:3000/users/${email}`)
+      .get(`https://no-signal.onrender.com/users/${email}`)
       .then((response) => {
         setData(response.data);
       })

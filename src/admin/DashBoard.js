@@ -12,7 +12,7 @@ export default function DashBoard() {
 
   const fetchBookRequests = async () => {
     try {
-      const response = await axios.get('/admin/bookrequests', {
+      const response = await axios.get('https://no-signal.onrender.com/admin/bookrequests', {
         headers: {
           "Content-Type": "application/json"
         }
@@ -27,7 +27,7 @@ export default function DashBoard() {
 
   const approveBookRequest = async (userId, bookId) => {
     try {
-      const response = await axios.post('/approvebook', { userId, bookId }, {
+      const response = await axios.post('https://no-signal.onrender.com/approvebook', { userId, bookId }, {
         headers: {
           "Content-Type": "application/json"
         }

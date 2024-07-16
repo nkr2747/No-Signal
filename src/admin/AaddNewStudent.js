@@ -37,7 +37,7 @@ export default function AaddNewAdmin() {
 
     const { name, email, password, cpassword, program, branch } = user;
     try {
-      const res = await fetch('/admin', {
+      const res = await fetch('https://no-signal.onrender.com/admin', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

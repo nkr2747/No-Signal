@@ -5,7 +5,7 @@ export default function AdminReturnRequests() {
   const [returnRequests, setReturnRequests] = useState([]);
   async function fetchReturnRequests() {
     try {
-      const res = await axios.get('/admin/returnrequests');
+      const res = await axios.get('https://no-signal.onrender.com/admin/returnrequests');
       setReturnRequests(res.data.requests);
     } catch (error) {
       console.error(error);
@@ -19,7 +19,7 @@ export default function AdminReturnRequests() {
 
   const handleApproveReturn = async (userId, bookId) => {
     try {
-      await axios.post('/admin/approvereturn', { userId, bookId });
+      await axios.post('https://no-signal.onrender.com/admin/approvereturn', { userId, bookId });
       setReturnRequests(returnRequests.filter(request => !(request.userId === userId && request.bookId === bookId)));
     } catch (error) {
       console.error(error);

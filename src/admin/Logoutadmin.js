@@ -8,7 +8,7 @@ export default function Logoutadmin() {
 
     const handleLogout = async () => {
         try {
-          await axios.get('/logoutadmin', null, {
+          await axios.get('https://no-signal.onrender.com/logoutadmin', null, {
             withCredentials: true, // Ensure cookies are sent with the request
           });
     
