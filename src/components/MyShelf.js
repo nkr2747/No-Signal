@@ -12,13 +12,20 @@ export default function MyShelf() {
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch("https://no-signal.onrender.com/about", {
-        method: "GET",
+      // const res = await fetch("https://no-signal.onrender.com/about", {
+      //   method: "GET",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //   },
+      //   credentials: "include",
+      // });
+      const res = await axios.get('https://no-signal.onrender.com/about', {
         headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
         },
-        credentials: "include",
+        withCredentials: false,
       });
       const data = await res.json();
       setUserData(data);
