@@ -17,7 +17,7 @@ export default function Home() {
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch("/about", {
+      const res = await fetch("https://no-signal.onrender.com/about", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -44,7 +44,7 @@ callAboutPage()
 },[])
 
   useEffect(() => {
-    axios.get('http://localhost:3000/books')
+    axios.get('https://no-signal.onrender.com/books')
       .then(response => {
         setBooks(response.data);
       })

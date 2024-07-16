@@ -17,7 +17,7 @@ export default function IssueBook() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/books/${id}`)
+      .get(`https://no-signal.onrender.com/books/${id}`)
       .then((response) => {
         setBook(response.data);
       })
@@ -31,11 +31,11 @@ export default function IssueBook() {
     console.log(state)
     console.log(id)
     if (state===false) {
-      navigate('/loginpage')
+      navigate('https://no-signal.onrender.com/loginpage')
       return;
     }
     try {
-      const response = await axios.post('/issuebook', { id },{
+      const response = await axios.post('https://no-signal.onrender.com/issuebook', { id },{
         headers: {
           "Content-Type": "application/json",
         }
@@ -56,11 +56,11 @@ export default function IssueBook() {
     console.log(state)
     console.log(id)
     if (state===false) {
-      navigate('/loginpage')
+      navigate('https://no-signal.onrender.com/loginpage')
       return;
     }
     try {
-      const response = await axios.post('/addtofavourite', { id },{
+      const response = await axios.post('https://no-signal.onrender.com/addtofavourite', { id },{
         headers: {
           "Content-Type": "application/json",
         }
@@ -84,7 +84,7 @@ export default function IssueBook() {
       <SearchBar />
       <div className=" d-flex align-items-center opacity-50" style={{ height: "10vh" }}>
         <div className="image-container">
-        <Link to='/searchpanel'>
+        <Link to='https://no-signal.onrender.com/searchpanel'>
         <img src={arrow} width="30px"  alt="" />
         </Link>
         </div>
@@ -105,7 +105,7 @@ export default function IssueBook() {
                 }}
               >
                 {" "}
-                <Link to="issuebook">
+                <Link to="https://no-signal.onrender.com/issuebook">
                   <img
                     src={book.image_url}
                     className="card-img-top"

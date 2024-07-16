@@ -17,7 +17,7 @@ export default function Loginpage(props) {
   {
       e.preventDefault();
 
-      const res = await fetch('/loginpage', {
+      const res = await fetch('https://no-signal.onrender.com/loginpage', {
         method : "POST",
         headers : {
           "Content-Type": "application/json"
@@ -37,7 +37,7 @@ export default function Loginpage(props) {
       {
         dispatch({type:"USER",payload:true})
         window.alert("Login Successfully");
-        navigate('/myshelf');
+        navigate('https://no-signal.onrender.com/myshelf');
       }
   }
   return (

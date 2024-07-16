@@ -19,7 +19,7 @@ export default function SearchBar(props) {
 
   useEffect(() => {
     axios
-      .get("http://localhost:3000/books")
+      .get("https://no-signal.onrender.com/books")
       .then((response) => {
         setBooks(response.data);
       })

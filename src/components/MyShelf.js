@@ -12,7 +12,7 @@ export default function MyShelf() {
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch("/about", {
+      const res = await fetch("https://no-signal.onrender.com/about", {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -29,7 +29,7 @@ export default function MyShelf() {
       }
     } catch (err) {
       console.log(err);
-      navigate("/loginpage");
+      navigate("https://no-signal.onrender.com/loginpage");
     }
   };
 
@@ -38,13 +38,13 @@ export default function MyShelf() {
       
       if (userData) {
         const favBookRequests = userData.favourites.map((bookId) =>
-          axios.get(`/books/${bookId}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
         );
         const reqBookRequests = userData.requested_books.map((bookId) =>
-          axios.get(`/books/${bookId.book}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId.book}`).then((response) => response.data)
         );
         const borrowedBookRequests = userData.borrowed_books.map((bookId) =>
-          axios.get(`/books/${bookId}`).then((response) => response.data)
+          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
         );
 
         const favBooks = await Promise.all(favBookRequests);
@@ -94,7 +94,7 @@ export default function MyShelf() {
 
   const handleReturnBook = async (bookId) => {
     try {
-      await axios.post('/returnbook', { bookId }, { withCredentials: true });
+      await axios.post('https://no-signal.onrender.com/returnbook', { bookId }, { withCredentials: true });
       setBorrowedBooks(borrowedBooks.filter(book => book._id !== bookId));
     } catch (error) {
       console.error(error);

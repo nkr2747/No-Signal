@@ -7,7 +7,7 @@ import axios from "axios";
 export default function NewArrivals() {
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    axios.get('http://localhost:3000/books')
+    axios.get('https://no-signal.onrender.com/books')
       .then(response => {
         setBooks(response.data);
       })
@@ -28,7 +28,7 @@ export default function NewArrivals() {
           style={{
             width: "6rem",
           }}
-        ><a href={`issuebook/${book._id}`}>
+        ><a href={`https://no-signal.onrender.com/issuebook/${book._id}`}>
           <img
             src={book.image_url}
             className="card-img-top"

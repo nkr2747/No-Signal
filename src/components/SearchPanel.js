@@ -24,7 +24,7 @@ export default function SearchPanel(props) {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:3000/booksdep/${branch}`)
+      .get(`https://no-signal.onrender.com/booksdep/${branch}`)
       .then((response) => {
         setBooksDep(response.data);
       })
@@ -107,7 +107,7 @@ const DisplayBooks=()=>{
   };
 //uselocation url me query token valid
   useEffect(() => {
-    axios.get('http://localhost:3000/books')
+    axios.get('https://no-signal.onrender.com/books')
       .then(response => {
         setBooks(response.data);
       })
@@ -117,7 +117,7 @@ const DisplayBooks=()=>{
   }, []);
     function func(book){
         return (
-            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
+            <a href={`https://no-signal.onrender.com/issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
     <div className="d-flex w-100 ">
       <div className="row small gx-2 w-100">
       <div className='col-2' style={{ height:'60px', }}>

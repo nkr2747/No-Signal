@@ -9,14 +9,14 @@ export default function Logout() {
 
     const handleLogout = async () => {
         try {
-          await axios.get('/logout', null, {
+          await axios.get('https://no-signal.onrender.com/logout', null, {
             withCredentials: true, // Ensure cookies are sent with the request
           });
     
           //localStorage.removeItem('token');
           console.log("hi")
           dispatch({type:"USER",payload:false})
-          navigate('/loginpage');
+          navigate('https://no-signal.onrender.com/loginpage');
         } catch (error) {
           console.error('Error logging out:', error);
         }
