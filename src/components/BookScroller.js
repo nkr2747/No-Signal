@@ -47,7 +47,7 @@ export default function BookScroller(props) {
             style={{
               width: "6rem",
             }}
-          > <Link to={`https://no-signal.onrender.com/issuebook/${book._id}`}>
+          > <Link to={`issuebook/${book._id}`}>
             <img
               src={book.image_url}
               className="card-img-top"

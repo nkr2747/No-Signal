@@ -49,7 +49,7 @@ const Search = () => {
             backgroundColor:"white"
         }}>
           {results.map(result => (
-            <Link to={`https://no-signal.onrender.com/issuebook/${result._id}`}>
+            <Link to={`issuebook/${result._id}`}>
             <div className='list-group-item my-1 ' key={result._id}>
               <div className='link-underline link-underline-opacity-0' dangerouslySetInnerHTML={{ __html: highlightMatch(result.title, query) }} />  
             </div>

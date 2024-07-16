@@ -28,7 +28,7 @@ export default function NewArrivals() {
           style={{
             width: "6rem",
           }}
-        ><a href={`https://no-signal.onrender.com/issuebook/${book._id}`}>
+        ><a href={`issuebook/${book._id}`}>
           <img
             src={book.image_url}
             className="card-img-top"

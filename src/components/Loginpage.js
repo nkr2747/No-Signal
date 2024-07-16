@@ -37,7 +37,7 @@ export default function Loginpage(props) {
       {
         dispatch({type:"USER",payload:true})
         window.alert("Login Successfully");
-        navigate('https://no-signal.onrender.com/myshelf');
+        navigate('/myshelf');
       }
   }
   return (

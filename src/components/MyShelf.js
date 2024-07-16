@@ -29,7 +29,7 @@ export default function MyShelf() {
       }
     } catch (err) {
       console.log(err);
-      navigate("https://no-signal.onrender.com/loginpage");
+      navigate("/loginpage");
     }
   };
 

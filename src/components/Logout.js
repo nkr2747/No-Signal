@@ -16,7 +16,7 @@ export default function Logout() {
           //localStorage.removeItem('token');
           console.log("hi")
           dispatch({type:"USER",payload:false})
-          navigate('https://no-signal.onrender.com/loginpage');
+          navigate('/loginpage');
         } catch (error) {
           console.error('Error logging out:', error);
         }

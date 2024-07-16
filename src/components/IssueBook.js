@@ -31,7 +31,7 @@ export default function IssueBook() {
     console.log(state)
     console.log(id)
     if (state===false) {
-      navigate('https://no-signal.onrender.com/loginpage')
+      navigate('/loginpage')
       return;
     }
     try {
@@ -56,7 +56,7 @@ export default function IssueBook() {
     console.log(state)
     console.log(id)
     if (state===false) {
-      navigate('https://no-signal.onrender.com/loginpage')
+      navigate('/loginpage')
       return;
     }
     try {
@@ -84,7 +84,7 @@ export default function IssueBook() {
       <SearchBar />
       <div className=" d-flex align-items-center opacity-50" style={{ height: "10vh" }}>
         <div className="image-container">
-        <Link to='https://no-signal.onrender.com/searchpanel'>
+        <Link to='/searchpanel'>
         <img src={arrow} width="30px"  alt="" />
         </Link>
         </div>
@@ -105,7 +105,7 @@ export default function IssueBook() {
                 }}
               >
                 {" "}
-                <Link to="https://no-signal.onrender.com/issuebook">
+                <Link to="issuebook">
                   <img
                     src={book.image_url}
                     className="card-img-top"

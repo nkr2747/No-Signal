@@ -117,7 +117,7 @@ const DisplayBooks=()=>{
   }, []);
     function func(book){
         return (
-            <a href={`https://no-signal.onrender.com/issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
+            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
     <div className="d-flex w-100 ">
       <div className="row small gx-2 w-100">
       <div className='col-2' style={{ height:'60px', }}>

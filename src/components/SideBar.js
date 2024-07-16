@@ -16,7 +16,7 @@ export default function SideBar() {
             backgroundColor: "white",
           }}
         >
-          <a className="navbar-brand " href="https://no-signal.onrender.com/">
+          <a className="navbar-brand " href="/">
             <img
               src={logo}
               alt="Bootstrap"
@@ -25,25 +25,25 @@ export default function SideBar() {
           </a>
           <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
                     <li className="nav-item">
-                      <Link className="nav-link active" aria-current="page" to="https://no-signal.onrender.com/">
+                      <Link className="nav-link active" aria-current="page" to="/">
                       <img src={home} className="px-1 d-inline-block align-text-top" alt=".." height="15" />
                         Home
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="https://no-signal.onrender.com/searchpanel">
+                      <Link className="nav-link" to="searchpanel">
                       <img src={search} className='px-1' height="15" alt="" />
                        Search
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="https://no-signal.onrender.com/myshelf">
+                      <Link className="nav-link" to="myshelf">
                       <img src={bookshelf} className='px-1' alt="" />
                        My Shelf
                       </Link>
                     </li>
                     <li className="nav-item">
-                      <Link className="nav-link" to="https://no-signal.onrender.com/contributepanel">
+                      <Link className="nav-link" to="contributepanel">
                       <img src={contri} className='px-1' alt="" />
                        Contribute
                       </Link>
@@ -52,7 +52,7 @@ export default function SideBar() {
           
           <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li className="nav-item small">
-                      <Link className="nav-link " to="https://no-signal.onrender.com/admin">
+                      <Link className="nav-link " to="admin">
                         <div className="small">
                           Admin
                         </div>
@@ -62,21 +62,21 @@ export default function SideBar() {
                       }} />
                     </li>
                     <li className="nav-item small">
-                      <Link className="nav-link " to="https://no-signal.onrender.com/about">
+                      <Link className="nav-link " to="about">
                         <div className="small">
                           About
                         </div>
                       </Link>
                     </li>
                     <li className="nav-item  small">
-                      <Link className="nav-link" to="https://no-signal.onrender.com/support">
+                      <Link className="nav-link" to="support">
                       <div className="small">
                           Support
                         </div>
                       </Link>
                     </li>
                     <li className="nav-item small">
-                      <Link className="nav-link" to="https://no-signal.onrender.com/termsconditions">
+                      <Link className="nav-link" to="termsconditions">
                         <div className="small">
                         Terms & Conditions
                         </div>
