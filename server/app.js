@@ -18,7 +18,13 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(cors());
-
+const allowedOrigins = ['https://no-signal-frontend.vercel.app'];
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true // Allow cookies
+};
+app.use(cors(corsOptions));
+app.options('*', cors(corsOptions));
 //get all books
 app.get("/books", async (req, res) => {
     try {
@@ -216,12 +222,7 @@ app.post("/books", async (req, res) => {
 
 // app.use(cors(corsOptions));
 
-const allowedOrigins = ['https://no-signal-frontend.vercel.app'];
-const corsOptions = {
-  origin: allowedOrigins,
-  credentials: true // Allow cookies
-};
-app.use(cors(corsOptions));
+
 
 //
 // app.use(cors({
@@ -231,7 +232,7 @@ app.use(cors(corsOptions));
 //   allowedHeaders: ['Content-Type', 'Authorization']
 // }));
 
-app.options('*', cors(corsOptions));
+
 //
 
 // we link the router files to make our route easy
