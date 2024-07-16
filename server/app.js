@@ -222,6 +222,7 @@ const allowedOrigins = ['https://no-signal-frontend.vercel.app'];
 
 app.use(cors({
   origin: function (origin, callback) {
+      console.log("HI")
     if (!origin || allowedOrigins.indexOf(origin) !== -1) {
       callback(null, true);
     } else {
