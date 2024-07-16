@@ -25,7 +25,7 @@ export default function MyShelf() {
           Accept: 'application/json',
           'Content-Type': 'application/json',
         },
-        withCredentials: false,
+        withCredentials: true,
       });
       const data = await res.json();
       setUserData(data);
