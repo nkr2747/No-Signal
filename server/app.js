@@ -17,7 +17,7 @@ const Book = require("./model/bookSchema");
 app.use(express.json());
 app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(cors());
+// app.use(cors());
 
 //get all books
 app.get("/books", async (req, res) => {
