@@ -9,6 +9,7 @@ import { UserContext } from "../App";
 
 
 
+
 export default function IssueBook() {
   const navigate= useNavigate()
   const {state,dispatch} = useContext(UserContext)
@@ -47,7 +48,9 @@ export default function IssueBook() {
       window.alert('Book issued successfully');
     } catch (error) {
       console.error('Error issuing book:', error);
-      window.alert('Error issuing book');
+      window.alert('Login to issue books');
+      navigate('/loginpage')
+
     }
       
   }
@@ -72,7 +75,9 @@ export default function IssueBook() {
       window.alert('Book added to favourite successfully');
     } catch (error) {
       console.error('Error issuing book:', error);
-      window.alert('Error ');
+      window.alert('Login to Add to favourites Book');
+      navigate('/loginpage')
+
     }
       
   }
