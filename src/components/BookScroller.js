@@ -25,7 +25,7 @@ export default function BookScroller(props) {
 
     useEffect(() => {
       axios
-        .get(`https://no-signal.vercel.app/booksdep/${props.department}`)
+        .get(`https://no-signal.onrender.com/booksdep/${props.department}`)
         .then((response) => {
           setBooks(response.data);
         })
