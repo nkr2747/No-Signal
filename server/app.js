@@ -209,11 +209,18 @@ app.post("/books", async (req, res) => {
   });
 
 //login was not working after hosting as now frontend and backend are on different ports
-const corsOptions = {
-  origin: 'https://no-signal-frontend.vercel.app/', // Your frontend domain
-  credentials: true, // Allow credentials
-};
+// const corsOptions = {
+//   origin: 'https://no-signal-frontend.vercel.app/', // Your frontend domain
+//   credentials: true, // Allow credentials
+// };
 
+// app.use(cors(corsOptions));
+
+const allowedOrigins = ['https://no-signal-frontend.vercel.app'];
+const corsOptions = {
+  origin: allowedOrigins,
+  credentials: true // Allow cookies
+};
 app.use(cors(corsOptions));
 
 //
