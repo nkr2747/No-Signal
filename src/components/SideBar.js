@@ -12,17 +12,16 @@ export default function SideBar() {
     <div
           className="col-3 rounded-start d-none flex-column d-flex h-100 align-items-center text-center d-lg-block"
           style={{
-            //height: "100vh",
             backgroundColor: "white",
           }}
         >
-          <a className="navbar-brand " href="/">
+          <Link className="navbar-brand " to="/">
             <img
               src={logo}
+              className="sidebar-brand-logo"
               alt="Bootstrap"
-              width="260"
             />
-          </a>
+          </Link>
           <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
                     <li className="nav-item">
                       <Link className="nav-link active" aria-current="page" to="/">

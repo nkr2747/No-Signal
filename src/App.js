@@ -1,3 +1,4 @@
+import { API_URL } from "./config";
 import "./App.css";
 import MyShelf from "./components/MyShelf";
 import ContributePanel from "./components/ContributePanel";
@@ -9,6 +10,8 @@ import TermsConditions from "./components/TermsConditions";
 import IssueBook from "./components/IssueBook";
 import Layout from "./components/Layout";
 import Loginpage from "./components/Loginpage";
+import ForgotPassword from "./components/ForgotPassword";
+import NotFound from "./components/NotFound";
 import About from "./components/About";
 import Expand from "./components/Expand";
 import Alayout from "./admin/Alayout";
@@ -16,25 +19,34 @@ import Alayout from "./admin/Alayout";
 import AddBook from "./admin/AddBook";
 import DashBoard from "./admin/DashBoard";
 import AaddNewStudent from "./admin/AaddNewStudent";
-import ProtectedRoute from "./components/ProtectedRoute";
 import Logout from "./components/Logout";
-import React, { createContext, useReducer } from "react";
+import React, { useEffect, useReducer, useRef, useState } from "react";
+import { UserContext } from "./UserContext";
 import { initialState, reducer } from "./reducer/UseReducer";
-import Favourites from "./components/Favourites";
 import PresentStatus from "./admin/PresentStatus";
-import PresentStatusPage from "./admin/PresentStatusPage";
 import AdminReturnRequests from "./admin/ReturnReq";
 import Loginpageadmin from "./admin/AdminLogin";
 import AaddNewAdmin from "./admin/AddNewAdmin";
 import Logoutadmin from "./admin/Logoutadmin";
-
-export const UserContext = createContext();
+import ContributionRequests from "./admin/ContributionRequests";
 
 function App() {
   const [state, dispatch] = useReducer(reducer, initialState);
 
+  const [authChecked, setAuthChecked] = useState(false);
+  const startupLogout = useRef(null);
+
+  useEffect(() => {
+    if (!startupLogout.current) {
+      startupLogout.current = Promise.allSettled([
+        fetch(`${API_URL}/logout`, { credentials: "include" }),
+        fetch(`${API_URL}/logoutadmin`, { credentials: "include" }),
+      ]).finally(() => setAuthChecked(true));
+    }
+  }, []);
+
   return (
-    <UserContext.Provider value={{ state, dispatch }}>
+    <UserContext.Provider value={{ state, dispatch, authChecked }}>
       <Router>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -58,6 +70,8 @@ function App() {
           </Route>
           <Route path="loginpage" element={<Loginpage />} />
           <Route path="loginpageadmin" element={<Loginpageadmin />} />
+          <Route path="forgotpassword" element={<ForgotPassword role="student" />} />
+          <Route path="forgotpasswordadmin" element={<ForgotPassword role="admin" />} />
           <Route path="registeradmin" element={<AaddNewAdmin />} />
           <Route path="/admin" element={<Alayout />}>
             <Route index element={<DashBoard />} />
@@ -66,10 +80,12 @@ function App() {
             
             <Route path="presentstatus" element={<PresentStatus />} />
             
-            <Route path="presentstatuspage" element={<PresentStatusPage />} />
+            <Route path="presentstatuspage" element={<PresentStatus />} />
             <Route path="returnrequest" element={<AdminReturnRequests />} />
+            <Route path="contributionrequests" element={<ContributionRequests />} />
             <Route path="logoutadmin" element={<Logoutadmin />} />
           </Route>
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </Router>
     </UserContext.Provider>

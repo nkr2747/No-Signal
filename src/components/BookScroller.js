@@ -1,6 +1,8 @@
+import { API_URL } from "../config";
 import React,{useState,useEffect} from 'react'
 import { Link } from 'react-router-dom';
 import axios from 'axios';
+import BookCover from "./BookCover";
 
 export default function BookScroller(props) {
   const Heading=()=>{
@@ -21,11 +23,10 @@ export default function BookScroller(props) {
     }
   }
     const [books,setBooks]=useState([])
-    // const { department } = useParams();
 
     useEffect(() => {
       axios
-        .get(`https://no-signal.onrender.com/booksdep/${props.department}`)
+        .get(`${API_URL}/booksdep/${props.department}`)
         .then((response) => {
           setBooks(response.data);
         })
@@ -47,11 +48,11 @@ export default function BookScroller(props) {
             style={{
               width: "6rem",
             }}
-          > <Link to={`issuebook/${book._id}`}>
-            <img
-              src={book.image_url}
+          > <Link to={`/issuebook/${book._id}`}>
+            <BookCover
+              src={book.image_url} title={book.title} author={book.author}
               className="card-img-top"
-              alt="..."
+              alt={`${book.title} cover`}
               style={{
                 height: "150px",
                 objectFit: "cover",
@@ -101,4 +102,3 @@ export default function BookScroller(props) {
 BookScroller.defaultProps = {
   recommendation: false,
 };
-

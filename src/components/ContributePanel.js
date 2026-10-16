@@ -1,74 +1,124 @@
-import React from "react";
-import Search from "./search";
+import { API_URL } from "../config";
+import React, { useState } from "react";
+import axios from "axios";
+import { Link } from "react-router-dom";
+
+const initialForm = {
+  title: "",
+  author: "",
+  genre: "",
+  department: "",
+  description: "",
+  count: "1",
+};
 
 export default function ContributePanel() {
+  const [book, setBook] = useState(initialForm);
+  const [image, setImage] = useState(null);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+
+  const handleChange = (event) => {
+    setBook({ ...book, [event.target.name]: event.target.value });
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setMessage("");
+    setError("");
+    setSubmitting(true);
+
+    const formData = new FormData();
+    Object.entries(book).forEach(([key, value]) => formData.append(key, value));
+    if (image) formData.append("image", image);
+
+    try {
+      const response = await axios.post(`${API_URL}/contributions`, formData, {
+        withCredentials: true,
+      });
+      setMessage(response.data.message);
+      setBook(initialForm);
+      setImage(null);
+      event.target.reset();
+    } catch (requestError) {
+      if (requestError.response?.status === 401) {
+        setError("Please sign in as a student before submitting a contribution.");
+      } else {
+        setError(requestError.response?.data?.error || "Unable to submit your contribution.");
+      }
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
-    <div
-      className="container border px-4"
-      style={{
-        height: "75vh",
-      }}
-    >
-      {/* <Search/> */}
-      <div className="row align-items-center g-3 h-100 ">
-        <div
-          className="col-12 col-lg mx-2 px-5 rounded py-2"
-          style={{
-            backgroundColor: "white",
-          }}
-        >
-          <p className="my-4">Fill up Book Details</p>
-          <div className="row">
-            <div className="col">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Book name"
-                aria-label="Book name"
-              />
+    <div className="container border px-4 py-3">
+      <div className="row align-items-center g-3">
+        <div className="col-12 col-lg-7 rounded py-2" style={{ backgroundColor: "white" }}>
+          <h4 className="my-3">Contribute a Book</h4>
+          <p className="text-secondary">Your submission will be added to the library after admin review.</p>
+          <form className="row g-3" onSubmit={handleSubmit}>
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="contributionTitle">Book title</label>
+              <input id="contributionTitle" name="title" className="form-control" value={book.title} onChange={handleChange} required />
             </div>
-            <select className="col form-select" aria-label="Default select example">
-              <option selected>Category</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div className="row my-3">
-            <div className="col">
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Author name"
-                aria-label="Author name"
-              />
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="contributionAuthor">Author</label>
+              <input id="contributionAuthor" name="author" className="form-control" value={book.author} onChange={handleChange} required />
             </div>
-            <select className="col form-select" aria-label="Default select example">
-              <option selected>Language</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
-          </div>
-          <div className="mb-3">
-            <textarea
-              className="form-control"
-              id="exampleFormControlTextarea1"
-              rows="3"
-              placeholder="Reason For Your Contribution"
-            ></textarea>
-          </div>
-          <button type="button" className="btn btn-outline-danger btn-lg my-4">Submit</button>
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="contributionGenre">Category</label>
+              <input id="contributionGenre" name="genre" className="form-control" value={book.genre} onChange={handleChange} placeholder="e.g. Textbook" />
+            </div>
+            <div className="col-md-6">
+              <label className="form-label" htmlFor="contributionDepartment">Department</label>
+              <select id="contributionDepartment" name="department" className="form-select" value={book.department} onChange={handleChange}>
+                <option value="">Select department</option>
+                <option>Chemical Engineering</option>
+                <option>Civil Engineering</option>
+                <option>Computer Science</option>
+                <option>Electrical Engineering</option>
+                <option>Engineering Physics</option>
+                <option>Mechanical Engineering</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div className="col-md-4">
+              <label className="form-label" htmlFor="contributionCount">Number of copies</label>
+              <input id="contributionCount" name="count" type="number" min="1" step="1" className="form-control" value={book.count} onChange={handleChange} required />
+            </div>
+            <div className="col-md-8">
+              <label className="form-label" htmlFor="contributionImage">Book cover image</label>
+              <input
+                id="contributionImage"
+                type="file"
+                className="form-control"
+                accept="image/jpeg,image/png,image/webp,image/gif"
+                onChange={(event) => setImage(event.target.files?.[0] || null)}
+              />
+              <div className="form-text">Optional JPG, PNG, WEBP, or GIF (max 5 MB).</div>
+            </div>
+            <div className="col-12">
+              <label className="form-label" htmlFor="contributionDescription">Description</label>
+              <textarea id="contributionDescription" name="description" className="form-control" rows="3" value={book.description} onChange={handleChange} />
+            </div>
+            {error && (
+              <div className="col-12 text-danger" role="alert">
+                {error} {error.startsWith("Please sign in") && <Link to="/loginpage">Sign in</Link>}
+              </div>
+            )}
+            {message && <div className="col-12 text-success" role="status">{message}</div>}
+            <div className="col-12">
+              <button type="submit" className="btn btn-outline-danger" disabled={submitting}>
+                {submitting ? "Submitting..." : "Submit for review"}
+              </button>
+            </div>
+          </form>
         </div>
-        <div
-          className="col d-none h-100 py-5 align-items-start align-item-top d-lg-block mx-1 "
-          
-        >
-          <h2>Your <span style={{
-            color:"red"
-          }}>Contribution</span>
-          </h2>
-          <h2>Helps Other to Learn</h2>
+        <div className="col d-none d-lg-block mx-1">
+          <h2>Your <span style={{ color: "red" }}>Contribution</span></h2>
+          <h2>Helps Others Learn</h2>
         </div>
       </div>
     </div>

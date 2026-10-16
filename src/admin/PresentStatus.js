@@ -1,6 +1,7 @@
+import { API_URL } from "../config";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import BookCover from "../components/BookCover";
 
 const statusStyle = {
   color: "red",
@@ -11,44 +12,47 @@ export default function PresentStatus() {
   const [favBooks, setFavBooks] = useState([]);
   const [borrowedBooks, setBorrowedBooks] = useState([]);
   const [prevBorrowedBooks, setPrevBorrowedBooks] = useState([]);
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  //functions to show books
+
   function shelfBooks(book, index) {
     return (
-      <div
-        className="col-4 rounded mx-2 d-inline p-2"
-        key={index}
-        style={{ backgroundColor: "white" }}
-      >
-        <div className=" d-flex">
-          <div className="d-inline">
-            <img src={book.image_url} alt="" style={{ height: "120px" }} />
-          </div>
-          <div className="d-inline px-1">
-            {book.title}
-            <small>{book.author}</small>
+      <div className="col-12 col-md-6 col-xl-4" key={book._id || index}>
+        <div className="h-100 rounded p-3" style={{ backgroundColor: "white" }}>
+          <div className="d-flex align-items-start gap-3">
+            <BookCover
+              src={book.image_url}
+              title={book.title}
+              author={book.author}
+              alt={`${book.title} cover`}
+              className="flex-shrink-0 rounded"
+              style={{ height: "120px", width: "80px", objectFit: "cover" }}
+            />
+            <div className="min-w-0">
+              <h6 className="mb-1 text-break">{book.title}</h6>
+              <p className="small text-secondary mb-0 text-break">{book.author}</p>
+            </div>
           </div>
         </div>
       </div>
     );
   }
   //function to fetch books
-  const fetchBooks = async () => {
+  const fetchBooks = async (student) => {
     try {
-      if (data) {
-        console.log(data);
-        const favBookRequests = data.favourites.map((bookId) =>
-          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
+      if (student) {
+        const favBookRequests = student.favourites.map((bookId) =>
+          axios.get(`${API_URL}/books/${bookId}`).then((response) => response.data)
         );
-        const reqBookRequests = data.requested_books.map((bookId) =>
-          axios.get(`https://no-signal.onrender.com/books/${bookId.book}`).then((response) => response.data)
+        const reqBookRequests = student.requested_books.map((bookId) =>
+          axios.get(`${API_URL}/books/${bookId.book}`).then((response) => response.data)
         );
-        console.log(data.previously_borrowed_books[0].book)
-        const prevBorrowedBookRequests = data.previously_borrowed_books.map((bookId) =>
-          axios.get(`https://no-signal.onrender.com/books/${bookId.book}`).then((response) => response.data)
+        const prevBorrowedBookRequests = student.previously_borrowed_books.map((bookId) =>
+          axios.get(`${API_URL}/books/${bookId.book}`).then((response) => response.data)
         );
-        const borrowedBookRequests = data.borrowed_books.map((bookId) =>
-          axios.get(`https://no-signal.onrender.com/books/${bookId}`).then((response) => response.data)
+        const borrowedBookRequests = student.borrowed_books.map((bookId) =>
+          axios.get(`${API_URL}/books/${bookId}`).then((response) => response.data)
         );
 
         const favBooks = await Promise.all(favBookRequests);
@@ -67,27 +71,24 @@ export default function PresentStatus() {
   };
   //
 
-  const navigate = useNavigate();
   const [email, setEmail] = useState("");
-  const [data, setData] = useState([]);
+  const [data, setData] = useState(null);
 
   const presentStatus = async (e) => {
     e.preventDefault();
-
-    axios
-      .get(`https://no-signal.onrender.com/users/${email}`)
-      .then((response) => {
-        setData(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the books!", error);
+    setLoading(true);
+    setError("");
+    try {
+      const response = await axios.get(`${API_URL}/users/${encodeURIComponent(email)}`, {
+        withCredentials: true,
       });
-
-    if (!data) {
-      window.alert("Student Does Not Found");
-    } else {
-      window.alert("Student Found");
-      fetchBooks();
+      setData(response.data);
+      await fetchBooks(response.data);
+    } catch (requestError) {
+      setData(null);
+      setError(requestError.response?.data?.error || "Unable to find this student.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -132,18 +133,19 @@ export default function PresentStatus() {
               <div className="col-md-3 d-flex align-items-end">
                 <button
                   type="search"
-                  className="btn btn-danger"
-                  value="search"
+                  className="btn btn-outline-danger"
                   onClick={presentStatus}
+                  disabled={loading || !email}
                 >
-                  Search ID
+                  {loading ? "Searching..." : "Search ID"}
                 </button>
               </div>
             </div>
           </div>
         </div>
+        {error && <p className="text-danger mt-3" role="alert">{error}</p>}
        
-        <div
+        {data && <><div
           className="container rounded my-2 p-3 d-flex justify-content-between align-items-center"
           style={{ backgroundColor: "white" }}
         >
@@ -154,7 +156,7 @@ export default function PresentStatus() {
             <strong>Branch:</strong> {data.branch}
           </p>
           <p className="mb-0">
-            <strong>Department:</strong> {data.program}
+            <strong>Program:</strong> {data.program}
           </p>
         </div>
         {/* Navbar */}
@@ -172,6 +174,7 @@ export default function PresentStatus() {
         <div className="row py-2 g-5 my-2">
           {prevBorrowedBooks.map(shelfBooks)}
         </div>
+        </>}
       </div>
     </>
   );

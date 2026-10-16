@@ -1,201 +1,80 @@
 import React from 'react';
 import './Support.css';
 
-export default function Support(props) {
-    let myStyle = {
-        color: props.mode === 'dark' ? 'white' : '#042743',
-        backgroundColor: props.mode === 'dark' ? 'rgb(36 74 104)' : 'white',
-    };
+const faqs = [
+  {
+    question: 'How long may I borrow a book?',
+    answer: 'The borrowing period and any renewal options depend on your user category and Library policy. Check your account or contact the Library to confirm the due date for an item.',
+  },
+  {
+    question: 'How do I request a book?',
+    answer: 'Sign in with your IIT Dharwad student account, find an available title in the catalogue, and submit a borrow request. You can follow its status under My Shelf. Requests awaiting review for more than 24 hours are cancelled automatically.',
+  },
+  {
+    question: 'How do I return a borrowed book?',
+    answer: 'Open My Shelf and choose Request return beside the borrowed title. The request will appear for Library staff to review. Please return the book to the Library as instructed.',
+  },
+  {
+    question: 'Can I suggest or donate a book?',
+    answer: 'Yes. Use the Contribute a Book form to submit the title for Library review. A submission is added to the collection only after it has been reviewed and approved.',
+  },
+  {
+    question: 'How can I access e-resources off campus?',
+    answer: 'IIT Dharwad patrons can access subscribed electronic resources off campus with their Institute LDAP credentials through the approved access service. Use is governed by each provider’s licence, and systematic downloading is prohibited.',
+  },
+  {
+    question: 'Who can help with a Library account or website issue?',
+    answer: 'Contact the Knowledge Resource Centre (KRC) at kr.office@iitdh.ac.in or librarian@iitdh.ac.in. For internal assistance, call VIOP 7001 or 7002.',
+  },
+];
 
-    return (
-        <div className='container' style={myStyle}>
-            <h1>Support</h1>
-            <br/>
-            <br/>
-            <br/>
-            <h3>Some FAQ's</h3>
-            <div className="accordion" id="accordionExample">
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-                            Q: What is the last Date of submission after the date of issue of the book ???
-                        </button>
-                    </h2>
-                    <div id="collapseOne" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                            <strong>After 24 days from the date of issue.</strong>Late fees are $0.25 per day for books, $1.00 per day for DVDs, and $0.10 per day for magazines. We encourage timely returns to avoid fines and ensure availability for other patrons.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                            Q: How can I reserve a book?
-                        </button>
-                    </h2>
-                    <div id="collapseTwo" className="accordion-collapse collapse " data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        You can reserve a book online through our catalog, over the phone, or by visiting the library. We will notify you when the book is available for pickup.    
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                            Q: Does the library offer digital resources?
-                        </button>
-                    </h2>
-                    <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        Yes, we offer a variety of digital resources including e-books, audiobooks, online databases, and streaming services. Access these resources through our website using your library card.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
-                            Q: Are there computers and Wi-Fi available?
-                        </button>
-                    </h2>
-                    <div id="collapseFour" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        Yes, we provide public computers with internet access and free Wi-Fi throughout the library. You can use your library card to log in to the computers.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
-                        Q: Can I print, copy, or scan documents at the library?
-                        </button>
-                    </h2>
-                    <div id="collapseFive" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        Yes, we have printing, copying, and scanning services available. Printing and copying cost $0.10 per page for black and white and $0.50 per page for color.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
-                         Q: How can I volunteer at the library?
-                        </button>
-                    </h2>
-                    <div id="collapseSix" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        We welcome volunteers! Please visit our volunteer page on the website or speak to a staff member for more information on how to get involved.
-                        </div>
-                    </div>
-                </div>
-                <div className="accordion-item">
-                    <h2 className="accordion-header">
-                        <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
-                         Q: Who do I contact for additional questions or support?
-                        </button>
-                    </h2>
-                    <div id="collapseSeven" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                        <div className="accordion-body">
-                        For any further inquiries, you can contact us via phone at [Library Phone Number], email at [Library Email Address], or visit the library in person.
-                        </div>
-                    </div>
-                </div>
+export default function Support() {
+  return (
+    <main className="container py-4">
+      <h1>Library Support</h1>
+      <p>Find answers to common questions about IIT Dharwad Library services and this website.</p>
+      <h2 className="mt-4">Frequently asked questions</h2>
+      <div className="accordion" id="supportFaqs">
+        {faqs.map((faq, index) => (
+          <div className="accordion-item" key={faq.question}>
+            <h3 className="accordion-header">
+              <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target={`#supportFaq${index}`} aria-expanded="false" aria-controls={`supportFaq${index}`}>
+                {faq.question}
+              </button>
+            </h3>
+            <div id={`supportFaq${index}`} className="accordion-collapse collapse" data-bs-parent="#supportFaqs">
+              <div className="accordion-body">{faq.answer}</div>
             </div>
-            <br/>
-
-            <h2>Library Cafeteria Usage Guidelines</h2>
-            <ul>
-                <li><h4>Respect Designated Eating Areas:</h4></li>
-                <h6>Kindly use the cafeteria seating area and courtyard for consuming food and beverages.
-                This helps organize the space and ensures a pleasant experience for everyone.</h6>
-                <br/>
-                <li><h4>Avoid Leaving a Mess:</h4></li>
-                <h6>Take a moment to clean up after yourself; this includes crumbs, spills, and any other
-                debris. Let's work together to maintain a tidy space for everyone's benefit.</h6>
-                <br/>
-                <li><h4>Maintain Cleanliness:</h4></li>
-                <h6>Dispose of wrappers, containers, and leftover food responsibly in the trash bin/dust bin to
-                uphold a clean and inviting environment for all users.</h6>
-                <br/>
-                <li><h4>Keep Conversations at a Low Volume:</h4></li>
-                <h6>Refrain from engaging in loud conversations while eating to prevent disturbances.
-                Keeping discussions at a low volume contributes to a quiet and focused atmosphere.</h6>
-                <br/>
-                <li><h4>Food and Drinks Policy:</h4></li>
-                <h6>Avoid bringing other edibles or drinks into the Stack area and reading section except for
-                plain drinking water.</h6>
-                <br/>
-                <li><h4>Library Reading Materials:</h4></li>
-                <h6>Avoid bringing library equipment or reading materials to the courtyard area. Let's
-                maintain the integrity of the reading spaces for everyone's enjoyment.</h6>
-                <br/>
-            </ul>
-            <br/>
-            <h2>24X7 Reading Hall Usage Guidelines</h2>
-            <ul>
-                <li><h5>Use your valid IITDh ID for entry into 24X7 Reading Hall.</h5></li>
-                <li><h5>ID is not transferable.</h5></li>
-                <li><h5>Maintain silence inside the 24X7 Reading Hall.</h5></li>
-                <li><h5>Do not middle with private and Institute Property</h5></li>
-                <li><h5>Ensure a safe environment for others.</h5></li>
-                <li><h5>24 hours Reading Hall is under CCTV surveillance.</h5></li>
-                <li><h5>Don't threaten personal safety or the security of personal or institute property.</h5></li>
-                <li><h5>Don't disrupt the activities of other library users or Staff. Avoid noise, cell
-phones, music, hostility, rudeness, and consumption of food and drink etc.
-inside the 24X7 Reading Hall.</h5></li>
-                <li><h5>The IITDh Central Library may limit or refuse access to individuals or groups
-                who fail to comply with these guidelines.</h5></li>
-                <li><h5>Please also note that the 24X7 Reading Hall is under the CCTV surveillance
-                and the miscreant found guilty will be punished as per Rules.</h5></li>
-            </ul>
-
-           <h3>Support staff emails</h3>
-           <ul className="list-group">
-    <li className="list-group-item">Mohit<br/><a href="mailto:me23bt022@iitdh.ac.in">me23bt022@iitdh.ac.in</a></li>
-    <li className="list-group-item">Saurabh<br/><a href="mailto:ch23bt001@iitdh.ac.in">ch23bt001@iitdh.ac.in</a></li>
-    <li className="list-group-item">Nilesh<br/><a href="mailto:cs23bt006@iitdh.ac.in">cs23bt006@iitdh.ac.in</a></li>
-    <li className="list-group-item">Siddharth<br/><a href="mailto:ce23bt007@iitdh.ac.in">ce23bt007@iitdh.ac.in</a></li>
-</ul>
-
-
-            <footer id="foot">
-                <table>
-                    <tr>
-                        <th>QUICK LINKS</th>
-                        <th>CONTACT US</th>
-                    </tr>
-                    <tr>
-                        <td><a href="#new">What's New</a></td>
-                        <td>Room No. 102</td>
-                    </tr>
-                    <tr>
-                        <td><a href="#remote-access">E-Resource Remote Access</a></td>
-                        <td>IITD Library</td>
-                    </tr>
-                    <tr>
-                        <td>Library Timings: All working days</td>
-                        <td>KNOWLEDGE RESOURCE CENTRE</td>
-                    </tr>
-                    <tr>
-                        <td>From 9:00 a.m. to 5:30 p.m. (Mon-Sat, Sunday Holiday)</td>
-                        <td>Indian Institute of Technology DHARWAD</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>KARNATAKA</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>PHONE: +91 854 000 2229</td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td>Email: <a href="mailto:librarian@iitdh.ac.in">librarian@iitdh.ac.in</a></td>
-                    </tr>
-                </table>
-                <br />
-                &#169;2024 Indian Institute of Technology DHARWAD, WALMI, KARNATAKA, India. All rights reserved.
-            </footer>
-        </div>
-    );
+          </div>
+        ))}
+      </div>
+      <section className="mt-5">
+        <h2>Library spaces and facilities</h2>
+        <h3 className="h5 mt-3">Cafeteria</h3>
+        <ul>
+          <li>Use the designated cafeteria seating area and courtyard for food and drinks.</li>
+          <li>Clean up after yourself and place waste in the bins provided.</li>
+          <li>Keep conversations at a considerate volume.</li>
+          <li>Do not take food or drinks into the stack or reading areas, except plain drinking water.</li>
+          <li>Keep Library equipment and reading material in the designated Library areas.</li>
+        </ul>
+        <h3 className="h5 mt-3">24×7 General Reading Area</h3>
+        <ul>
+          <li>The general reading area is open 24×7 and has more than 300 seats.</li>
+          <li>Carry your valid IIT Dharwad ID card for entry. ID cards are not transferable.</li>
+          <li>Maintain silence and respect other users’ study time.</li>
+          <li>Take care of Institute property and help keep the space safe.</li>
+          <li>The Reading Hall is monitored by CCTV. Follow Library staff instructions and applicable Institute rules.</li>
+        </ul>
+      </section>
+      <footer id="foot" className="mt-5">
+        <h2>Contact IIT Dharwad KRC</h2>
+        <p>Knowledge Resource and Data Centre (KRDC) Block, Permanent Campus, Chikkamalligawad, Dharwad, Karnataka 580 011.</p>
+        <p>Staff operations: 9:00 a.m. to 5:30 p.m. on Institute working days. The general reading area is open 24×7.</p>
+        <p>VIOP: 7001 / 7002 · Email: <a href="mailto:kr.office@iitdh.ac.in">kr.office@iitdh.ac.in</a> / <a href="mailto:librarian@iitdh.ac.in">librarian@iitdh.ac.in</a></p>
+        <p>© Indian Institute of Technology Dharwad. All rights reserved.</p>
+      </footer>
+    </main>
+  );
 }
-

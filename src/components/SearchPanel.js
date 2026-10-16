@@ -1,232 +1,144 @@
-import React from 'react'
-import { useEffect,useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
-// import SearchBar from './SearchBar'
-import axios from 'axios'
-import Fuse from "fuse.js"
-export default function SearchPanel(props) {
-  function bkttle(x) {
-    return x.title;
-  }
+import { API_URL } from "../config";
+import React, { useEffect, useMemo, useState } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
+import Fuse from "fuse.js";
+import BookCover from "./BookCover";
+import AuthButton from "./AuthButton";
+
+const branches = [
+  "Chemical Engineering",
+  "Civil Engineering",
+  "Computer Science",
+  "Electrical Engineering",
+  "Engineering Physics",
+  "Mechanical Engineering",
+];
+
+export default function SearchPanel() {
   const [books, setBooks] = useState([]);
-  const suggestions = books.map(bkttle);
-  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
-  const [inputValue, setInputValue] = useState('');
+  const [inputValue, setInputValue] = useState("");
+  const [branch, setBranch] = useState("");
+  const [hasSearched, setHasSearched] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
-  const [branch, setBranch] = useState([]);
-  const [booksDep, setBooksDep] = useState([]);
-  
-  const handleInput = (event) => {
-    const inputValue = event.target.value;
-    setBranch(inputValue);
-  }
-  
+  const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
   useEffect(() => {
-    axios
-      .get(`https://no-signal.onrender.com/booksdep/${branch}`)
-      .then((response) => {
-        setBooksDep(response.data);
-      })
-      .catch((error) => {
-        console.error("There was an error fetching the books!", error);
-      });
-  }, [branch]);
+    axios.get(`${API_URL}/books`)
+      .then((response) => setBooks(response.data))
+      .catch((error) => console.error("Unable to load books:", error));
+  }, []);
 
-
+  const visibleBooks = useMemo(() => {
+    const source = hasSearched ? searchResults : books;
+    return branch ? source.filter((book) => book.department === branch) : source;
+  }, [books, branch, hasSearched, searchResults]);
 
   const handleChange = (event) => {
-    const inputValue = event.target.value;
-    setInputValue(inputValue);
-
-    // Filter suggestions based on input value if input value is not empty
-    if (inputValue.trim() !== '') {
-      const filteredSuggestions = suggestions.filter(suggestion =>
-        suggestion.toLowerCase().includes(inputValue.toLowerCase())
-      );
-      setFilteredSuggestions(filteredSuggestions);
-    } else {
+    const value = event.target.value;
+    setInputValue(value);
+    setHasSearched(false);
+    setSearchResults([]);
+    if (!value.trim()) {
       setFilteredSuggestions([]);
+      return;
     }
+    const normalized = value.toLowerCase();
+    setFilteredSuggestions(books
+      .filter((book) => book.title?.toLowerCase().includes(normalized))
+      .slice(0, 7)
+      .map((book) => book.title));
   };
 
-const DisplayBooks=()=>{
-  if(searchResults.length === 0 && booksDep.length ===0)
-    {
-      return(
-        <>
-        {books.map(func)}
-        </>
-      )
+  const handleSearch = (event) => {
+    event.preventDefault();
+    const query = inputValue.trim();
+    if (!query) {
+      setHasSearched(false);
+      setSearchResults([]);
+      return;
     }
-    else if( booksDep.length>0 && searchResults.length === 0)
-    {
-      return(
-        <>
-        {booksDep.map(func)}
-        </>
-      )
-    }
-    else
-    {
-      return(
-        <>
-        {searchResults.map(func)}
-        </>
-      )
-    }
-}
-
-  const handleSelect = (value) => {
-    setInputValue(value);
+    const fuse = new Fuse(books, { keys: ["title", "author", "description"], includeScore: true, threshold: 0.5 });
+    setSearchResults(fuse.search(query).map((result) => result.item));
+    setHasSearched(true);
     setFilteredSuggestions([]);
   };
 
-  const navigate = useNavigate();
-
-  const goToAbout = () => {
-    navigate('searchpanel');
-  }
-
-  const handleSearch = () => {
-    const fuse = new Fuse(books, {
-      keys: ['title', 'author', 'description'],
-      includeScore: true,
-      threshold:0.5
-    });
-
-    const results = fuse.search(inputValue);
-    setSearchResults(results.map(result => result.item));
+  const handleSelect = (title) => {
+    setInputValue(title);
+    setFilteredSuggestions([]);
   };
 
-  const getHighlightedText = (text, highlight) => {
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === highlight.toLowerCase() ? <span key={index} onk className="highlight">{part}</span> : part
-    );
-  };
-//uselocation url me query token valid
-  useEffect(() => {
-    axios.get('https://no-signal.onrender.com/books')
-      .then(response => {
-        setBooks(response.data);
-      })
-      .catch(error => {
-        console.error('There was an error fetching the books!', error);
-      });
-  }, []);
-    function func(book){
-        return (
-            <a href={`issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" >
-    <div className="d-flex w-100 ">
-      <div className="row small gx-2 w-100">
-      <div className='col-2' style={{ height:'60px', }}>
-  <img className='object-fit-scale' src={book.image_url} style={{ height:'60px' }} alt="book" />
-</div>
-
-        <div className="col-6 ">
-        <h6 className="mb-1">{book.title}</h6>
-        <small className="text-body-secondary">{book.author}</small>
-        </div>
-        <div className="col-2 small text-truncate ">{book.genre}</div>
-        
-        <div className="col-2 small text-end">
-          <small  className='text-end'>
-          {book.count===0?"Unavailable":"Available"}
-          </small>
-          </div>
-       
-      </div>
-      
-    </div>
-  </a>
-        )
-    }
   return (
-    <>
-    {/* <SearchBar/> */}
-    <div
-      className="row mx-1  "
-      style={{
-        backgroundColor: "#F3F3F7",
-      }}
-    >
-      <div className="col-12 col-lg-9   align-items-end ">
-        {/* <DateTimeDisplay /> */}
-        {/* <Autocomplete suggestions={bkttles} /> */}
-            <div className="container px-0" style={ {
-        position: 'relative',
-        zIndex: 2 /* Ensures this container is on top */
-      }}>
-    <div className="input-group">
-    
-
-      <input
-            type="text"
-            className="form-control me-2"
-            value={inputValue}
-            onChange={handleChange}
-            placeholder="Search"
-            aria-label="Example text with button addon"
-            aria-describedby="button-addon1"
-          />
-          <button className="btn btn-outline-danger rounded" onClick={handleSearch} type="submit">Search</button>
-          
-          
-          
-    </div>
-    <div className='my-2'>
-    <select
-            id="inputBranch"
-            name="branch"
-            className="form-select"
-            value={branch}
-            onChange={handleInput}
-          >
-            <option value="">Select Branch</option>
-            <option>Computer Science</option>
-            <option>Electrical Engineering</option>
-            <option>Mechanical Engineering</option>
-            <option>Civil Engineering</option>
-            <option>Chemical Engineering</option>
-            <option>Engineering Physics</option>
-            <option>BS-MS</option>
-          </select>
-    </div>
-    {inputValue.trim() !== '' && (
-            <div className="container overflow-y-auto list-group scrollable-container " style={{maxHeight:'40vh'}}>
-        <ul className='' style={{
-            position: 'absolute',
-            zIndex:2
-        }} >
-          {filteredSuggestions.map((suggestion, index) => (
-            <li className="list-group-item list-group-item-action" key={index} onClick={() => handleSelect(suggestion)}>
-              {getHighlightedText(suggestion, inputValue)}
-            </li>
-          ))}
-        </ul>
+    <main>
+      <div className="row mx-1 g-2 align-items-center" style={{ backgroundColor: "#F3F3F7" }}>
+        <div className="col-12 col-lg-9">
+          <div className="position-relative" style={{ zIndex: 2 }}>
+            <form className="input-group" onSubmit={handleSearch}>
+              <input
+                type="search"
+                className="form-control me-2"
+                value={inputValue}
+                onChange={handleChange}
+                placeholder="Search books"
+                aria-label="Search books"
+              />
+              <button className="btn btn-outline-danger rounded" type="submit">Search</button>
+            </form>
+            {filteredSuggestions.length > 0 && (
+              <ul className="list-group position-absolute w-100 mt-1 shadow" style={{ zIndex: 3 }}>
+                {filteredSuggestions.map((title, index) => (
+                  <li
+                    className="list-group-item list-group-item-action"
+                    key={`${title}-${index}`}
+                    role="option"
+                    tabIndex={0}
+                    onClick={() => handleSelect(title)}
+                    onKeyDown={(event) => { if (event.key === "Enter") handleSelect(title); }}
+                  >
+                    {title}
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
         </div>
-      )}
-    </div>
+        <div className="col-12 col-lg-3 d-flex justify-content-lg-end align-items-center">
+          <AuthButton />
+        </div>
+        <div className="col-12 col-lg-9">
+          <select id="inputBranch" name="branch" className="form-select" value={branch} onChange={(event) => setBranch(event.target.value)}>
+            <option value="">Select Branch</option>
+            {branches.map((item) => <option key={item}>{item}</option>)}
+          </select>
+        </div>
       </div>
-    </div>
-    <div className="contaiiner px-4">
-    <div className="row pt-3  mt-4">
-      <div className="col-7 text-center "><h6>Title</h6></div>
-      <div className="col-3  text-center px-0"><h6>Category</h6></div>
-      <div className="col-2  text-end px-1"><h6>Status</h6></div>
-    </div>
-    </div>
-    <div className="list-group ">
-      
-       
-        <DisplayBooks/>
-        {/* {(searchResults.length > 0 ? searchResults : books).map(func)} */}
-        {/* {booksDep.map(func)} */}
 
-      
-      
-    </div>
-    </>
-  )
+      <div className="row pt-3 mt-4 px-4 small fw-semibold text-secondary">
+        <div className="col-8 col-md-7">Title and author</div>
+        <div className="col-2 text-center">Category</div>
+        <div className="col-2 text-end">Status</div>
+      </div>
+      <div className="list-group px-2">
+        {visibleBooks.map((book) => (
+          <Link to={`/issuebook/${book._id}`} className="list-group-item my-2 rounded list-group-item-action" key={book._id}>
+            <div className="row align-items-center gx-2">
+              <div className="col-2 col-md-1">
+                <BookCover src={book.image_url} title={book.title} author={book.author} alt={`${book.title} cover`} style={{ height: "60px", width: "42px", objectFit: "cover" }} />
+              </div>
+              <div className="col-6 col-md-6">
+                <h3 className="h6 mb-1 text-break">{book.title}</h3>
+                <p className="small text-body-secondary mb-0 text-break">{book.author}</p>
+              </div>
+              <div className="col-2 small text-center text-truncate">{book.genre || "—"}</div>
+              <div className="col-2 small text-end">{book.count > 0 ? "Available" : "Unavailable"}</div>
+            </div>
+          </Link>
+        ))}
+        {visibleBooks.length === 0 && (
+          <p className="text-muted px-2" role="status">{hasSearched ? "No books match your search." : "No books found for this branch."}</p>
+        )}
+      </div>
+    </main>
+  );
 }

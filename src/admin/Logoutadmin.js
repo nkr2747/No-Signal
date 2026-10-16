@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React,{useEffect} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -8,21 +9,21 @@ export default function Logoutadmin() {
 
     const handleLogout = async () => {
         try {
-          await axios.get('https://no-signal.onrender.com/logoutadmin', null, {
-            withCredentials: true, // Ensure cookies are sent with the request
+          await axios.get(`${API_URL}/logoutadmin`, {
+            withCredentials: true, 
           });
     
-          //localStorage.removeItem('token');
           console.log("hi")
-          navigate('/loginpageadmin');
+          navigate('/');
         } catch (error) {
           console.error('Error logging out:', error);
+          navigate('/');
         }
       };
 
     useEffect(()=>{
         handleLogout()
-    })
+    }, [])
   return (
     <div>
       

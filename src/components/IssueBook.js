@@ -1,24 +1,23 @@
-import React, { useEffect, useState,useContext } from "react";
+import { API_URL } from "../config";
+import React, { useEffect, useState } from "react";
 import "../App.css"
-import SearchBar from "./SearchBar";
 import authorlogo from "../images/authorlogo.svg";
 import { Link, useParams ,useNavigate} from "react-router-dom";
 import axios from "axios";
 import arrow from "../images/arrow.svg"
-import { UserContext } from "../App";
+import BookCover from "./BookCover";
 
 
 
 
 export default function IssueBook() {
   const navigate= useNavigate()
-  const {state,dispatch} = useContext(UserContext)
   const { id } = useParams();
   const [book, setBook] = useState([]);
 
   useEffect(() => {
     axios
-      .get(`https://no-signal.onrender.com/books/${id}`)
+      .get(`${API_URL}/books/${id}`)
       .then((response) => {
         setBook(response.data);
       })
@@ -29,54 +28,50 @@ export default function IssueBook() {
 
   const handleIssue=async (e)=>{
     e.preventDefault();
-    console.log(state)
-    console.log(id)
-    if (state===false) {
-      navigate('/loginpage')
-      return;
-    }
     try {
-      const response = await axios.post('https://no-signal.onrender.com/issuebook', { id },{
+      const response = await axios.post(`${API_URL}/issuebook`, { id },{
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        withCredentials: true,
       }
       );
       
 
-      console.log('Book issued successfully:', response.data);
-      window.alert('Book issued successfully');
+      console.log('Borrow request submitted:', response.data);
+      window.alert('Borrow request submitted. The library admin will review it, and you can track it under Requested Books in My Shelf.');
     } catch (error) {
       console.error('Error issuing book:', error);
-      window.alert('Login to issue books');
-      navigate('/loginpage')
+      if (error.response?.status === 401) {
+        navigate('/loginpage');
+        return;
+      }
+      window.alert(error.response?.data?.message || 'Unable to submit your borrow request.');
 
     }
       
   }
   const handleAddToFav=async (e)=>{
     e.preventDefault();
-    console.log(state)
-    console.log(id)
-    if (state===false) {
-      navigate('/loginpage')
-      return;
-    }
     try {
-      const response = await axios.post('https://no-signal.onrender.com/addtofavourite', { id },{
+      const response = await axios.post(`${API_URL}/addtofavourite`, { id },{
         headers: {
           "Content-Type": "application/json",
-        }
+        },
+        withCredentials: true,
       }
       );
       
 
       console.log('Book added to favourite successfully:', response.data);
-      window.alert('Book added to favourite successfully');
+      window.alert('Added to your favourites.');
     } catch (error) {
       console.error('Error issuing book:', error);
-      window.alert('Login to Add to favourites Book');
-      navigate('/loginpage')
+      if (error.response?.status === 401) {
+        navigate('/loginpage');
+        return;
+      }
+      window.alert(error.response?.data?.message || 'Unable to add this book to favourites.');
 
     }
       
@@ -86,7 +81,6 @@ export default function IssueBook() {
   return (
 
     <>
-      <SearchBar />
       <div className=" d-flex align-items-center opacity-50" style={{ height: "10vh" }}>
         <div className="image-container">
         <Link to='/searchpanel'>
@@ -110,13 +104,13 @@ export default function IssueBook() {
                 }}
               >
                 {" "}
-                <Link to="issuebook">
-                  <img
-                    src={book.image_url}
+                <div>
+                  <BookCover
+                    src={book.image_url} title={book.title} author={book.author}
                     className="card-img-top"
-                    alt="..."
+                    alt={`${book.title || "Book"} cover`}
                   />
-                </Link>
+                </div>
               </div>
             </div>
           </div>
@@ -135,10 +129,10 @@ export default function IssueBook() {
             </div>
             <div className="container d-flex  my-5">
               <div className="d-inline mx-3">
-              <button className="btn btn-outline-danger" onClick={handleIssue}>Issue{state}</button>
+              <button className="btn btn-outline-danger" onClick={handleIssue}>Request to borrow</button>
               </div>
               <div className="d-inline mx-3">
-              <button className="btn btn-outline-secondary" onClick={handleAddToFav} >Add to Favourite</button>
+              <button className="btn btn-outline-danger" onClick={handleAddToFav} >Add to Favourite</button>
               </div>
             </div>
           </div>

@@ -1,17 +1,21 @@
-import React,{ useEffect, useState } from "react";
+import { API_URL } from "../config";
+import React,{ useContext, useEffect, useState } from "react";
 import bg from "../images/bg.png";
+import logo from "../images/logo.png";
+import AdminNavItems from "./AdminNavItems";
+import { UserContext } from "../UserContext";
 import AsideBar from "../admin/AsideBar";
 import { Link, Outlet,useNavigate } from "react-router-dom";
-import axios from "axios";
 
 export default function Alayout() {
 
   const navigate = useNavigate();
+  const { authChecked } = useContext(UserContext);
   const [adminData, setAdminData] = useState(null);
 
   const callAboutPage = async () => {
     try {
-      const res = await fetch("https://no-signal.onrender.com/aboutadmin", {
+      const res = await fetch(`${API_URL}/aboutadmin`, {
         method: "GET",
         headers: {
           Accept: "application/json",
@@ -20,19 +24,19 @@ export default function Alayout() {
         credentials: "include",
       });
       const data = await res.json();
-      setAdminData(data);
       if (res.status !== 200) {
-        const error = new Error(res.error);
-        throw error;
+        throw new Error(data.error || "Unable to load admin account.");
       }
+      setAdminData(data);
     } catch (err) {
-      console.log(err);
       navigate("/loginpageadmin");
     }
   };
   useEffect(() => {
-    callAboutPage();
-  }, []);
+    if (authChecked) callAboutPage();
+  }, [authChecked]);
+
+  if (!authChecked) return <div className="container py-4" role="status">Preparing admin session…</div>;
 
   return (
     <>
@@ -91,40 +95,9 @@ export default function Alayout() {
                     }}
                   >
                     <Link className="navbar-brand " to="/">
-                      <img src="" alt="Bootstrap" width="260" />
+                      <img src={logo} className="sidebar-brand-logo" alt="IIT Dharwad Library" />
                     </Link>
-                    <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
-                    <li className="nav-item">
-                      <Link className="nav-link" to="/admin">
-                      <img src="" className='px-1' height="15" alt="" />
-                      Issue Requests
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="addnewbook">
-                      <img src="" className='px-1' alt="" />
-                       Add New Book
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="presentstatus">
-                      <img src="" className='px-1' alt="" />
-                       Search Student
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="returnrequest">
-                      <img src="" className='px-1' alt="" />
-                       Return Requests
-                      </Link>
-                    </li>
-                    <li className="nav-item">
-                      <Link className="nav-link" to="addnewstudent">
-                      <img src="" className='px-1' alt="" />
-                       Add New Student
-                      </Link>
-                    </li>
-                  </ul>
+                    <AdminNavItems />
           
           <ul className="navbar-nav m-1 align-items-start px-5 fs-6 flex-column d-flex position-absolute bottom-0 my-4 ">
                     <li className="nav-item small">
@@ -144,8 +117,13 @@ export default function Alayout() {
               <h1 style={{color:'black'}}>IIT<span style={{color:'red'}}>D</span>h <span style={{color:'red'}}>Book</span> Shelf</h1>
               </Link>
             </div>
-            </div>
-            <Outlet/>
+            </div            >
+              {adminData && (
+                <div className="container mb-3">
+                  <p className="mb-0"><strong>Welcome, {adminData.name}</strong> <span className="text-muted">({adminData.email})</span></p>
+                </div>
+              )}
+              <Outlet/>
           </div>
         </div>
       </div>

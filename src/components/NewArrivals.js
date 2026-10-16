@@ -1,13 +1,15 @@
+import { API_URL } from "../config";
 import React,{useState,useEffect} from "react";
 import na from "../images/na.png"
 import { Link } from "react-router-dom";
 import axios from "axios";
+import BookCover from "./BookCover";
 
 
 export default function NewArrivals() {
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    axios.get('https://no-signal.onrender.com/books')
+    axios.get(`${API_URL}/books`)
       .then(response => {
         setBooks(response.data);
       })
@@ -28,17 +30,17 @@ export default function NewArrivals() {
           style={{
             width: "6rem",
           }}
-        ><a href={`issuebook/${book._id}`}>
-          <img
-            src={book.image_url}
+        ><Link to={`/issuebook/${book._id}`}>
+          <BookCover
+            src={book.image_url} title={book.title} author={book.author}
             className="card-img-top"
-            alt="..."
+            alt={`${book.title} cover`}
             style={{
               height: "150px",
               objectFit: "cover",
             }}
           />
-          </a>
+          </Link>
         </div>
       </div>
     );

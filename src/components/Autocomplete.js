@@ -1,7 +1,8 @@
 // Autocomplete.js
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import "../App.css"
-// import Fuse from 'fuse.js'
+
 const Autocomplete = ({ suggestions }) => {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
   const [inputValue, setInputValue] = useState('');
@@ -10,7 +11,6 @@ const Autocomplete = ({ suggestions }) => {
     const inputValue = event.target.value;
     setInputValue(inputValue);
 
-    // Filter suggestions based on input value if input value is not empty
     if (inputValue.trim() !== '') {
       const filteredSuggestions = suggestions.filter(suggestion =>
         suggestion.toLowerCase().includes(inputValue.toLowerCase())
@@ -29,21 +29,20 @@ const Autocomplete = ({ suggestions }) => {
   };
 
 
-  // const handleSearch = () => {
-  //   const fuse = new Fuse(books, {
-  //     keys: ['title', 'author', 'description'],
-  //     includeScore: true,
-  //     threshold:0.5
-  //   });
-
-  //   const results = fuse.search(inputValue);
-  //   setSearchResults(results.map(result => result.item));
-  // };
+  const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
   const getHighlightedText = (text, highlight) => {
-    const parts = text.split(new RegExp(`(${highlight})`, 'gi'));
-    return parts.map((part, index) => 
-      part.toLowerCase() === highlight.toLowerCase() ? <span key={index} className="highlight">{part}</span> : part
+    const safeText = String(text ?? '');
+    const safeHighlight = String(highlight ?? '');
+    if (!safeHighlight.trim()) {
+      return safeText;
+    }
+
+    const parts = safeText.split(new RegExp(`(${escapeRegExp(safeHighlight)})`, 'gi'));
+    return parts.map((part, index) =>
+      part.toLowerCase() === safeHighlight.toLowerCase() ?
+        <span key={`${part}-${index}`} className="highlight">{part}</span> :
+        <React.Fragment key={`${part}-${index}`}>{part}</React.Fragment>
     );
   };
 
@@ -56,11 +55,11 @@ const Autocomplete = ({ suggestions }) => {
   return (
     <div className="container px-0" style={ {
         position: 'relative',
-        zIndex: 2 /* Ensures this container is on top */
+        zIndex: 2 
       }}>
     <div className="input-group">
         <button
-            className="btn  btn-secondary text-dark dropdown-toggle"
+            className="btn btn-outline-danger dropdown-toggle"
             type="button"
             data-bs-toggle="dropdown"
             aria-expanded="false"
@@ -72,19 +71,19 @@ const Autocomplete = ({ suggestions }) => {
           </button>
           <ul className="dropdown-menu">
             <li>
-              <a className="dropdown-item" href="/">
+              <Link className="dropdown-item" to="/">
                 Action
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="dropdown-item" href="/">
+              <Link className="dropdown-item" to="/">
                 Another action
-              </a>
+              </Link>
             </li>
             <li>
-              <a className="dropdown-item" href="/">
+              <Link className="dropdown-item" to="/">
                 Something else here
-              </a>
+              </Link>
             </li>
           </ul>
 

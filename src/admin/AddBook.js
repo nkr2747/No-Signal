@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useState } from "react";
 import "./AddBook.css";
 import axios from "axios";
@@ -14,35 +15,50 @@ export default function AddBook() {
   const [publisher, setPublisher] = useState("");
   const [publisher_id, setPublisher_id] = useState("");
   const [message, setMessage] = useState("");
+  const [image, setImage] = useState(null);
+  const [submitting, setSubmitting] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setMessage("");
+    setSubmitting(true);
     try {
-      const response = await axios.post("https://no-signal.onrender.com/books", {
-        title,
-        description,
-        author,
-        genre,
-        department,
-        count,
-        vendor,
-        vendor_id,
-        publisher,
-        publisher_id,
+      const formData = new FormData();
+      Object.entries({
+        title, description, author, genre, department, count,
+        vendor, vendor_id, publisher, publisher_id,
+      }).forEach(([key, value]) => formData.append(key, value));
+      if (image) formData.append("image", image);
+      const response = await axios.post(`${API_URL}/books`, formData, {
+        withCredentials: true,
       });
       setMessage(response.data.message);
+      setTitle("");
+      setDescription("");
+      setAuthor("");
+      setGenre("");
+      setDepartment("");
+      setCount("");
+      setVendor("");
+      setVendor_id("");
+      setPublisher("");
+      setPublisher_id("");
+      setImage(null);
+      e.target.reset();
     } catch (error) {
       if (error.response) {
-        setMessage(error.response.data.error);
+        setMessage(error.response.data.error || "Unable to add book.");
       } else {
-        setMessage("An error occurred");
+        setMessage("Unable to reach the library server.");
       }
+    } finally {
+      setSubmitting(false);
     }
   };
 
   return (
     <div className="container-fluid">
-      <form className="row g-3" >
+      <form className="row g-3 add-book-form" onSubmit={handleSubmit}>
         <div className="col-md-4">
           <label htmlFor="validationDefault01" className="form-label">
             Title
@@ -101,7 +117,7 @@ export default function AddBook() {
             Department
           </label>
           <select className="form-select" value={department} onChange={(e) => setDepartment(e.target.value)} id="validationDefault04" required>
-            <option selected disabled value="">
+            <option disabled value="">
               Choose...
             </option>
             <option value="Chemical Engineering">Chemical Engineering</option>
@@ -121,13 +137,26 @@ export default function AddBook() {
             Count
           </label>
           <input
-            type="text"
+            type="number"
             className="form-control"
             id="validationDefault05"
             value={count}
             onChange={(e) => setCount(e.target.value)}
+            min="0"
+            step="1"
             required
           />
+        </div>
+        <div className="col-md-6">
+          <label htmlFor="bookCover" className="form-label">Book cover image</label>
+          <input
+            type="file"
+            className="form-control"
+            id="bookCover"
+            accept="image/jpeg,image/png,image/webp,image/gif"
+            onChange={(e) => setImage(e.target.files?.[0] || null)}
+          />
+          <div className="form-text">Optional JPG, PNG, WEBP, or GIF (max 5 MB).</div>
         </div>
         <div className="col-md-6">
           <label htmlFor="validationDefault06" className="form-label">
@@ -168,7 +197,8 @@ export default function AddBook() {
             required
           />
         </div>
-        <div className="col-md-2 small-width">
+        <div className="w-100 d-none d-md-block" aria-hidden="true" />
+        <div className="col-md-6">
           <label htmlFor="validationDefault09" className="form-label">
             Publisher ID
           </label>
@@ -182,12 +212,12 @@ export default function AddBook() {
           />
         </div>
         <div className="col-12">
-          <button className="btn btn-danger" onClick={handleSubmit} type="submit">
-            +ADD
+          <button className="btn btn-outline-danger" type="submit" disabled={submitting}>
+            {submitting ? "Adding..." : "+ADD"}
           </button>
         </div>
       </form>
-      {message && <p>{message}</p>}
+      {message && <p className="mt-3" role="status">{message}</p>}
     </div>
   );
 }

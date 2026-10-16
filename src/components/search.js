@@ -1,3 +1,4 @@
+import { API_URL } from "../config";
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -8,7 +9,7 @@ const Search = () => {
 
   useEffect(() => {
     if (query.length > 0) {
-      axios.get(`https://no-signal.onrender.com/search?q=${query}`)
+      axios.get(`${API_URL}/search`, { params: { q: query } })
         .then(response => {
           setResults(response.data);
         })
@@ -20,24 +21,41 @@ const Search = () => {
     }
   }, [query]);
 
+  const escapeRegExp = (value) => String(value).replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+
   const highlightMatch = (text, highlight) => {
-    const regex = new RegExp(`(${highlight})`, 'gi');
-    return text.replace(regex, '<strong>$1</strong>');
+    const safeText = String(text ?? '');
+    const safeHighlight = String(highlight ?? '');
+    if (!safeHighlight.trim()) {
+      return escapeHtml(safeText);
+    }
+
+    const regex = new RegExp(`(${escapeRegExp(safeHighlight)})`, 'gi');
+    return safeText
+      .split(regex)
+      .map((part) => {
+        if (part.toLowerCase() === safeHighlight.toLowerCase()) {
+          return `<strong>${escapeHtml(part)}</strong>`;
+        }
+        return escapeHtml(part);
+      })
+      .join('');
   };
 
   return (
     <div className='list-group' >
       <input
-        // type="text"
-        // value={query}
-        // onChange={(e) => setQuery(e.target.value)}
-        // placeholder="Search books..."
-        //
+
         type="text"
             className="form-control me-2"
             value={query}
             onChange={(e) => setQuery(e.target.value)}
-            // onKeyPress={handleKeyPress}
             placeholder="Search Book Title"
             aria-label="Example text with button addon"
             aria-describedby="button-addon1"
@@ -49,8 +67,8 @@ const Search = () => {
             backgroundColor:"white"
         }}>
           {results.map(result => (
-            <Link to={`issuebook/${result._id}`}>
-            <div className='list-group-item my-1 ' key={result._id}>
+            <Link to={`/issuebook/${result._id}`} key={result._id}>
+            <div className='list-group-item my-1 '>
               <div className='link-underline link-underline-opacity-0' dangerouslySetInnerHTML={{ __html: highlightMatch(result.title, query) }} />  
             </div>
             </Link>

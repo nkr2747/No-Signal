@@ -1,7 +1,8 @@
+import { API_URL } from "../config";
 import React,{useEffect,useContext} from 'react'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { UserContext } from '../App';
+import { UserContext } from '../UserContext';
 
 export default function Logout() {
   const {state,dispatch}=useContext(UserContext)
@@ -9,22 +10,23 @@ export default function Logout() {
 
     const handleLogout = async () => {
         try {
-          await axios.get('https://no-signal.onrender.com/logout', null, {
-            withCredentials: true, // Ensure cookies are sent with the request
+          await axios.get(`${API_URL}/logout`, {
+            withCredentials: true, 
           });
     
-          //localStorage.removeItem('token');
           console.log("hi")
           dispatch({type:"USER",payload:false})
-          navigate('/loginpage');
+          navigate('/');
         } catch (error) {
           console.error('Error logging out:', error);
+          dispatch({type:"USER",payload:false});
+          navigate('/');
         }
       };
 
     useEffect(()=>{
         handleLogout()
-    })
+    }, [])
   return (
     <div>
       

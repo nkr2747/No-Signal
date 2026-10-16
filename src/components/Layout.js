@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import bg from "../images/bg.png";
 import SideBar from "../components/SideBar";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useLocation } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import AuthButton from "./AuthButton";
+import { UserContext } from "../UserContext";
 import logoiitdh from "../images/logo.png";
-//import DateTimeDisplay from "../components/DateTimeDisplay";
 import home from "../images/home.svg";
 import search from "../images/search-icon.svg";
 import bookshelf from "../images/Bookshelf.svg";
@@ -11,6 +13,11 @@ import contri from "../images/Give Gift.svg";
 import logo from "../images/logo.svg";
 
 export default function Layout() {
+  const { state: userData } = useContext(UserContext);
+  const { pathname } = useLocation();
+  const onSearchPage = pathname.startsWith("/searchpanel");
+  const onContributionPage = pathname.startsWith("/contributepanel");
+
   return (
     <>
       <div
@@ -26,7 +33,7 @@ export default function Layout() {
         <div className="row h-100">
           <SideBar />
           <div
-            className="col-12 rounded-end h-100 col-lg-9 py-4 scrollable-container" //note : iss line ka mtlb hai ki col-12 rhe jb size chota rhe (kyuki iss time sidebar gayab ho jaega aur aur jb wapas aa jayega lg breakpoint ke bad tb col-9 ho jaye)
+            className="col-12 rounded-end h-100 col-lg-9 py-4 scrollable-container"
             style={{
               height: "100vh",
               overflowY: "scroll",
@@ -69,7 +76,7 @@ export default function Layout() {
                     }}
                   >
                     <Link className="navbar-brand " to="/">
-                      <img src={logoiitdh} alt="Bootstrap" width="260" />
+                      <img src={logoiitdh} className="sidebar-brand-logo" alt="IIT Dharwad Library" />
                     </Link>
                     <ul className="navbar-nav m-1 align-items-start px-5 flex-column ">
                       <li className="nav-item">
@@ -151,7 +158,7 @@ export default function Layout() {
               <div className="col-2 d-none d-lg-block justify-content border start">
                 <div className="dropdown-start ">
                   <button
-                    className="btn btn-secondary btn-sm text-dark rounded-pill dropdown-toggle "
+                    className="btn btn-outline-danger btn-sm rounded-pill dropdown-toggle "
                     type="button"
                     data-bs-toggle="dropdown"
                     aria-expanded="false"
@@ -165,28 +172,28 @@ export default function Layout() {
                       alt="..."
                       height="25"
                     />
-                    Guest
+                    {userData?.name || "Guest"}
                   </button>
                   <ul className="dropdown-menu ">
-                    {/* <li>
-              <a className="dropdown-item" href="/">
-                Profile
-              </a>
-            </li> */}
-                    {/* <li>
-              <a className="dropdown-item" href="/">
-                Favourite
-              </a>
-            </li> */}
-                    <li>
-                      <a className="dropdown-item" href="/loginpage">
-                        Login
-                      </a>
-                    </li>
+                    {userData ? (
+                      <>
+                        <li><Link className="dropdown-item" to="/myshelf">My account &amp; shelf</Link></li>
+                        <li><Link className="dropdown-item" to="/logout">Logout</Link></li>
+                      </>
+                    ) : (
+                      <li><span className="dropdown-item-text text-secondary small">Not signed in</span></li>
+                    )}
                   </ul>
                 </div>
               </div>
             </div>
+            {onSearchPage ? null : onContributionPage ? (
+              <div className="d-flex justify-content-end px-2 mb-3">
+                <AuthButton />
+              </div>
+            ) : (
+              <SearchBar />
+            )}
             <Outlet />
           </div>
         </div>
