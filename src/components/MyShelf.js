@@ -19,7 +19,7 @@ export default function MyShelf() {
   useEffect(() => {
     if (!authChecked) return;
     let active = true;
-    axios.get(`https://no-signal.onrender.com/about`, { withCredentials: true })
+    axios.get(`${API_URL}/about`, { withCredentials: true })
       .then((response) => { if (active) setUserData(response.data); })
       .catch(() => { if (active) navigate("/loginpage"); });
     return () => { active = false; };
@@ -27,7 +27,7 @@ export default function MyShelf() {
 
   useEffect(() => {
     if (!userData) return;
-    const getBook = (id) => axios.get(`https://no-signal.onrender.com/books/${id}`).then((response) => response.data);
+    const getBook = (id) => axios.get(`${API_URL}/books/${id}`).then((response) => response.data);
     const requestedIds = (userData.requested_books || []).map((request) => request.book?._id || request.book).filter(Boolean);
     Promise.all([
       Promise.all((userData.favourites || []).map((id) => getBook(id?._id || id))),
@@ -43,7 +43,7 @@ export default function MyShelf() {
   const handleRemoveFavourite = async (bookId) => {
     setRemovingFavoriteIds((ids) => [...ids, bookId]);
     try {
-      await axios.delete(`https://no-signal.onrender.com/removefromfavourite/${bookId}`, { withCredentials: true });
+      await axios.delete(`${API_URL}/removefromfavourite/${bookId}`, { withCredentials: true });
       setFavBooks((books) => books.filter((book) => book._id !== bookId));
     } catch (error) {
       alert(error.response?.data?.message || "Unable to remove this book from your favourites.");
@@ -55,7 +55,7 @@ export default function MyShelf() {
   const handleCancelRequest = async (bookId) => {
     setCancellingRequestIds((ids) => [...ids, bookId]);
     try {
-      await axios.delete(`https://no-signal.onrender.com/cancelbookrequest/${bookId}`, { withCredentials: true });
+      await axios.delete(`${API_URL}/cancelbookrequest/${bookId}`, { withCredentials: true });
       setReqBooks((books) => books.filter((book) => book._id !== bookId));
       setUserData((user) => ({
         ...user,
@@ -70,7 +70,7 @@ export default function MyShelf() {
 
   const handleReturnBook = async (bookId) => {
     try {
-      await axios.post(`https://no-signal.onrender.com/returnbook`, { bookId }, { withCredentials: true });
+      await axios.post(`${API_URL}/returnbook`, { bookId }, { withCredentials: true });
       setPendingReturnIds((ids) => [...new Set([...ids, bookId])]);
       setUserData((user) => ({ ...user, return_requests: [...(user.return_requests || []), { book: bookId }] }));
       alert("Return request submitted. Library staff will review it.");

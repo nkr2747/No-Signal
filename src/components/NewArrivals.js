@@ -9,7 +9,7 @@ import BookCover from "./BookCover";
 export default function NewArrivals() {
   const [books, setBooks] = useState([]);
   useEffect(() => {
-    axios.get(`https://no-signal.onrender.com/books`)
+    axios.get(`${API_URL}/books`)
       .then(response => {
         setBooks(response.data);
       })

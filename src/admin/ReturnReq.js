@@ -9,7 +9,7 @@ export default function AdminReturnRequests() {
 
   const fetchReturnRequests = async () => {
     try {
-      const res = await axios.get(`https://no-signal.onrender.com/admin/returnrequests`, { withCredentials: true });
+      const res = await axios.get(`${API_URL}/admin/returnrequests`, { withCredentials: true });
       setReturnRequests(res.data.requests);
       setError(null);
     } catch (err) {
@@ -26,7 +26,7 @@ export default function AdminReturnRequests() {
   const handleApproveReturn = async (userId, bookId) => {
     try {
       const response = await axios.post(
-        `https://no-signal.onrender.com/admin/approvereturn`,
+        `${API_URL}/admin/approvereturn`,
         { userId, bookId },
         { withCredentials: true }
       );

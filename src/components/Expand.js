@@ -9,7 +9,7 @@ export default function Expand({ category }) {
   const [error, setError] = useState("");
 
   useEffect(() => {
-    axios.get(`https://no-signal.onrender.com/books`)
+    axios.get(`${API_URL}/books`)
       .then((response) => setBooks([...response.data].reverse()))
       .catch((requestError) => {
         console.error("Unable to load books:", requestError);

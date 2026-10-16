@@ -9,7 +9,7 @@ const Search = () => {
 
   useEffect(() => {
     if (query.length > 0) {
-      axios.get(`https://no-signal.onrender.com/search`, { params: { q: query } })
+      axios.get(`${API_URL}/search`, { params: { q: query } })
         .then(response => {
           setResults(response.data);
         })

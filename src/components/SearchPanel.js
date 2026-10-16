@@ -24,7 +24,7 @@ export default function SearchPanel() {
   const [filteredSuggestions, setFilteredSuggestions] = useState([]);
 
   useEffect(() => {
-    axios.get(`https://no-signal.onrender.com/books`)
+    axios.get(`${API_URL}/books`)
       .then((response) => setBooks(response.data))
       .catch((error) => console.error("Unable to load books:", error));
   }, []);

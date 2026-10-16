@@ -40,7 +40,7 @@ export default function AaddNewStudent() {
 
     const { name, email, password, cpassword, program, branch } = user;
     try {
-      const res = await fetch(`https://no-signal.onrender.com/admin`, {
+      const res = await fetch(`${API_URL}/admin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
