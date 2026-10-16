@@ -29,7 +29,7 @@ export default function AddBook() {
         vendor, vendor_id, publisher, publisher_id,
       }).forEach(([key, value]) => formData.append(key, value));
       if (image) formData.append("image", image);
-      const response = await axios.post(`${API_URL}/books`, formData, {
+      const response = await axios.post(`https://no-signal.onrender.com/books`, formData, {
         withCredentials: true,
       });
       setMessage(response.data.message);

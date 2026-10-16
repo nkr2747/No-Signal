@@ -10,7 +10,7 @@ export default function Logout() {
 
     const handleLogout = async () => {
         try {
-          await axios.get(`${API_URL}/logout`, {
+          await axios.get(`https://no-signal.onrender.com/logout`, {
             withCredentials: true, 
           });
     

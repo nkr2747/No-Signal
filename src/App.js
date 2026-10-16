@@ -39,8 +39,8 @@ function App() {
   useEffect(() => {
     if (!startupLogout.current) {
       startupLogout.current = Promise.allSettled([
-        fetch(`${API_URL}/logout`, { credentials: "include" }),
-        fetch(`${API_URL}/logoutadmin`, { credentials: "include" }),
+        fetch(`https://no-signal.onrender.com/logout`, { credentials: "include" }),
+        fetch(`https://no-signal.onrender.com/logoutadmin`, { credentials: "include" }),
       ]).finally(() => setAuthChecked(true));
     }
   }, []);

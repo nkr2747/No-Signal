@@ -35,7 +35,7 @@ export default function LoginForm({ role = "student" }) {
     setError("");
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_URL}${config.endpoint}`, {
+      const res = await fetch(`https://no-signal.onrender.com${config.endpoint}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         credentials: "include",

@@ -11,7 +11,7 @@ export default function ContributionRequests() {
 
   const fetchContributions = async () => {
     try {
-      const response = await axios.get(`${API_URL}/admin/contributions`, { withCredentials: true });
+      const response = await axios.get(`https://no-signal.onrender.com/admin/contributions`, { withCredentials: true });
       setContributions(response.data.contributions || []);
       setError(null);
     } catch (err) {
@@ -28,12 +28,12 @@ export default function ContributionRequests() {
     try {
       if (approve) {
         await axios.post(
-          `${API_URL}/admin/contributions/${contribution.requestId}/approve`,
+          `https://no-signal.onrender.com/admin/contributions/${contribution.requestId}/approve`,
           { bookId: contribution.bookId },
           { withCredentials: true }
         );
       } else {
-        await axios.delete(`${API_URL}/admin/contributions/${contribution.requestId}`, { withCredentials: true });
+        await axios.delete(`https://no-signal.onrender.com/admin/contributions/${contribution.requestId}`, { withCredentials: true });
       }
       await fetchContributions();
     } catch (err) {

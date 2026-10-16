@@ -30,7 +30,7 @@ export default function ForgotPassword({ role = "student" }) {
     }
     setSubmitting(true);
     try {
-      const res = await fetch(`${API_URL}/resetpassword`, {
+      const res = await fetch(`https://no-signal.onrender.com/resetpassword`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ ...form, role }),

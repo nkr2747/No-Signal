@@ -9,7 +9,7 @@ export default function DashBoard() {
 
   const fetchBookRequests = async () => {
     try {
-      const response = await axios.get(`${API_URL}/admin/bookrequests`, { withCredentials: true });
+      const response = await axios.get(`https://no-signal.onrender.com/admin/bookrequests`, { withCredentials: true });
       setBookRequests(response.data.requests);
       setError(null);
     } catch (err) {
@@ -23,7 +23,7 @@ export default function DashBoard() {
 
   const updateRequest = async (request, approve) => {
     try {
-      await axios.post(`${API_URL}/${approve ? "approvebook" : "rejectbook"}`, {
+      await axios.post(`https://no-signal.onrender.com/${approve ? "approvebook" : "rejectbook"}`, {
         userId: request.userId,
         bookId: request.bookId,
       }, { withCredentials: true });

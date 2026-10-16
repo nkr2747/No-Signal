@@ -34,7 +34,7 @@ export default function ContributePanel() {
     if (image) formData.append("image", image);
 
     try {
-      const response = await axios.post(`${API_URL}/contributions`, formData, {
+      const response = await axios.post(`https://no-signal.onrender.com/contributions`, formData, {
         withCredentials: true,
       });
       setMessage(response.data.message);

@@ -17,7 +17,7 @@ export default function IssueBook() {
 
   useEffect(() => {
     axios
-      .get(`${API_URL}/books/${id}`)
+      .get(`https://no-signal.onrender.com/books/${id}`)
       .then((response) => {
         setBook(response.data);
       })
@@ -29,7 +29,7 @@ export default function IssueBook() {
   const handleIssue=async (e)=>{
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/issuebook`, { id },{
+      const response = await axios.post(`https://no-signal.onrender.com/issuebook`, { id },{
         headers: {
           "Content-Type": "application/json",
         },
@@ -54,7 +54,7 @@ export default function IssueBook() {
   const handleAddToFav=async (e)=>{
     e.preventDefault();
     try {
-      const response = await axios.post(`${API_URL}/addtofavourite`, { id },{
+      const response = await axios.post(`https://no-signal.onrender.com/addtofavourite`, { id },{
         headers: {
           "Content-Type": "application/json",
         },

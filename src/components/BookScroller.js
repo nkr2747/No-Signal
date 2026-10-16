@@ -26,7 +26,7 @@ export default function BookScroller(props) {
 
     useEffect(() => {
       axios
-        .get(`${API_URL}/booksdep/${props.department}`)
+        .get(`https://no-signal.onrender.com/booksdep/${props.department}`)
         .then((response) => {
           setBooks(response.data);
         })

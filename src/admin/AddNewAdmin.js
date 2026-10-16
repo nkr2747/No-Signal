@@ -38,7 +38,7 @@ export default function AaddNewAdmin() {
 
     const { name, email, password, cpassword } = admin;
     try {
-      const res = await fetch(`${API_URL}/adminregister`, {
+      const res = await fetch(`https://no-signal.onrender.com/adminregister`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

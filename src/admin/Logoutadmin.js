@@ -9,7 +9,7 @@ export default function Logoutadmin() {
 
     const handleLogout = async () => {
         try {
-          await axios.get(`${API_URL}/logoutadmin`, {
+          await axios.get(`https://no-signal.onrender.com/logoutadmin`, {
             withCredentials: true, 
           });
     
